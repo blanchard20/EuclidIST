@@ -1,0 +1,173 @@
+\documentclass{Latex_Euclid_style}
+
+%\@ifundefined{textcolor}{}
+%{%
+% \definecolor{BLACK}{gray}{0}
+% \definecolor{WHITE}{gray}{1}
+% \definecolor{RED}{rgb}{1,0,0}
+% \definecolor{GREEN}{rgb}{0,1,0}
+% \definecolor{BLUE}{rgb}{0,0,1}
+% \definecolor{CYAN}{cmyk}{1,0,0,0}
+% \definecolor{MAGENTA}{cmyk}{0,1,0,0}
+% \definecolor{YELLOW}{cmyk}{0,0,1,0}
+% }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+%\def\citep{\cite}
+\def\aap{A\&A}
+\def\apj{ApJ}
+\def\aapr{A\&A Rev.}
+\def\apjl{ApJ}
+\def\mnras{MNRAS}
+\def\araa{ARA\&A}
+\def\aj{AJ}
+\def\qjras{QJRAS}
+\def\physrep{Phys. Rep.}
+\def\nat{Nature}
+\def\aaps{A\&A Supp.}
+\def\apss{Ap\&SS}      % Astrophysics and Space Science
+\def\apjs{ApJS}
+\def\prd{Phys. Rev. D}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{epsfig}
+\usepackage{psfig}
+%\usepackage[numbers,sort&compress]{natbib}
+%\usepackage{natbib}
+%\usepackage{hyperref}
+
+%\usepackage[numbers,sort&compress]{natbib}
+%\usepackage[square,sort,comma,numbers]{natbib}
+%\usepackage[nonamebreak]{natbib} 
+%\usepackage{hyperref}
+%\hypersetup{breaklinks,colorlinks,citecolor=blue}
+
+\usepackage[hang,small,bf]{caption}
+\usepackage{rotating}
+\usepackage{url}
+\usepackage{times}
+\usepackage{color}
+\usepackage[alsoload=hep]{siunitx}
+%\usepackage{babel}
+\usepackage{enumitem}
+\usepackage{verbatim}
+
+
+
+%%%%%% SP: modified to possibly use the font to Arial (Times New Roman)
+%\usepackage[scaled]{uarial}
+%\usepackage{times}
+%\renewcommand{\familydefault}{\sfdefault}
+%\usepackage[T1]{fontenc}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+\definecolor{orange}{rgb}{1,0.5,0}
+\definecolor{darkorange}{rgb}{0.69,0.33,0.13}
+\definecolor{fidcol}{rgb}{0.7,0,0}
+\newcommand{\CSC}[1]{{\color{darkorange} {\tt {\bf  [CS: #1]}}}}
+\newcommand{\mkr}[1]{{\color{blue}\tt [MK: #1]}}
+\newcommand{\avr}[1]{{\color{green}\tt [AV: #1]}}
+\newcommand{\emr}[1]{{\color{orange}\tt [EM: #1]}}
+\newcommand{\com}[1]{{\color{red}\tt [To do: #1]}}
+\newcommand{\lavi}[1]{{\color{orange}\tt [lavi: #1]}}
+\newcommand{\fid}[1]{{\bf\color{fidcol} #1}}
+\newcommand{\cjm}[1]{{\color{blue}\tt [CJM: #1]}}
+% --------------
+
+\DeclareSIPrePower\quartic{4}   % declares quartic power for SI units package
+
+\newcommand{\phih}{\ensuremath{\hat{\phi}}}
+\newcommand{\phib}{\ensuremath{\bar{\phi}}}
+\newcommand{\grad}{\ensuremath{\vec{\nabla}}}
+\newcommand{\lap}{\ensuremath{\Delta}}
+\newcommand{\adotoa}{\ensuremath{{\cal H}}}
+\newcommand{\tadotoa}{\ensuremath{{\cal \tilde{H}}}}
+\def\R{{\cal R}}
+\def\T{{\cal T}}
+\def\L{{\cal L}}
+\def\G{{\cal G}}
+\def\g{\gamma}
+\def\mn{{\mu\nu}}
+\def\ij{{ij}}
+\def\ab{{ab}}
+\def\AB{{AB}}
+\def\TT{\tilde{T}}
+\def\half{\frac{1}{2}}
+\def\quarter{\frac{1}{4}}
+\def\del{\partial}
+\def\Mpl{M_{\rm pl}}
+\newcommand{\FT}{{\cal F}_T}
+\newcommand{\GT}{{\cal G}_T}
+\newcommand{\e}{{\cal E}}
+\newcommand{\p}{{\cal P}}
+% --------------
+
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\bea}{\begin{eqnarray}}
+\newcommand{\eea}{\end{eqnarray}}
+\newcommand{\pp}{~~~.}
+\newcommand{\vv}{~~~,}
+\newcommand{\dd}{\mbox{d}}
+
+
+\def\rmd{{\rm d}}
+\def\comment#1{\textcolor{red}{#1}}
+\def\revtext#1{\textcolor{blue}{#1}}
+\def\revt#1{\textcolor{red}{#1}}
+
+\begin{document}
+
+\DocTitle{{\bf \emph{Euclid Theoretical Predictions Specification Document (TPSD)}}}
+\DocAuths{This document is under the custodianship of the Euclid Inter-Science Working Group 
+Taskforce for Forecasting.}
+\DocRespb{TWG}
+\DocNumbr{EC-???-???}
+\DocIssue{0}
+
+\DocAbstr{This document contains the specification of the remit of the inter-science working group taskforce for 
+  forecasting and probe combination. Details of how this group relates to the SWGs is defined in the PPSAID.}
+
+\DocDate{\today}
+
+\DocChange{Draft 0 & 0 & 2015-09 & Creation \\ \hline}
+
+\DocApprov{ &  & & \\ \hline}
+
+%\DocHeadr
+
+\header{\DocHeadr}
+
+\mktitlepage
+
+\newpage 
+
+\mksecondpage
+
+\newpage
+
+\tableofcontents
+
+\newpage
+\include{parameter_forecasts}
+
+%--------------------------------------------------------------------
+%\bibliographystyle{parameters}
+%\bibliographystyle{unsrt}
+\bibliographystyle{JHEP}
+\bibliography{references}
+
+\end{document}
+
+
+
+
+
+
