@@ -304,7 +304,7 @@ when ratified.
 
 \section*{Appendix: Galaxy Clustering Holistic Forecast Definitions}
 We recall the main equations to be used. Observed linear spectrum at all redshifts:
-\begin{equation} \label{eq:observed-power}
+\begin{equation}
 P_{r,obs}(k_{ref},\mu_{ref};z)=P_{s}(z)+\frac{D_{A}(z)_{ref}^{2} H(z)}{D_A(z)^{2} H_{ref}(z)} \frac{P(k,z)}{P(k,z=0)} b^{2}(z) (1+\beta(z)\mu^{2})^{2}P(k,z=0)\,,
 \end{equation}
 We use:
@@ -443,7 +443,7 @@ dV_{dz} = \frac{\frac{4 \pi}{3} \left[ (1+z_2)^3 D_A[z_2;\theta]^3 - (1+z_1)^3 D
 is the volume in the redshift shell per degree squared.
 The survey Volume is 
 \begin{equation}
-V_s = \text{Area} (\text{i.e. } 15,000 \text{ sq deg}) * dV_{dz}
+V_s = Area (i.e. 15,000 sq deg) * dV_{dz}
 \end{equation}
 
 \revtext{The third column (dVol) should not be used anywhere.}
@@ -539,47 +539,16 @@ In addition to the common settings above, case4 fixes:
 \item $\sigma_z = 0$
 \end{enumerate}
 
-\subsection*{GC case 5: Constraining  $ \,\ln D_A(z),\, \ln H(z),\,f\sigma_8(z), \, b\sigma_8(z),\, P_{s}(z) $ at each redshift bin}
-In this case, we want to constrain some cosmological functions that depend on redshift, especially $f\sigma_8(z), \, b\sigma_8(z)$.
+\subsection*{GC case 5: Constraining $\{ \ln D_A(z),\, \ln H(z),\,f\sigma_8(z), \, b\sigma_8(z),\, P_{s}(z) \}$}
+In addition to the common settings above, case4 fixes:
+\begin{enumerate}
+\item  Bias: marginalization over bias, derivatives as in \ref{der:bias}.
+\item The AP effect is included.
+\item $P_{shot}$: marginalisation over $P_{shot}$; the fiducial is still zero; derivatives are calculated according to \ref{der:pshot} 
+\item $\sigma_z = 0$
+\end{enumerate}
 
-
-For doing this, we rewrite eqn. \ref{eq:observed-power} as: 
-\begin{equation}
- P_s(z) + \frac{D_A(z)^2_\text{ref} H(z)}{D_A(z)^2 H_\text{ref}(z)}     \left(b\sigma_8(z) + f\sigma_8(z) \mu^2 \right)^2 \frac{P(k,z)}{\sigma^2_8(z)}
-\end{equation}
-
-The full list of parameters is the following:
-\begin{itemize}
-\item n cosmological parameters, in our case $n=5$: $\theta_i =\{ \Omega_c h^2,\, \Omega_b h^2,\, h,\, n_s,\, \ln 10^{10} A_s \}$
-\item $5\times n_{bin}$ redshift-dependent parameters: $\{ \ln D_A(z),\, \ln H(z),\,f\sigma_8(z), \, b\sigma_8(z),\, P_{s}(z) \}$
-\end{itemize}
-
-Now we will have small modifications on the derivatives:
-
-\begin{subequations}
-
-\begin{align}
-\frac{\partial\ln P_{obs}\left(\bar{z},k,\mu;\theta_{i}\right)}{\partial\ln P_{s}(\bar{z})} & =\frac{1}{P_{obs}\left(\bar{z},k,\mu;\theta_{i}\right)}\\
-\frac{\partial\ln P_{obs}\left(\bar{z},k,\mu;\theta_{i}\right)}{\partial f \sigma_8(\bar{z},k)} & = \frac{2 \mu^2}{b\sigma_8(\bar{z}) + \mu^2 f \sigma_8(\bar{z},k)}\\
-\frac{\partial\ln P_{obs}\left(\bar{z},k,\mu;\theta_{i}\right)}{\partial b\sigma_8(\bar{z})} & = \frac{2 }{b\sigma_8(\bar{z}) + \mu^2 f \sigma_8(\bar{z},k)}\\
-\frac{\partial\ln P_{obs}\left(\bar{z},k,\mu;\theta_{i}\right)}{\partial\ln H(\bar{z})} & = 1 + \mu^2 \left(1 - \mu^2\right) \frac{ f \sigma_8(\bar{z},k)
-  }{b\sigma_8(\bar{z}) + 
-     \mu^2 f \sigma_8(\bar{z},k)} + k \mu^2 \frac{\partial \ln P(k,z)}{\partial k}\\
-\frac{\partial\ln P_{obs}\left(\bar{z},k,\mu;\theta_{i}\right)}{\partial\ln D_{A}(\bar{z})} & =  
--2 + 4 \mu^2 \left(1 - \mu^2\right)\frac{ f \sigma_8(\bar{z},k)}{
-  b\sigma_8(\bar{z}) + \mu^2 f \sigma_8(\bar{z},k)} - 
-k (1 - \mu^2) \frac{\partial \ln P(k,z)}{\partial k}
-\\
-\frac{\partial\ln P_{obs}\left(\bar{z},k,\mu;\theta_{i}\right)}{\partial \theta_i} & = \frac{\partial \ln P(k,z)}{\partial \theta_i} - 
-\frac{2}{\sigma_8(\bar{z})} \frac{\partial \sigma_8(\bar{z})}{\partial \theta_i}. \label{eq: partial-derivs-subeqns-sigma8}
-\end{align}
-\label{eq: partial-derivs-subeqns}
-
-\end{subequations}
-
-\revtext{The right hand side of eqn.\ref{eq: partial-derivs-subeqns-sigma8} is zero, when $\theta_i = \ln 10^{10} A_{s}$, so we should not add this parameter when constraining at the same time $\sigma_8(z)$.
-A Fisher matrix for comparison, will be added once this detail is solved.
-}
+\revtext{The Fisher matrix to compare with for this case, is case4.dat.}
 
 \section*{Appendix: Weak Lensing Holistic Forecast Definitions}
 Convergence power spectrum with (correlated) sources in redshift bins centered around $z_i$ and $z_j$:
