@@ -582,7 +582,10 @@ A Fisher matrix for comparison, will be added once this detail is solved.
 }
 
 \section*{Appendix: Weak Lensing Holistic Forecast Definitions}
-Convergence power spectrum with (correlated) sources in redshift bins centered around $z_i$ and $z_j$:
+
+\subsection{Lensing projections}
+
+Convergence power spectrum with (correlated) sources in redshift bins centered around $z_i$ and $z_j$ using Limber approximation:
 \begin{equation}
 P_{ij}(\ell)=\frac{9}{4}\int_{0}^{\infty}\mathrm{d}z\frac{W_{i}(z)W_{j}(z)H^{3}(z)\Omega_{m}^{2}(z)}{(1+z)^{4}}P_{m}\left(\frac{\ell}{ r(z)}\right),\label{eq:pstomog}
 \end{equation}
@@ -596,6 +599,9 @@ This is provided in the input, column 3 of table VII. Please, for this compariso
  W_i(z) = \int^\infty_z \frac{d\tilde{z}}{H(\tilde{z})}\left[ 1 - \frac{r(z)}{r(\tilde{z})} \right] n_i[r(\tilde{z})]
 \end{equation}
 where $r(z)$ is the coming distance.
+
+\subsection{Redshift distribution}
+
 The window function depends on $n_{i}(z)$, the galaxy distribution
 in the $i$-th redshift bin: this is convolved with a Gaussian to account for photometric
 redshift errors $\sigma_{z}$~(value specified below), i.e. 
@@ -610,6 +616,34 @@ In eq. (\ref{n_binned}), the density is given by:
 n(z) = z^2 exp(-(z/z_0)^{3/2})
 \end{equation}
 where $z_0 = z_{mean}/1.412$ is the peak of $n(z)$ and $z_{mean}$ is the median redshift (value specified below).
+
+\subsection{Likelihood function}
+
+
+\subsection{Covariance matrix}
+
+
+\subection{Real-space forecasts}
+
+
+\subsection{Systematics}
+
+
+\subsubsection{Instrumental and observational systematics}
+
+
+\subsubsection{Astrophysical systematics}
+
+
+\subsection{Intrinsic alignment}
+
+\subsection{Non-linear power spectrum}
+
+
+\subsubsection{Baryonic corrections}
+
+
+\subsection{Fisher matrix}
 
 Then the Fisher matrix is summed over all multiples:
 \begin{equation}
