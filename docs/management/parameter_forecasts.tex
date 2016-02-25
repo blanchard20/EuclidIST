@@ -590,19 +590,29 @@ A Fisher matrix for comparison, will be added once this detail is solved.
 The simplest form of the convergence power spectrum with (correlated) sources in redshift bins centered around $z_i$ and $z_j$ is
 %
 \begin{equation}
-P_{ij}(\ell) = \frac{9}{4} \Omega_{\rm m}^2 \left(\frac{H_0}{c}\right)^2 \int_{0}^{z_{\rm lim}}\mathrm{d}z\frac{W_{i}(z)W_{j}(z)}{(1+z)^{4}}P_{\rm m}\left(\frac{\ell}{ f_K[r(z)], z}\right),\label{eq:pstomog}
+P_{ij}(\ell) = \frac{9}{4} \Omega_{\rm m}^2 \left(\frac{H_0}{c}\right)^3 \int_{0}^{z_{\rm lim}}\mathrm{d}z\frac{(1+z)^2}{E(z)} W_{i}(z)W_{j}(z)
+    P_{\rm m}\left(\frac{\ell}{ f_K[r(z)], z}\right),
+  \label{eq:pstomog}
 \end{equation}
 %
-where $W_{i}(z)$ is the window function and r(z) is the comoving distance,
-which in flat space, is equal to the comoving angular diameter distance: This
+where $W_{i}(z)$ is the window function, $r(z)$ is the comoving distance, and $f_K$ the comoving angular
+diameter distance as a function of curvature $K$. The function $E$ is related to the Hubble parameter as
+%
+\begin{equation}
+  E(z) = \frac{H(z)}{H_0}.
+  \label{eq:E}
+\end{equation}
+%
+This
 approximate expression uses the Limber approximation (collecting only modes
 that lie in the plane of the sky, thereby neglecting correlations along the
 line of sight, \cite{1953ApJ...117..134L,1992ApJ...388..272K}), the small-angle
 approximation (expanding to first order trigonometric functions of the angle)
-and the flat-sky limit (replacing spherical harmonics by Fourier transforms)
+and the flat-sky limit (replacing spherical harmonics by Fourier transforms).
+The function $r$ is the comoving distance, which is related to the angular diameter distrance $D_{\rm A}$ as
 %
 \begin{equation}
-  r(z) = D_{\rm A}(1+z)
+  r(z) = D_{\rm A}(z) (1+z)
 \end{equation}
 %
 This is provided in the input, column 3 of table VII. Please, for this comparison, do not use other methods to calculate it.
