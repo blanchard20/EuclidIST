@@ -585,28 +585,47 @@ A Fisher matrix for comparison, will be added once this detail is solved.
 
 \subsection{Lensing projections}
 
-Convergence power spectrum with (correlated) sources in redshift bins centered around $z_i$ and $z_j$ using Limber approximation:
+\mk{Generalized equations for non-flat Universe.}
+
+The simplest form of the convergence power spectrum with (correlated) sources in redshift bins centered around $z_i$ and $z_j$ is
+%
 \begin{equation}
-P_{ij}(\ell)=\frac{9}{4}\int_{0}^{\infty}\mathrm{d}z\frac{W_{i}(z)W_{j}(z)H^{3}(z)\Omega_{m}^{2}(z)}{(1+z)^{4}}P_{m}\left(\frac{\ell}{ r(z)}\right),\label{eq:pstomog}
+P_{ij}(\ell) = \frac{9}{4} \Omega_{\rm m}^2 \left(\frac{H_0}{c}\right)^2 \int_{0}^{z_{\rm lim}}\mathrm{d}z\frac{W_{i}(z)W_{j}(z)}{(1+z)^{4}}P_{\rm m}\left(\frac{\ell}{ f_K[r(z)], z}\right),\label{eq:pstomog}
 \end{equation}
- where $W_{i}(z)$ is the window function and r(z) is the comoving distance, which in flat space, is equal to the comoving angular diameter distance:
- \begin{equation}
-r(z) = D_A(1+z)
- \end{equation}
+%
+where $W_{i}(z)$ is the window function and r(z) is the comoving distance,
+which in flat space, is equal to the comoving angular diameter distance: This
+approximate expression uses the Limber approximation (collecting only modes
+that lie in the plane of the sky, thereby neglecting correlations along the
+line of sight, \cite{1953ApJ...117..134L,1992ApJ...388..272K}), the small-angle
+approximation (expanding to first order trigonometric functions of the angle)
+and the flat-sky limit (replacing spherical harmonics by Fourier transforms)
+%
+\begin{equation}
+  r(z) = D_{\rm A}(1+z)
+\end{equation}
+%
 This is provided in the input, column 3 of table VII. Please, for this comparison, do not use other methods to calculate it.
  
 \begin{equation}
- W_i(z) = \int^\infty_z \frac{d\tilde{z}}{H(\tilde{z})}\left[ 1 - \frac{r(z)}{r(\tilde{z})} \right] n_i[r(\tilde{z})]
+ W_i(z) = \int^{z_{\rm lim}}_z {\rm d}\tilde{z} \, \frac{f_K[r(z) - r(\tilde z)]}{f_K[r(\tilde{z})]} n_i(\tilde{z})
 \end{equation}
-where $r(z)$ is the coming distance.
+where $r(z)$ is the coming distance. The redshift distribution for bin $i$ is denoted with $n_i$, and it is normalized to
+the number of galaxies belonging to that bin,
+%
+\begin{equation}
+  \int_0^{z_{\rm lim}} {\rm d} z \, n_i(z) = 1.
+\end{equation}
+%
+\mk{Modified, $n$ should depend on $\bar z$, not on $r$}
 
 \subsection{Redshift distribution}
 
 The window function depends on $n_{i}(z)$, the galaxy distribution
 in the $i$-th redshift bin: this is convolved with a Gaussian to account for photometric
-redshift errors $\sigma_{z}$~(value specified below), i.e. 
+redshift errors $\sigma_{z}$~(value specified below), i.e.~
 \begin{equation}
-n_{i}(z)=A \int\limits _{i\text{-th bin}}n({z})\exp\left(\frac{-(\tilde{z}-z)^{2}}{2 \sigma_{z}^{2}}\right)\mathrm{d}\tilde{z}
+n_{i}(z)=A \int\limits _{i\text{-th bin}}n({\tilde z})\exp\left(\frac{-(\tilde{z}-z)^{2}}{2 \sigma_{z}^{2}}\right)\mathrm{d}\tilde{z}
 \label{n_binned}
 \end{equation}
  where the integral is done over $\tilde{z}$ for the single i-th bin. 
