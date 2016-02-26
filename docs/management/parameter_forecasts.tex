@@ -647,6 +647,54 @@ where $z_0 = z_{mean}/1.412$ is the peak of $n(z)$ and $z_{mean}$ is the median 
 
 \subsection{Systematics}
 
+Often for Fisher matrix forecast, we implicitly assume that the observed power spectra
+is an unbiased realization of the underlying theoretical one so that we can
+directly compare them to infer constraints on the cosmological parameters.
+Actually, systematics make this assumption less than obvious. Roughly speaking,
+we can divide systematics sources in three classes.
+
+
+\begin{itemize}
+
+\item{{\it Astrophysical/theoretical systematics.} This includes all those
+effects which are usually taken for granted and neglected in the standard
+analysis. As discussed in \cite{2010A&A...523A..28K}, possible corrections
+originate from, e.g., multiple deflections contributing to the lensing shear
+and galaxy ellipticities probing the reduced rather than the actual shear.
+Moreover, one should also investigate effects related to source\,-\,lens
+clustering and magnification bias and check the limits of validity of the Born
+approximation and Limber projections.} \\
+
+\item{{\it Instrumental systematics.} Textbook example is CTI correction which
+introduces an artificial distortion pattern which impacts the ellipticity of
+each galaxy and hence the shear determination. As a result, a fake correlation
+can be induced leading to a biased observed power spectrum.} \\
+
+\item{{\it Observational systematics.} These are related to errors in the
+measurement process. The most well known case concerns shape measurement codes.
+In a first good approximation, one can assume that the measured ellipticity
+$\epsilon_{obs}$ is related to the true one $\epsilon$ as $\epsilon_{obs} = (1
++ m) \epsilon + c$, with $(m, c)$ the multiplicative and additive bias
+respectively. Depending on the code, $(m, c)$ can depend on the galaxy
+properties; e.g.~\cite{CFHTLenS-shapes} have used mock CFHTLenS data analysed
+with the {\it lensfit} code to show that, while $c$ is negligible, $m$ is a
+function of the galaxy size and S/N ratio. As a second example, one can
+consider colour gradient bias which can still be parameterized with the same
+formalism with $m$ dependent on the source redshift and color as preliminarily
+found by \cite{2013MNRAS.432.2385S}.}
+
+\end{itemize}
+
+The impact of systematics in the first class can be explicitely evaluated and their impact on the cosmic shear power spectrum quantified and included if necessary. On the contrary, second and third class systematics ask for a more empirical analysis. Under general assumptions, we can model their impact stating that the following relation hold
+
+\begin{displaymath}
+{\cal{C}}_{sys}(\ell, z_i, z_j) = (1 + {\cal{M}}_{ij}) {\cal{C}}_{lens}(\ell, z_i, z_j) + {\cal{A}}(\ell, z_i, z_j)
+\end{displaymath}
+where ${\cal{C}}_{sys}$ and ${\cal{C}}_{lens}$ are the cosmic shear power spectra with systematics included and the theoretical one, ${\cal{M}}_{ij}$ a redshift dependent multiplicative correction and ${\cal{A}}(\ell, z_i, z_j)$ is a scale and redshift dependent additive correction.
+
+Forecasting codes should include the relevant astrophysical systematics as a first step. A parameterization for the multiplicative and additive bias terms should be worked out to be added as soon as second and third class systematics have been quantified in some way.
+
+
 
 \subsubsection{Instrumental and observational systematics}
 
