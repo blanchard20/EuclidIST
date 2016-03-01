@@ -1,0 +1,360 @@
+%\documentclass{Latex_Euclid_style}
+
+%\usepackage{amsmath}
+%\usepackage{amsfonts}
+%\usepackage{amssymb}
+%\usepackage{graphicx}
+%\usepackage{epsfig}
+%\usepackage[hang,small,bf]{caption}
+%\usepackage{rotating}
+
+
+% --------------
+
+%\begin{document}
+
+\section{Splinter Group 1: codes}
+
+\subsubsection*{List of participants}
+\begin{itemize}
+ \item Valeria Pettorino
+ \item Matteo Martinelli
+\end{itemize}
+
+\subsubsection*{Aim}
+Make a recommendation on existing codes for Atomistic Forecasting approach (likelihood).\\
+Expected output:
+\begin{itemize}
+ \item A technical note explaining pros and cons of the various potential public codes for this purpose 
+ \item How do they meet our requirements
+ \begin{itemize}
+  \item On the division/requirements setting at fine-grained level 
+  \item On individual probe work and on combinations
+ \end{itemize}
+ \item Make a consensus of codes, and make a short presentation showing initial pros and cons.
+\end{itemize}
+
+\subsection{Boltzmann codes}
+
+\subsubsection{Overview of publicly available codes}
+
+
+
+\paragraph{CAMB}
+(\url{http://camb.info/})\\
+{\it Language:} fortran90\\
+{\it Includes:}\\
+\begin{itemize}
+ \item standard neutrinos, sterile neutrinos
+ \item CDM
+ \item DE: $w_0\ w_a$
+\end{itemize}
+{\it Pros: }
+\begin{itemize}
+%publicly available
+ \item updated very often
+ \item tested by a large community
+ \item there are several implementations for MG models (though not as well tested)
+ \item python wrapper for CAMB to join to any MCMC
+ \item documentation available and often updated: quick feedback by Anony Lewis and large community, via cosmocoffee
+\end{itemize}
+{\it Cons:}
+\begin{itemize}
+ \item structure of the code requires to modify different parts of the code for different models
+ \item no general distribution function for neutrinos
+ \item only synchronous gauge
+ \item maintainer (Antony Lewis) not currently in Euclid
+\end{itemize}
+
+
+\paragraph{EFTCAMB}(\url{http://wwwhome.lorentz.leidenuniv.nl/~hu/codes/})\\
+
+{\it Language:} fortran90\\
+{\it Includes:}
+Something here!\\
+{\it Pros:}\\ 
+\begin{itemize}
+ \item based on CAMB
+ \item very general parametrization for effective field theory (EFT) parametrisation of MG and DE models
+ \item tested against HiCLASS/MGCAMB/private codes for some models
+ \item several parameterisations of the background expansion and also of the perturbations (now including the Horndeski functions)
+ \item perturbation evolution computed self-consistently for EFT class of models
+ \item Very clearly written, structured, documented. 
+ \item It has a MCMC wrapper.
+\end{itemize}
+{\it Cons: }
+\begin{itemize}
+ \item need further testing
+ \item needs some understand stability conditions
+ \item MG starts from z = 100 (not tested earlier)
+\end{itemize}
+
+
+\paragraph{MGCAMB}(\url{http://aliojjati.github.io/MGCAMB/})\\
+
+{\it Language:} fortran90\\
+{\it Includes: }
+\begin{itemize}
+ \item changes the response of the scalar metric potentials (phi and psi) to the perturbations
+ \item this can be due to modifications of the Einstein equations (modified gravity) or due to extra clustering components (dark energy)
+\end{itemize}
+{\it Pros: }
+\begin{itemize}
+ \item it works with some well tested parametrization to provide comparison 
+ \item can test  very general deviations from LCDM visible in the scalar metric perturbations
+\end{itemize}
+{\it Cons: }
+\begin{itemize}
+ \item When used as a ‘EFT replacement’:
+ \begin{itemize}
+  \item does not evolve all perturbation equations 
+  \item assumes quasi static limit
+ \end{itemize}
+ \item General deviations in scalar metric perturbations require careful parameterisation, some further developments (eg. Gaussian process) may be required
+ \item Does not include similar deviations in vector and tensor perturbations
+\end{itemize}
+
+
+\paragraph{CLASS}(\url{http://class-code.net/})\\
+
+{\it Language:} C
+
+{\it Includes:}
+\begin{itemize}
+ \item various forms of neutrinos and dark matter
+ \item DE with a given equation of state, quintessence with scalar potentials.
+ \item DE extension is HiClass but not public (Bellini, Miguel Zuma)
+ \item newtonian and synchronous gauge
+\end{itemize}
+{\it Pros: }
+\begin{itemize}
+ \item structure of code
+ \item python wrapper
+ \item two gauges (newtonian and synchronous: except the initial conditions which are only written in the synchronous gauge and gauge-transformed). 
+ \item maintainer (Julien Lesgourgues) is active Euclid member
+\end{itemize}
+{\it Cons: }
+\begin{itemize}
+ \item community that uses/tested CLASS is smaller than CAMB
+\end{itemize}
+
+
+
+
+
+\subsubsection{Requirements to trust a code in MG}
+
+For every MG model, there should be at least 2 Boltzmann codes, agreeing. Agreement is defined as follows: 
+\begin{itemize}
+ \item check them on LCDM, need to agree at less than 0.1\%
+ \item check them in a MG scenario in different ranges of parameters: they should match at the same level at which they agree in LCDM on 
+all background quantities, all perturbation quantities, all spectra
+\end{itemize}
+
+ 
+
+
+
+
+\subsection{Parameter estimation codes}
+
+\subsubsection{Requirements for parameter estimation codes}
+
+The basic requirement for codes which obtain cosmological predictions from Boltzmann codes and perform parameter estimation is ``modularity''.\\
+A modular code will allow to easily modify the codes in case some modifications need to be included, e.g. additional likelihoods, extra parameters, correction to observables (systematics).\\
+Furthermore, separate modules for different physical quantities is needed for the atomistic approach as they allow to easily retrieve and compute the intermediate quantities of the theory
+flows (see e.g. Fig. \ref{WLtomo}) and to compare them between different codes.\\
+However too much modularity may affect code performances.\\
+
+A wishlist of module is:
+\begin{enumerate}
+ \item module calling the Boltzmann/transfer function codes for primary science
+ \item module calling the sampler
+ \item module for each likelihood for each probe
+ \item module for background quantities
+ \item module for perturbation quantities
+ \item module for non-linear corrections (ex. halofit)
+ \item module that gets the standard output and produces list of suitable output
+ \item postprocessing of the samples
+ \item plotting modules 
+\end{enumerate}
+
+In the following, the publicly available codes are listed, together with the requirements which are satisfied by each of them. The missed requirements are also listed and the complexity 
+of implementation is indicated as easy (E), medium (M) and difficult (D)
+
+\subsubsection{Overview of publicly available codes}
+
+\paragraph{COSMOMC}(\url{http://cosmologist.info/cosmomc/})\\
+{\it Language:} fortran90
+{\it pros:}
+\begin{itemize}
+ \item updated constantly
+ \item very well tested, very efficient for standard cosmology
+ \item used by a large community
+ \item easy to add parameters
+ \item easy to add an additional likelihood by adding a separate module
+ \item python nice graphical interactive interface for first tests
+ \item well documented
+ \item there are many options and more control to analyse the samples. 
+ \item Updated to all current probes (WL, GC, clusters, CMB).
+ \item Likelihood Sampler works really well
+\end{itemize}
+{\it Cons: }
+\begin{itemize}
+ \item if you increase the number of parameters, the sampler gets slower (may need to include other kind of sampler within COSMOMC?)
+ \item maintainer (Antony Lewis) not currently in Euclid
+\end{itemize}
+{\it Wish-list requirements: }
+\begin{itemize}
+ \item included: 1, 2 (add samplers), 3, 6, 8, 9
+ \item missing: 4 (E CAMB has background functions collected in module ModelParams in modules.f90 ), 5 (D), 6 (alternatives to halofit), 7 (E/M) 
+\end{itemize}
+
+\paragraph{MONTEPYTHON}(\url{https://github.com/baudren/montepython_public} or \url{http://baudren.github.io/montepython.html})\\
+{\it Language:} python\\
+{\it Includes:}
+\begin{itemize}
+ \item Euclid mock likelihood (weak lensing + galaxies) is publicly available; CMB, SNIa, BAO, WiggleZ (CHFTLens and SDSS to be released); 
+\end{itemize}
+{\it Pros: }
+\begin{itemize}
+ \item modular environment
+ \item can switch among different samplers
+ \item it has a graphical interface
+ \item can easily be interfaced with different Boltzmann codes
+ \item can use MPI
+ \item extra parameters written only in the input file
+ \item easy to add a new likelihood.
+\end{itemize}
+{\it Cons:} 
+\begin{itemize}
+ \item community that uses/tested MP is smaller than COSMOMC
+ \item less frequently updated 
+\end{itemize}
+{\it Wish-list requirements: }
+\begin{itemize}
+ \item included: 1 (for generic Boltzmann code; currently points at Class wrapper; Camb wrapper in preparation), 2 (MH, Multinest, CosmoHammer, importance sampling, reprocessing chains, fisher matrices), 3, 4, 5, 6 (Halofit), 7, 8, 9 (can choose between MontePython or Getdist to produce plots or reprocess: chains are in the same format as cosmomc and can use 8,9 from COSMOMC) 
+ \item missing: 6 (alternatives to Halofit E/M) 
+\end{itemize}
+
+\paragraph{COSMOSIS}(\url{https://bitbucket.org/joezuntz/cosmosis/wiki/Home})\\
+{\it Language:} ??\\
+{\it Includes: }
+\begin{itemize}
+ \item sampler code (http://arxiv.org/pdf/1409.3409v1.pdf)
+ \item CFHTLens, Planck, some BAO, SNae JLA. 
+\end{itemize}
+{\it pros:} 
+\begin{itemize}
+ \item can be wrapped to CAMB and CLASS
+ \item it is modular (can introduce other samplers or Boltzmann codes) 
+ \item can add modules in different languages
+ \item new parameters are defined only in the input parameter file
+ \item They will include SDSS. Easy to implement a new module for a new likelihood.
+ \item Used by DES.
+\end{itemize}
+{\it cons:} 
+\begin{itemize}
+ \item not very well tested
+ \item small community uses it
+ \item who is updating it?
+\end{itemize}
+{\it Wish-list requirements: }
+\begin{itemize}
+ \item included: 1 (generic Boltzmann code: CAMB, CLASS), 2 (MH, MultiNest, EMCEE), 3 (...add…), 4 (?), 6 (Halofit, Halofit + T correction), 7
+ \item Datablock the object passed down the pipeline. For a given set of parameters all module inputs are read from the datablock and all module outputs are written to it 
+ \item missing: 4 (E but not implemented?), 5 (?), 6 (alternatives to Halofit; E/M), 8 (format of chains? can one use getdist? how advanced as compared to getdist?), 9 (how advanced with respect to COSMOMC ones?) 
+\end{itemize}
+\paragraph{NumCosmo}(\url{http://www.nongnu.org/numcosmo/})\\
+
+
+
+
+\paragraph{emcee}(\url{http://dan.iel.fm/emcee/current/})\\
+{\it Language:} python\\
+{\it Includes:}
+\begin{itemize}
+ \item 3 different samplers (unified calling interface) and plotting tools
+\end{itemize}
+{\it Pros:} 
+\begin{itemize}
+ \item affine invariant sampling for fast sampling of degenerate likelihoods
+ \item parallel tempered sampler for multimodal likelihoods
+ \item standard Metropolis-Hastings sampler
+ \item many plotting tools included
+ \item can use MPI
+ \item interfaces reasonbly easy to write
+ \item interface to lensing code exists (in C)
+ \item interface to supernova code exists (in C or python)
+ \end{itemize}
+{\it Cons:} 
+\begin{itemize}
+ \item not specifically interfaced to a Boltzmann code
+\end{itemize}
+{\it Wish-list requirements: }
+\begin{itemize}
+ \item inclusion of observables CMB, CMB-lensing, CMB cross-correlations (iSW) and galaxy clustering
+ \item call to Boltzmann code (Bjoern: we’re working to add CMB-related probes)
+\end{itemize}
+
+
+\subsection{Code recommendation}
+
+\paragraph{Coding Language}
+The SGS use python and C++ only, and it would be good for us to follow them to have some coherence. Although there are pros and cons.
+infrastructure in python: wrappers in python to other codes written in different open sources free languages (instead of IDL, Mathematica)
+FR software to convert languages from one to another: help to write a python wrapper, for example SDC is using swig (http://www.swig.org/)
+good experience with SWIG, it serves as a way of passing data between python and other languages (Bjoern: tried out python$\rightarrow$C with openMP-parallelisation)
+Make sure all libraries used/needed are available. 
+SDC already have a list of libraries that are allowed to be used, at http://euclid.roe.ac.uk/projects/codeen-users/wiki/EDEN
+Python slow for high level performances, 
+
+\paragraph{Infrastructure}
+
+\paragraph{Boltzmann code}
+
+use the one you prefer but recommendation is that we need at least 2 codes that match for each model (match in the sense explained above); 
+in addition, our recommendation is to use MGCAMB only for tests (and clearly specify limitations of the code and assumptions in it)
+
+
+\paragraph{Parameter estimation}
+MontePython at present is the one that includes the highest number of requirements in the wish list. JL \& team within Euclid guarantee fast 
+update for wrappers to Boltzmann code version updates and to new data which become available. 
+
+\paragraph{Analysis and visualization}
+Getdist and plotting tools provided by cosmomc
+
+\paragraph{Code testing}
+Self-consistent check of the likelihood codes:  use a simulation to produce a set of data and check if we can recover the initial cosmological model.\\
+Available now: \\
+galaxy mock catalogue
+\begin{enumerate}
+ \item from MICE simulations (HOD) in LCDM cosmology  \url{http://internal.euclid-ec.org/?page_id=1551}
+ \item from Durham simulations (SAM) in LCDM cosmology 
+\end{enumerate}
+Needed:
+\begin{itemize}
+ \item simulations from non-standard cosmological models: e.g. f(R), DE 
+ \item mock catalogue for WL (to be asked to the WL splinter-2
+\end{itemize}
+
+
+\paragraph{Output required to other groups}
+\begin{itemize}
+ \item SDC: list of python libraries (\url{http://euclid.roe.ac.uk/projects/codeen-users/wiki/EDEN})
+ \item TWG:
+ \begin{itemize}
+  \item parameter definition document
+  \item list of Boltzmann codes available for MG
+ \end{itemize}
+ \item Simulations: list of simulations available
+\end{itemize}
+
+
+
+
+
+%\end{document}
+
+
+
