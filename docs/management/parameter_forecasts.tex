@@ -573,7 +573,7 @@ k (1 - \mu^2) \frac{\partial \ln P(k,z)}{\partial k}
 \frac{\partial\ln P_{obs}\left(\bar{z},k,\mu;\theta_{i}\right)}{\partial \theta_i} & = \frac{\partial \ln P(k,z)}{\partial \theta_i} - 
 \frac{2}{\sigma_8(\bar{z})} \frac{\partial \sigma_8(\bar{z})}{\partial \theta_i}. \label{eq: partial-derivs-subeqns-sigma8}
 \end{align}
-\label{eq: partial-derivs-subeqns}
+\label{eq: partial-derivs-subeqns-2}
 
 \end{subequations}
 
@@ -609,13 +609,13 @@ that lie in the plane of the sky, thereby neglecting correlations along the
 line of sight, \cite{1953ApJ...117..134L,1992ApJ...388..272K}), the small-angle
 approximation (expanding to first order trigonometric functions of the angle)
 and the flat-sky limit (replacing spherical harmonics by Fourier transforms).
+See Sect.~\ref{sec:WL_systematics} for further discussions on these astrophysical systematics.
 The function $r$ is the comoving distance, which is related to the angular diameter distrance $D_{\rm A}$ as
 %
 \begin{equation}
   r(z) = D_{\rm A}(z) (1+z)
 \end{equation}
 %
-This is provided in the input, column 3 of table VII. Please, for this comparison, do not use other methods to calculate it.
  
 \begin{equation}
  W_i(z) = \int^{z_{\rm lim}}_z {\rm d}\tilde{z} \, \frac{f_K[r(z) - r(\tilde z)]}{f_K[r(\tilde{z})]} n_i(\tilde{z})
@@ -656,6 +656,7 @@ where $z_0 = z_{mean}/1.412$ is the peak of $n(z)$ and $z_{mean}$ is the median 
 
 
 \subsection{Systematics}
+\label{sec:WL_systematics}
 
 Often for Fisher matrix forecast, we implicitly assume that the observed power spectra
 is an unbiased realization of the underlying theoretical one so that we can
@@ -672,8 +673,11 @@ analysis. As discussed in \cite{2010A&A...523A..28K}, possible corrections
 originate from, e.g., multiple deflections contributing to the lensing shear
 and galaxy ellipticities probing the reduced rather than the actual shear.
 Moreover, one should also investigate effects related to source\,-\,lens
-clustering and magnification bias and check the limits of validity of the Born
-approximation and Limber projections.} \\
+clustering \cite{1998A&A...338..375B}, source-source clustering
+\cite{2002A&A...389..729S}, and magnification bias \cite{2001MNRAS.326..326H},
+and check the limits of validity of the Born approximation, Limber projections,
+and check the amplitude of relativistic effects \cite{2010PhRvD..81h3002B}.
+} \\
 
 \item{{\it Instrumental systematics.} Textbook example is CTI correction which
 introduces an artificial distortion pattern which impacts the ellipticity of
