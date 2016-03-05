@@ -657,15 +657,104 @@ where $z_0 = z_{mean}/1.412$ is the peak of $n(z)$ and $z_{mean}$ is the median 
 
 \subsection{Systematics}
 
+Often for Fisher matrix forecast, we implicitly assume that the observed power spectra
+is an unbiased realization of the underlying theoretical one so that we can
+directly compare them to infer constraints on the cosmological parameters.
+Actually, systematics make this assumption less than obvious. Roughly speaking,
+we can divide systematics sources in three classes.
+
+
+\begin{itemize}
+
+\item{{\it Astrophysical/theoretical systematics.} This includes all those
+effects which are usually taken for granted and neglected in the standard
+analysis. As discussed in \cite{2010A&A...523A..28K}, possible corrections
+originate from, e.g., multiple deflections contributing to the lensing shear
+and galaxy ellipticities probing the reduced rather than the actual shear.
+Moreover, one should also investigate effects related to source\,-\,lens
+clustering and magnification bias and check the limits of validity of the Born
+approximation and Limber projections.} \\
+
+\item{{\it Instrumental systematics.} Textbook example is CTI correction which
+introduces an artificial distortion pattern which impacts the ellipticity of
+each galaxy and hence the shear determination. As a result, a fake correlation
+can be induced leading to a biased observed power spectrum.} \\
+
+\item{{\it Observational systematics.} These are related to errors in the
+measurement process. The most well known case concerns shape measurement codes.
+In a first good approximation, one can assume that the measured ellipticity
+$\epsilon_{obs}$ is related to the true one $\epsilon$ as $\epsilon_{obs} = (1
++ m) \epsilon + c$, with $(m, c)$ the multiplicative and additive bias
+respectively. Depending on the code, $(m, c)$ can depend on the galaxy
+properties; e.g.~\cite{CFHTLenS-shapes} have used mock CFHTLenS data analysed
+with the {\it lensfit} code to show that, while $c$ is negligible, $m$ is a
+function of the galaxy size and S/N ratio. As a second example, one can
+consider colour gradient bias which can still be parameterized with the same
+formalism with $m$ dependent on the source redshift and color as preliminarily
+found by \cite{2013MNRAS.432.2385S}.}
+
+\end{itemize}
+
+The impact of systematics in the first class can be explicitely evaluated and their impact on the cosmic shear power spectrum quantified and included if necessary. On the contrary, second and third class systematics ask for a more empirical analysis. Under general assumptions, we can model their impact stating that the following relation hold
+
+\begin{displaymath}
+{\cal{C}}_{sys}(\ell, z_i, z_j) = (1 + {\cal{M}}_{ij}) {\cal{C}}_{lens}(\ell, z_i, z_j) + {\cal{A}}(\ell, z_i, z_j)
+\end{displaymath}
+where ${\cal{C}}_{sys}$ and ${\cal{C}}_{lens}$ are the cosmic shear power spectra with systematics included and the theoretical one, ${\cal{M}}_{ij}$ a redshift dependent multiplicative correction and ${\cal{A}}(\ell, z_i, z_j)$ is a scale and redshift dependent additive correction.
+
+Forecasting codes should include the relevant astrophysical systematics as a first step. A parameterization for the multiplicative and additive bias terms should be worked out to be added as soon as second and third class systematics have been quantified in some way.
+
+
 
 \subsubsection{Instrumental and observational systematics}
 
 
+% -------------------------------------------------------------------- %
 \subsubsection{Astrophysical systematics}
 
 
-\subsection{Intrinsic alignment}
+% -------------------------------------------------------------------- %
+\subsection{Lensing-related systematics}
+Weak lensing probes the cosmic large-scale structure through its null-geodesics: While this property follows almost universally from all relativistic theories of gravity and is easy enough to understand, the technical computation of weak lensing observables, in particular on small scales, is challenging as it is influenced by a number of second-order effects. With Euclid, large multipoles are probed with high statistical precision such that the exact prediction of spectra on small scales is necessary in order to have unbiased measurements: Euclid's weak lensing data set will have a statistical significance of about $10^3\sigma$, such that for example an over- or underpredicition of the spectra by $10^{-3}$ will be a $1\sigma$-bias.
 
+Second order effects in weak lensing fall into a couple of categories, according to the physical mechanisms, but they have in common that the weak lensing signal is weighted by a second field, which, under some circumstances, can generate $B$-modes in the ellipticity field - with impact on the calibration of the ellipticity measurements. Typically, the effects are important on small scales around and above $\ell=10^3$ and modify the spectra by a factor of $10^{-3\ldots-8}$ depending on the nature of the weighting field.
+
+\subsubsection{geodesic effects}
+The implict lens equation is solved by a perturbative expansion, where the weak lensing deflection is collected by integration along a straight line replacing the actual light path. At higher order, there are corrections due to better approximations of the actual light path (Born-corrections). Similarly, the change in shape of a light bundle is computed relative to a light bundle with circular cross section, and corrected at higher order by gravitational distortion of an already deformed bundle (lens-lens coupling).
+
+
+\subsubsection{clustering effects}
+The weak lensing effect assumes a uniform sampling of the tidal fields generated by the cosmic large-scale structure. The source galaxies, however, are clustered due to structure formation and introduce a weighting into the weak lensing  signal which reflects their angular clustering (source-source clustering). In addition, there is a positive correlation between lensing structures and structures hosting lensed galaxies (source-lens clustering), again breaking the uniform sampling in the idealised picture.
+
+
+\subsubsection{relativistic effects}
+Weak lensing is computed in the limit of a weakly perturbed FLRW-metric with gradients in the potential being responsible for deflection and tidal shear fields for shape distortions of galaxies. There are, however, corrections to the metric of order $\Phi/c^2$ as well as corrections due to the momentum density. In general, these effects are small but might be relevant looking for deviations from general relativity as the theory of gravity.
+
+
+\subsubsection{source motion and location}
+Lensing requires the conversion from the observed redshift of a source galaxy to comoving distance, and in this conversion one usually assumes that the redshift is purely cosmological. But there can be non-cosmological contributions to the redshift, for instance by peculiar motion, or by gravitational redshifting at the source itself (Sachs-Wolfe-type corrections) or by cumulative gravitational redshifting between the source and the observer (integrated Sachs-Wolfe-type corrections).
+
+\subsubsection{lensing-specific effects}
+The quantity relevant for mapping the ellipticity of a galaxy is the reduced shear $g = \gamma/(1-\kappa)$ instead of the lensing shear $\gamma$, implying corrections to the weak lensing shear spectra at second order. Furthermore, the survey depth and the number of observed galaxies is modulated by weak lensing magnification, both leading to a weighting of the shear signal with another lensing quantity. 
+
+
+As a general observation we emphasise that the corrections affect higher-order statistical measures, in particular the bispectrum, at a lower order in perturbation theory.
+
+
+% -------------------------------------------------------------------- %
+\subsection{Intrinsic alignments}
+Weak lensing commonly operates under the assumption that ellipticities are intrinsically uncorrelated, and that weak lensing is the only effect that generates ellipticity correlations due to correlated tidal shear fields between light bundles. Galaxies can have intrinsically correlated shape due to their formation history or due to their interaction with the cosmic large-scale structure. While the exact mechanisms are not yet fully understood, there are two types of interaction based on tidal fields which are thought to be relevant for the alignment of spiral and elliptical galaxies.
+
+\subsubsection{linear alignment model for elliptical galaxies}
+The dynamical model of elliptical galaxies is that of a cloud of stars in virial equilibirum inside the hosting dark matter structure. The gravitational potential of this structure can be perturbed by tidal gravitational fields, which cause a change in shape of the stellar component. 
+
+
+\subsubsection{quadratic alignment model for spiral galaxies}
+The shape of a spiral galaxy is determined by the inclination angle under which we see the stellar disc. One assumes that the symmetry axis of the stellar disc coincides with the angular momentum direction of the host halo, which in turn is determined in its formation process through tidal torquing.
+
+
+
+% -------------------------------------------------------------------- %
 \subsection{Non-linear power spectrum}
 
 
@@ -712,6 +801,4 @@ the same amount of galaxies. \comment{need to add formula}
 \end{enumerate}
 
 %\end{document}
-
-
 
