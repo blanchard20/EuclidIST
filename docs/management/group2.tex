@@ -1,0 +1,226 @@
+% group2.tex
+
+\section{Splinter Group 2: Weak Lensing Holistic Forecast Definitions}
+
+\subsection{Lensing projections}
+
+\mk{Generalized equations for non-flat Universe.}
+
+The simplest form of the convergence power spectrum with (correlated) sources in redshift bins centered around $z_i$ and $z_j$ is
+%
+\begin{equation}
+P_{ij}(\ell) = \frac{9}{4} \Omega_{\rm m}^2 \left(\frac{H_0}{c}\right)^3 \int_{0}^{z_{\rm lim}}\mathrm{d}z\frac{(1+z)^2}{E(z)} W_{i}(z)W_{j}(z)
+    P_{\rm m}\left(\frac{\ell}{ f_K[r(z)], z}\right),
+  \label{eq:pstomog}
+\end{equation}
+%
+where $W_{i}(z)$ is the window function, $r(z)$ is the comoving distance, and $f_K$ the comoving angular
+diameter distance as a function of curvature $K$. The function $E$ is related to the Hubble parameter as
+%
+\begin{equation}
+  E(z) = \frac{H(z)}{H_0}.
+  \label{eq:E}
+\end{equation}
+%
+This
+approximate expression uses the Limber approximation (collecting only modes
+that lie in the plane of the sky, thereby neglecting correlations along the
+line of sight, \cite{1953ApJ...117..134L,1992ApJ...388..272K}), the small-angle
+approximation (expanding to first order trigonometric functions of the angle)
+and the flat-sky limit (replacing spherical harmonics by Fourier transforms).
+See Sect.~\ref{sec:WL_systematics} for further discussions on these astrophysical systematics.
+The function $r$ is the comoving distance, which is related to the angular diameter distrance $D_{\rm A}$ as
+%
+\begin{equation}
+  r(z) = D_{\rm A}(z) (1+z)
+\end{equation}
+%
+ 
+\begin{equation}
+ W_i(z) = \int^{z_{\rm lim}}_z {\rm d}\tilde{z} \, \frac{f_K[r(z) - r(\tilde z)]}{f_K[r(\tilde{z})]} n_i(\tilde{z})
+\end{equation}
+where $r(z)$ is the coming distance. The redshift distribution for bin $i$ is denoted with $n_i$, and it is normalized to
+the number of galaxies belonging to that bin,
+%
+\begin{equation}
+  \int_0^{z_{\rm lim}} {\rm d} z \, n_i(z) = 1.
+\end{equation}
+%
+\mk{Modified, $n$ should depend on $\bar z$, not on $r$}
+
+\subsection{Redshift distribution}
+
+The window function depends on $n_{i}(z)$, the galaxy distribution
+in the $i$-th redshift bin: this is convolved with a Gaussian to account for photometric
+redshift errors $\sigma_{z}$~(value specified below), i.e.~
+\begin{equation}
+n_{i}(z)=A \int\limits _{i\text{-th bin}}n({\tilde z})\exp\left(\frac{-(\tilde{z}-z)^{2}}{2 \sigma_{z}^{2}}\right)\mathrm{d}\tilde{z}
+\label{n_binned}
+\end{equation}
+ where the integral is done over $\tilde{z}$ for the single i-th bin. 
+$A = \frac{1}{\sqrt{2\pi} \sigma_z}$ a normalization factor.
+In eq. (\ref{n_binned}), the density is given by: 
+\begin{equation}
+n(z) = z^2 exp(-(z/z_0)^{3/2})
+\end{equation}
+where $z_0 = z_{mean}/1.412$ is the peak of $n(z)$ and $z_{mean}$ is the median redshift (value specified below).
+
+\subsection{Likelihood function}
+
+
+\subsection{Covariance matrix}
+
+
+\subsection{Real-space forecasts}
+
+
+\subsection{Systematics}
+\label{sec:WL_systematics}
+
+Often for Fisher matrix forecast, we implicitly assume that the observed power spectra
+is an unbiased realization of the underlying theoretical one so that we can
+directly compare them to infer constraints on the cosmological parameters.
+Actually, systematics make this assumption less than obvious. Roughly speaking,
+we can divide systematics sources in three classes.
+
+
+\begin{itemize}
+
+\item{{\it Astrophysical/theoretical systematics.} This includes all those
+effects which are usually taken for granted and neglected in the standard
+analysis. As discussed in \cite{2010A&A...523A..28K}, possible corrections
+originate from, e.g., multiple deflections contributing to the lensing shear
+and galaxy ellipticities probing the reduced rather than the actual shear.
+Moreover, one should also investigate effects related to source\,-\,lens
+clustering \cite{1998A&A...338..375B}, source-source clustering
+\cite{2002A&A...389..729S}, and magnification bias \cite{2001MNRAS.326..326H},
+and check the limits of validity of the Born approximation, Limber projections,
+and check the amplitude of relativistic effects \cite{2010PhRvD..81h3002B}.
+} \\
+
+\item{{\it Instrumental systematics.} Textbook example is CTI correction which
+introduces an artificial distortion pattern which impacts the ellipticity of
+each galaxy and hence the shear determination. As a result, a fake correlation
+can be induced leading to a biased observed power spectrum.} \\
+
+\item{{\it Observational systematics.} These are related to errors in the
+measurement process. The most well known case concerns shape measurement codes.
+In a first good approximation, one can assume that the measured ellipticity
+$\epsilon_{obs}$ is related to the true one $\epsilon$ as $\epsilon_{obs} = (1
++ m) \epsilon + c$, with $(m, c)$ the multiplicative and additive bias
+respectively. Depending on the code, $(m, c)$ can depend on the galaxy
+properties; e.g.~\cite{CFHTLenS-shapes} have used mock CFHTLenS data analysed
+with the {\it lensfit} code to show that, while $c$ is negligible, $m$ is a
+function of the galaxy size and S/N ratio. As a second example, one can
+consider colour gradient bias which can still be parameterized with the same
+formalism with $m$ dependent on the source redshift and color as preliminarily
+found by \cite{2013MNRAS.432.2385S}.}
+
+\end{itemize}
+
+The impact of systematics in the first class can be explicitely evaluated and their impact on the cosmic shear power spectrum quantified and included if necessary. On the contrary, second and third class systematics ask for a more empirical analysis. Under general assumptions, we can model their impact stating that the following relation hold
+
+\begin{displaymath}
+{\cal{C}}_{sys}(\ell, z_i, z_j) = (1 + {\cal{M}}_{ij}) {\cal{C}}_{lens}(\ell, z_i, z_j) + {\cal{A}}(\ell, z_i, z_j)
+\end{displaymath}
+where ${\cal{C}}_{sys}$ and ${\cal{C}}_{lens}$ are the cosmic shear power spectra with systematics included and the theoretical one, ${\cal{M}}_{ij}$ a redshift dependent multiplicative correction and ${\cal{A}}(\ell, z_i, z_j)$ is a scale and redshift dependent additive correction.
+
+Forecasting codes should include the relevant astrophysical systematics as a first step. A parameterization for the multiplicative and additive bias terms should be worked out to be added as soon as second and third class systematics have been quantified in some way.
+
+
+
+\subsubsection{Instrumental and observational systematics}
+
+
+% -------------------------------------------------------------------- %
+\subsubsection{Astrophysical systematics}
+
+
+% -------------------------------------------------------------------- %
+\subsection{Lensing-related systematics}
+Weak lensing probes the cosmic large-scale structure through its null-geodesics: While this property follows almost universally from all relativistic theories of gravity and is easy enough to understand, the technical computation of weak lensing observables, in particular on small scales, is challenging as it is influenced by a number of second-order effects. With Euclid, large multipoles are probed with high statistical precision such that the exact prediction of spectra on small scales is necessary in order to have unbiased measurements: Euclid's weak lensing data set will have a statistical significance of about $10^3\sigma$, such that for example an over- or underpredicition of the spectra by $10^{-3}$ will be a $1\sigma$-bias.
+
+Second order effects in weak lensing fall into a couple of categories, according to the physical mechanisms, but they have in common that the weak lensing signal is weighted by a second field, which, under some circumstances, can generate $B$-modes in the ellipticity field - with impact on the calibration of the ellipticity measurements. Typically, the effects are important on small scales around and above $\ell=10^3$ and modify the spectra by a factor of $10^{-3\ldots-8}$ depending on the nature of the weighting field.
+
+\subsubsection{geodesic effects}
+The implict lens equation is solved by a perturbative expansion, where the weak lensing deflection is collected by integration along a straight line replacing the actual light path. At higher order, there are corrections due to better approximations of the actual light path (Born-corrections). Similarly, the change in shape of a light bundle is computed relative to a light bundle with circular cross section, and corrected at higher order by gravitational distortion of an already deformed bundle (lens-lens coupling).
+
+
+\subsubsection{clustering effects}
+The weak lensing effect assumes a uniform sampling of the tidal fields generated by the cosmic large-scale structure. The source galaxies, however, are clustered due to structure formation and introduce a weighting into the weak lensing  signal which reflects their angular clustering (source-source clustering). In addition, there is a positive correlation between lensing structures and structures hosting lensed galaxies (source-lens clustering), again breaking the uniform sampling in the idealised picture.
+
+
+\subsubsection{relativistic effects}
+Weak lensing is computed in the limit of a weakly perturbed FLRW-metric with gradients in the potential being responsible for deflection and tidal shear fields for shape distortions of galaxies. There are, however, corrections to the metric of order $\Phi/c^2$ as well as corrections due to the momentum density. In general, these effects are small but might be relevant looking for deviations from general relativity as the theory of gravity.
+
+
+\subsubsection{source motion and location}
+Lensing requires the conversion from the observed redshift of a source galaxy to comoving distance, and in this conversion one usually assumes that the redshift is purely cosmological. But there can be non-cosmological contributions to the redshift, for instance by peculiar motion, or by gravitational redshifting at the source itself (Sachs-Wolfe-type corrections) or by cumulative gravitational redshifting between the source and the observer (integrated Sachs-Wolfe-type corrections).
+
+\subsubsection{lensing-specific effects}
+The quantity relevant for mapping the ellipticity of a galaxy is the reduced shear $g = \gamma/(1-\kappa)$ instead of the lensing shear $\gamma$, implying corrections to the weak lensing shear spectra at second order. Furthermore, the survey depth and the number of observed galaxies is modulated by weak lensing magnification, both leading to a weighting of the shear signal with another lensing quantity. 
+
+
+As a general observation we emphasise that the corrections affect higher-order statistical measures, in particular the bispectrum, at a lower order in perturbation theory.
+
+
+% -------------------------------------------------------------------- %
+\subsection{Intrinsic alignments}
+Weak lensing commonly operates under the assumption that ellipticities are intrinsically uncorrelated, and that weak lensing is the only effect that generates ellipticity correlations due to correlated tidal shear fields between light bundles. Galaxies can have intrinsically correlated shape due to their formation history or due to their interaction with the cosmic large-scale structure. While the exact mechanisms are not yet fully understood, there are two types of interaction based on tidal fields which are thought to be relevant for the alignment of spiral and elliptical galaxies.
+
+\subsubsection{linear alignment model for elliptical galaxies}
+The dynamical model of elliptical galaxies is that of a cloud of stars in virial equilibirum inside the hosting dark matter structure. The gravitational potential of this structure can be perturbed by tidal gravitational fields, which cause a change in shape of the stellar component. 
+
+
+\subsubsection{quadratic alignment model for spiral galaxies}
+The shape of a spiral galaxy is determined by the inclination angle under which we see the stellar disc. One assumes that the symmetry axis of the stellar disc coincides with the angular momentum direction of the host halo, which in turn is determined in its formation process through tidal torquing.
+
+
+
+% -------------------------------------------------------------------- %
+\subsection{Non-linear power spectrum}
+
+
+\subsubsection{Baryonic corrections}
+
+
+\subsection{Fisher matrix}
+
+Then the Fisher matrix is summed over all multiples:
+\begin{equation}
+F_{\alpha\beta}=f_{\mathrm{sky}}\sum\limits _{\ell,i,j,k,m}\frac{(2\ell+1)\Delta\ell}{2}\frac{\partial P_{ij}(\ell)}{\partial\theta_{\alpha}}C_{jk}^{-1}\frac{\partial P_{km}(\ell)}{\partial\theta_{\beta}}C_{mi}^{-1}\label{eq:fm-wl}
+\end{equation}
+ with the covariance matrix 
+\begin{equation}
+C_{jk}=P_{jk}+\delta_{jk}\gamma_{\mathrm{int}}^{2}{{{q}}_j}^{-1},
+\end{equation}
+ where $\gamma_{\mathrm{int}}$ is the
+intrinsic galaxy shear  and 
+\begin{equation}
+q_{j} = 3600\left(\frac{180}{\pi}\right)^{2} n_{\theta} \int^\infty_0 n_j(z) dz \, .
+\end{equation}
+Here $n_{\theta}$ is the galaxy density per $\mathrm{arcmin}^{2}$ and $n_j(z)$ is the galaxy density for the j-th redshift bin, as defined in eq.(\ref{n_binned}).
+
+Since we consider multipoles up to $\ell_{\mathrm{max}}=5000$,
+we need to apply non-linear corrections to the matter power spectrum,
+for which we use the halofit (provided in the input spectra).
+
+\paragraph{Specifications for the weak lensing:}
+\begin{enumerate}
+\item Area: 15,000 sq deg
+\item $f_{sky} = Area/(4 \pi (180/\pi)^2)$
+\item Median Redshift: $z_{mean} = 0.9$
+\item $\gamma_{\mathrm{int}}=0.22$
+\item $n_\theta =$ 30 galaxies per $\mathrm{arcmin}^{2}$
+\item Error on photometric redshift: $\sigma_z$ = 0.05 (1+z)
+\item Linear Power Spectrum: CAMB (provided in the input, you shouldn't use it)
+\item Method to correct for non-linearities: Halo model  (however the input files are now linear; it does not matter for now as we are not looking for the correct Fisher, just comparing. For this comparison we are using linear spectra).
+\item Binning: 10 bins from z = 0 - 2.5. We assume equipopulated bins: the redshift bins chosen such that each contain
+the same amount of galaxies. \comment{need to add formula}
+\item k-range: $k_{min}=0.001$ h/Mpc, \revtext{$k_{max}=0.5$ h/Mpc}
+\item k-binning: use directly the one provided in the input
+\item $\ell$-range: $\ell_{min}=5$, $\ell_{max}$ \revtext{fixed as a function of z, using the table provided by Enea (uploaded in the wiki). No cut in z.}
+\item $\ell$-binning: 100 bins (with log spaced binning)
+\end{enumerate}
+
+
