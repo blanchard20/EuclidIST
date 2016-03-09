@@ -73,8 +73,68 @@ where $z_0 = z_{mean}/1.412$ is the peak of $n(z)$ and $z_{mean}$ is the median 
 
 \subsection{Real-space forecasts}
 
+The numerical calculation of real-space quantities is straight-forward,
+accurate, and fast. All real-space functions can be represented as  1D
+integrals over the filtered convergence-power spectrum $P_\kappa = P_\kappa^{\rm E} + P_\kappa^{\rm B}$.
+For the 2PCF $\xi_+$
+and $\xi_-$, these are efficiently carried out as Hankel transformation,
+%
+\begin{align}
+  \xi_+(\theta) & = \frac 1 {2\pi} \int {\rm d} \ell \, \ell {\rm J}_0(\ell
+   \theta)
+  [ P_\kappa^{\rm E}(\ell) + P_\kappa^{\rm B}(\ell)];
+  \nonumber \\
+   %
+   \xi_-(\theta) & = \frac 1 {2\pi} \int
+   {\rm d} \ell \, \ell {\rm J}_4(\ell \theta)
+  [ P_\kappa^{\rm E}(\ell) - P_\kappa^{\rm B}(\ell) ].
+  %
+   \label{eq:xi_pm_pkappa}
+\end{align}
+%
+For COSEBIs, the aperture-mass dispersion, and other real-space functions, the
+filter functions are smooth and have none to relatively few oscillations.
+The general expression for an E-/B-mode separating function $X_{\rm E, B}$ is
+%
+\begin{equation}
+  X_{\rm E, B} = \frac 1 {2\pi} \int_0^\infty {\rm d} \ell \, \ell \, P_\kappa^{\rm E, B}(\ell) \fourier U^2(\ell) .
+  %
+  \label{eq:X_EB_Fourier}
+\end{equation}
+%
+Fast
+and acurate codes exist to carry out the integrals in (\ref{eq:xi_pm_pkappa}) and (\ref{eq:X_EB_Fourier})
+(\texttt{FFTLog} \cite{2000MNRAS.312..257H};
+\texttt{nicaea}, part of \texttt{CosmoPMC} \cite{cosmo_pmc_ascl}; non-public
+codes from Patrick Simon, Marika Asgari).
 
-\subsection{Systematics}
+Some of these transformations are valid for a flat sky, and we need to check
+their accuracy for the curved sky case, and potentially modify those
+tranformations if necessary.
+
+The covariance matrix for real-space functions often shows stronger
+off-diagonal parts than the power spectrum. The latter, in the ideal case of a
+Gaussian shear field on the full sky, has zero-off diagonal elements. However,
+the non-Gaussian LSS on small scales and mask effects introduce off-diagonal
+correlations. In fact, the relation between the observable (band-power)
+spectrum and the underlying true convergence power spectrum $P_\kappa$ has the
+same form (\ref{eq:X_EB_Fourier}) as the relation between a real-space function
+and $P_\kappa$. The amplitude of off-diagonal elements depends mainly on the
+width of the filter function.
+
+$\xi_+$ and $\xi_-$ have a covariance with very large off-diagonal elements.
+The calculation of the cosmic variance term even in the Gaussian case is
+time-consuming due to the product of two Bessel function with different
+arguments $\ell \theta_i$, $\ell \theta_j$ for the off-diagonal element
+$C_{ij}$ with $i \ne j$. Code exists (Benjamin Joachimi) that has been used
+within Euclid. Even with parallelization on ${\cal O}(50)$ CPUs, 
+for $N_\theta = 50$ and $N_z = 12$ it takes a up to two weeks to compute
+the $N_\theta^2 [N_z (N_z + 1)] / 2 \times 4$ covariance elements for $\xi_+$ and $\xi_-$
+including the mixed terms ($+-, -+)$.
+
+
+
+\subsection{Systematics: overview}
 \label{sec:WL_systematics}
 
 Often for Fisher matrix forecast, we implicitly assume that the observed power spectra
@@ -83,20 +143,13 @@ directly compare them to infer constraints on the cosmological parameters.
 Actually, systematics make this assumption less than obvious. Roughly speaking,
 we can divide systematics sources in three classes.
 
-
 \begin{itemize}
 
-\item{{\it Astrophysical/theoretical systematics.} This includes all those
-effects which are usually taken for granted and neglected in the standard
-analysis. As discussed in \cite{2010A&A...523A..28K}, possible corrections
-originate from, e.g., multiple deflections contributing to the lensing shear
-and galaxy ellipticities probing the reduced rather than the actual shear.
-Moreover, one should also investigate effects related to source\,-\,lens
-clustering \cite{1998A&A...338..375B}, source-source clustering
-\cite{2002A&A...389..729S}, and magnification bias \cite{2001MNRAS.326..326H},
-and check the limits of validity of the Born approximation, Limber projections,
-and check the amplitude of relativistic effects \cite{2010PhRvD..81h3002B}.
-} \\
+\item{\it Astrophysical/theoretical systematics.} This includes all those
+lensing-related effects which are usually taken for granted and neglected in the standard
+analysis. These are listed in Sect.~\ref{sec:lensing_systematics}, with the exception
+of intrinsic aligment (IA). As one of the dominant contaminations of the lensing signal,
+IA is discussed in the separated Section \ref{sec:IA}.
 
 \item{{\it Instrumental systematics.} Textbook example is CTI correction which
 introduces an artificial distortion pattern which impacts the ellipticity of
@@ -129,15 +182,11 @@ Forecasting codes should include the relevant astrophysical systematics as a fir
 
 
 
-\subsubsection{Instrumental and observational systematics}
-
 
 % -------------------------------------------------------------------- %
-\subsubsection{Astrophysical systematics}
+\subsection{Systematics: astrophysical}
+\label{sec:lensing_systematics}
 
-
-% -------------------------------------------------------------------- %
-\subsection{Lensing-related systematics}
 Weak lensing probes the cosmic large-scale structure through its null-geodesics: While this property follows almost universally from all relativistic theories of gravity and is easy enough to understand, the technical computation of weak lensing observables, in particular on small scales, is challenging as it is influenced by a number of second-order effects. With Euclid, large multipoles are probed with high statistical precision such that the exact prediction of spectra on small scales is necessary in order to have unbiased measurements: Euclid's weak lensing data set will have a statistical significance of about $10^3\sigma$, such that for example an over- or underpredicition of the spectra by $10^{-3}$ will be a $1\sigma$-bias.
 
 Second order effects in weak lensing fall into a couple of categories, according to the physical mechanisms, but they have in common that the weak lensing signal is weighted by a second field, which, under some circumstances, can generate $B$-modes in the ellipticity field - with impact on the calibration of the ellipticity measurements. Typically, the effects are important on small scales around and above $\ell=10^3$ and modify the spectra by a factor of $10^{-3\ldots-8}$ depending on the nature of the weighting field.
@@ -147,7 +196,7 @@ The implict lens equation is solved by a perturbative expansion, where the weak 
 
 
 \subsubsection{clustering effects}
-The weak lensing effect assumes a uniform sampling of the tidal fields generated by the cosmic large-scale structure. The source galaxies, however, are clustered due to structure formation and introduce a weighting into the weak lensing  signal which reflects their angular clustering (source-source clustering). In addition, there is a positive correlation between lensing structures and structures hosting lensed galaxies (source-lens clustering), again breaking the uniform sampling in the idealised picture.
+The weak lensing effect assumes a uniform sampling of the tidal fields generated by the cosmic large-scale structure. The source galaxies, however, are clustered due to structure formation and introduce a weighting into the weak lensing  signal which reflects their angular clustering (source-source clustering; \cite{2002A&A...389..729S}). In addition, there is a positive correlation between lensing structures and structures hosting lensed galaxies (source-lens clustering; \cite{1998A&A...338..375B}), again breaking the uniform sampling in the idealised picture.
 
 
 \subsubsection{relativistic effects}
@@ -158,14 +207,21 @@ Weak lensing is computed in the limit of a weakly perturbed FLRW-metric with gra
 Lensing requires the conversion from the observed redshift of a source galaxy to comoving distance, and in this conversion one usually assumes that the redshift is purely cosmological. But there can be non-cosmological contributions to the redshift, for instance by peculiar motion, or by gravitational redshifting at the source itself (Sachs-Wolfe-type corrections) or by cumulative gravitational redshifting between the source and the observer (integrated Sachs-Wolfe-type corrections).
 
 \subsubsection{lensing-specific effects}
-The quantity relevant for mapping the ellipticity of a galaxy is the reduced shear $g = \gamma/(1-\kappa)$ instead of the lensing shear $\gamma$, implying corrections to the weak lensing shear spectra at second order. Furthermore, the survey depth and the number of observed galaxies is modulated by weak lensing magnification, both leading to a weighting of the shear signal with another lensing quantity. 
+The quantity relevant for mapping the ellipticity of a galaxy is the reduced shear $g = \gamma/(1-\kappa)$ instead of the lensing shear $\gamma$, implying corrections to the weak lensing shear spectra at second order. Furthermore, the survey depth and the number of observed galaxies is modulated by weak lensing magnification, both leading to a weighting of the shear signal with another lensing quantity (magnification bias; \cite{2001MNRAS.326..326H}.
 
+\subsubsection{General remarks}
 
 As a general observation we emphasise that the corrections affect higher-order statistical measures, in particular the bispectrum, at a lower order in perturbation theory.
 
+Useful references that compile, compare, and discuss various lensing-related systematics are \cite{2010A&A...523A..28K}
+and \cite{2010PhRvD..81h3002B}.
+
+
 
 % -------------------------------------------------------------------- %
-\subsection{Intrinsic alignments}
+\subsection{Systematics: Intrinsic alignments}
+\label{sec:IA}
+
 Weak lensing commonly operates under the assumption that ellipticities are intrinsically uncorrelated, and that weak lensing is the only effect that generates ellipticity correlations due to correlated tidal shear fields between light bundles. Galaxies can have intrinsically correlated shape due to their formation history or due to their interaction with the cosmic large-scale structure. While the exact mechanisms are not yet fully understood, there are two types of interaction based on tidal fields which are thought to be relevant for the alignment of spiral and elliptical galaxies.
 
 \subsubsection{linear alignment model for elliptical galaxies}
