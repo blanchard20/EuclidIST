@@ -22,13 +22,8 @@ diameter distance as a function of curvature $K$. The function $E$ is related to
   \label{eq:E}
 \end{equation}
 %
-This
-approximate expression uses the Limber approximation (collecting only modes
-that lie in the plane of the sky, thereby neglecting correlations along the
-line of sight, \cite{1953ApJ...117..134L,1992ApJ...388..272K}), the small-angle
-approximation (expanding to first order trigonometric functions of the angle)
-and the flat-sky limit (replacing spherical harmonics by Fourier transforms).
-See Sect.~\ref{sec:WL_systematics} for further discussions on these astrophysical systematics.
+See Sect.~\ref{sec:WL_systematics} for a discussion on the various assumptions and approximations under which this 
+equation is derived.
 The function $r$ is the comoving distance, which is related to the angular diameter distrance $D_{\rm A}$ as
 %
 \begin{equation}
@@ -190,6 +185,13 @@ Forecasting codes should include the relevant astrophysical systematics as a fir
 Weak lensing probes the cosmic large-scale structure through its null-geodesics: While this property follows almost universally from all relativistic theories of gravity and is easy enough to understand, the technical computation of weak lensing observables, in particular on small scales, is challenging as it is influenced by a number of second-order effects. With Euclid, large multipoles are probed with high statistical precision such that the exact prediction of spectra on small scales is necessary in order to have unbiased measurements: Euclid's weak lensing data set will have a statistical significance of about $10^3\sigma$, such that for example an over- or underpredicition of the spectra by $10^{-3}$ will be a $1\sigma$-bias.
 
 Second order effects in weak lensing fall into a couple of categories, according to the physical mechanisms, but they have in common that the weak lensing signal is weighted by a second field, which, under some circumstances, can generate $B$-modes in the ellipticity field - with impact on the calibration of the ellipticity measurements. Typically, the effects are important on small scales around and above $\ell=10^3$ and modify the spectra by a factor of $10^{-3\ldots-8}$ depending on the nature of the weighting field.
+
+\subsubsection{description of fluctuations}
+
+Several approximations are usually made, and should be examined, to describe density flucutations, their correlations, and their projections.
+The Limber approximation \cite{1953ApJ...117..134L,1992ApJ...388..272K} only accounts for modes that lie in the plane of sky, and neglects
+correlations of modes between different comoving distances $\chi \ne \chi^2$. Further, the small-angle and flat-sky approximation
+expands trigometric functions of the angles on the sky to first order, and replaces spherical harmonic transforms with Fourier transforms.
 
 \subsubsection{geodesic effects}
 The implict lens equation is solved by a perturbative expansion, where the weak lensing deflection is collected by integration along a straight line replacing the actual light path. At higher order, there are corrections due to better approximations of the actual light path (Born-corrections). Similarly, the change in shape of a light bundle is computed relative to a light bundle with circular cross section, and corrected at higher order by gravitational distortion of an already deformed bundle (lens-lens coupling).
