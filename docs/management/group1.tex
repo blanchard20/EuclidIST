@@ -296,15 +296,23 @@ of implementation is indicated as easy (E), medium (M) and difficult (D)
 \end{itemize}
 
 \newpage
-\subsubsection{NumCosmo}(\url{http://www.nongnu.org/numcosmo/})\\
+\subsubsection{NumCosmo}
 
-\paragraph{emcee}(\url{http://dan.iel.fm/emcee/current/})\\
-{\it Language:} python\\
-{\it Includes:}
+(\url{http://www.nongnu.org/numcosmo/})\\
+
+\newpage
+\subsubsection{emcee} 
+
+(\url{http://dan.iel.fm/emcee/current/})\\
+
+{\it \bf Language:} python\\
+
+{\it \bf Includes:}
 \begin{itemize}
  \item 3 different samplers (unified calling interface) and plotting tools
 \end{itemize}
-{\it Pros:} 
+
+{\it \bf Pros:} 
 \begin{itemize}
  \item affine invariant sampling for fast sampling of degenerate likelihoods
  \item parallel tempered sampler for multimodal likelihoods
@@ -315,17 +323,19 @@ of implementation is indicated as easy (E), medium (M) and difficult (D)
  \item interface to lensing code exists (in C)
  \item interface to supernova code exists (in C or python)
  \end{itemize}
-{\it Cons:} 
+
+{\it \bf Cons:} 
 \begin{itemize}
  \item not specifically interfaced to a Boltzmann code
 \end{itemize}
-{\it Wish-list requirements: }
+
+{\it \bf Wish-list requirements: }
 \begin{itemize}
  \item inclusion of observables CMB, CMB-lensing, CMB cross-correlations (iSW) and galaxy clustering
  \item call to Boltzmann code (Bjoern: we’re working to add CMB-related probes)
 \end{itemize}
 
-
+\newpage
 \subsection{Code recommendation}
 
 \paragraph{Coding Language}
@@ -370,6 +380,7 @@ Needed:
 \paragraph{Required output from other groups}
 \begin{itemize}
  \item SDC: list of python libraries (\url{http://euclid.roe.ac.uk/projects/codeen-users/wiki/EDEN})
+ \item From all other splinters: check that the wish-list satisfies their list of requirements. \comment{List specific output required by the codes that satisfies theory/observations?}
  \item TWG:
  \begin{itemize}
   \item parameter definition document
