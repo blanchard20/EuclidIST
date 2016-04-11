@@ -21,7 +21,7 @@
 \end{itemize}
 \subsubsection*{Participants}
 \begin{itemize}
- \item Matteo Costanzi,  Yabebal Fantaye, Martin Kunz, Massimiliano Lattanzi, Julien Lesgourgues, Baojiu Li, Matteo Martinelli, Federico Marulli, Valeria Pettorino, Anna M. Porredon, Marco Raveri, Valentina Salvatelli, Barbara Sartoris, Luca Amendola, Thejs Brinckmann, Ziad Sakr
+ \item Matteo Costanzi,  Yabebal Fantaye, Ken Ganga, Martin Kunz, Massimiliano Lattanzi, Julien Lesgourgues, Baojiu Li, Matteo Martinelli, Federico Marulli, Valeria Pettorino, Anna M. Porredon, Marco Raveri, Ziad Sakr, Valentina Salvatelli, Barbara Sartoris, Bjšrn Malte Schaefer, Luca Amendola, Thejs Brinckmann, Mariana Penna-Lima \comment{in Euclid? verify with Ken Ganga}.
 \end{itemize}
 
 \subsubsection*{Aim}
@@ -263,7 +263,7 @@ of implementation is indicated as easy (E), medium (M) and difficult (D).
 \begin{itemize}
 \item the models discussed here: \url{https://bitbucket.org/joezuntz/cosmosis/wiki/default_modules}
  \item Different samplers: including emcee (see schema discussed in this document), fisher matrices sampler and Multinest (that computes the Bayesian evidence and the posterior pdf's.) http://arxiv.org/pdf/1409.3409v1.pdf
- \item CFHTLens, Planck, some BAO, SNe JLA. 
+ \item Likelihoods are listed here: \url{https://bitbucket.org/joezuntz/cosmosis/wiki/default_modules} in the likelihood section.
  \item CAMB, CLASS
 \end{itemize}
 
@@ -297,6 +297,48 @@ of implementation is indicated as easy (E), medium (M) and difficult (D).
 \subsubsection{NumCosmo}
 
 (\url{http://www.nongnu.org/numcosmo/})\\
+(\url{https://github.com/NumCosmo/NumCosmo})
+
+{\it \bf Language:} C (main), Python, Perl, Java, Java Script, Vala, Lua, Ruby (for a complete list see \url{https://wiki.gnome.org/Projects/GObjectIntrospection/Users})
+\\
+
+{\it \bf Includes:}
+\begin{itemize}
+ \item some BAO, some H(z) , SNe Ia JLA,  Planck, some cluster data
+\item resample codes (from a probability density function and  bootstrap)
+\item sampler codes
+\end{itemize}
+
+{\it \bf Pros:} 
+\begin{itemize}
+ \item modular environment
+ \item	can switch among different samplers
+ \item MCMC object is modular and one can implement just a new transition kernel
+\item 	can easily be interfaced with different Boltzmann codes
+\item 	the code is parallelized through multithread and easily extended to MPI
+\item 	all parameter information is defined in the NcmModel. It is inherited by NcmMSet, NcmFit, NcmFitMCMC etc, avoiding repetition
+\item 	easy to add a new likelihood
+\item 	it call be called from any bind language or from a general purpose executable (in C) called darkenergy
+\item 	frequently updated
+\item 	portable to Linux, Mac OS and Window
+\item 	it uses autotools as its building system allowing NumCosmo to be easily compiled in several architectures
+\item 	a list of pre-compiled packages can be found at https://build.opensuse.org/package/show/home:vitenti/numcosmo
+\item 	the QA is assured by a set of tests using ''Unit testing''
+
+ \end{itemize}
+
+{\it \bf Cons:} 
+\begin{itemize}
+ \item 	community that uses/tested NumCosmo is much smaller than COSMOMC
+ \item 	external dependencies (NLopt, Sundials, cfitsio, etc)
+ \item 	users can call NumCosmo from any bind language, but the developers have to learn GObject and GObject Introspection. We plan to provide a cookbook to make it easier.
+ \item 	no graphical interface
+ \end{itemize}
+
+{\it \bf Wish-list requirements: }
+\begin{itemize}
+ \item included: 1 (CLASS wrapper, generic Boltzmann code in progress); 2 (statistical tools available: best-fit finders, Fisher Matrix,  Monte Carlo (resample from a probability density function and bootstrap), Profile Likelihood, Markov Chain Monte Carlo (Metropolis-Hastings, Ensemble sampler MCMC), Approximate Bayesian Computation); 3; 4; 5; 6 (halofit, halo model); 7; 8; 9.
+\end{itemize}
 
 \newpage
 \subsubsection{emcee} 
