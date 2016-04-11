@@ -52,13 +52,42 @@ redshift errors $\sigma_{z}$~(value specified below), i.e.~
 n_{i}(z)=A \int\limits _{i\text{-th bin}}n({\tilde z})\exp\left(\frac{-(\tilde{z}-z)^{2}}{2 \sigma_{z}^{2}}\right)\mathrm{d}\tilde{z}
 \label{n_binned}
 \end{equation}
- where the integral is done over $\tilde{z}$ for the single i-th bin. 
+where the integral is done over $\tilde{z}$ for the single i-th bin. 
 $A = \frac{1}{\sqrt{2\pi} \sigma_z}$ a normalization factor.
-In eq. (\ref{n_binned}), the density is given by: 
+
+\subsubsection{n(z)}
+In eq. (\ref{n_binned}), we use the number density
 \begin{equation}
-n(z) = z^2 exp(-(z/z_0)^{3/2})
+n(z) = a_1\exp\left[-\frac{(z-0.7)^2}{b_1^2}\right]+c_1\exp\left[-\frac{(z-1.2)^2}{d_1^2}\right]
 \end{equation}
-where $z_0 = z_{mean}/1.412$ is the peak of $n(z)$ and $z_{mean}$ is the median redshift (value specified below).
+where $(a_1, b_1, c_1, d_1)=(1.50, 0.32, 0.20, 0.46)$. This distribution is taken from van Waerbeke et al. (2013) and 
+is the number density as a function of redshift for the CFHTLS survey. This is the most applicable $n(z)$ for Euclid as 
+CFHTLS covers each of the ground based broad-band filters to the depth required for Euclid ground-based photometry. 
+
+\tk{Need to specify the exact binning in redshift for this functional form.}
+
+\subsubsection{p(z)}
+The photometric redshift behaviour needs to be able to model the three top-level requirements for this posterior redshift estimates. These are: 
+the scatter in the photometric redshifts (variance of the $p(z)$), the fraction of outliers, and any residual bias in the phototmetric redshifts. 
+These three features can be captured in a double-Gaussian distribution where the functional form is a sum of the main sample and the outying sample 
+\begin{equation}
+p(z|z_p)=\frac{1-f_{\rm out}}{\sqrt{2\pi}\sigma_z(z_p)}\exp\left[-(z-c_{\rm cal}z_p+z_{\rm bias})^2/2\sigma_z^2(z_p)\right]+
+\frac{f_{\rm out}}{\sqrt{2\pi}\sigma^O_z(z_p)}\exp\left[-(z-c^O_{\rm cal}z_p+z^O_{\rm bias})^2/2[\sigma^O_z(z_p)]^2\right], 
+\end{equation} 
+Here we have assumed that the photo-z distribution is calibrated, but imperfectly, so that the median spectroscopic redshift distribution 
+is biased and inclined so that it lies along a line $z_s =c_{\rm cal}z_p +z_{\rm bias}$, 
+where $z_{\rm bias}$ is some bias and $c_{\rm cal}$ is a calibration. 
+A value $c_{\rm cal} = 1$ would mean that the photometric redshift estimation is perfectly 
+calibrated to a spectroscopic sample. The redshift error $\sigma^O_z(z)$ is assumed to be unknown and the distribution is 
+also assumed to lie between some photometric redshift range $z_{\rm range}$. We also assume a fraction $f_{\rm out}$ 
+of outlying galaxies in the sample, inclined on a slope described by $z^O_{\rm bias}$ and $c^O_{\rm cal}$. 
+The outlying sample's redshift error is range
+also unknown $z^O(z)$, which is the range in photometric redshift over which the outliers subtend. 
+Note that we do not include outliers that have low spectroscopic redshifts but a broad range in estimated 
+photometric redshift. Our analysis may be pessimistic in this case since by 
+including such a sample some redshift biasing effects may cancel-out in this analytic approximation.
+
+\tk{Contacting OUPHZ for current best estimates.}
 
 \subsection{Likelihood function}
 
