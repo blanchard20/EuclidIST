@@ -37,20 +37,34 @@ Expected output:
  \item Make a consensus of codes, and make a short presentation showing initial pros and cons.
 \end{itemize}
 
+\newpage
 \subsection{Boltzmann codes}
 This section includes an overview of publicly available Boltzmann codes. For each code we present a schema in the same format, including pros and cons.
+
+\subsubsection{Requirements to trust a code in Modified Gravity}
+
+For every MG model, there should be at least 2 Boltzmann codes, agreeing. Agreement is defined as follows: 
+\begin{itemize}
+ \item check them on LCDM, need to agree at less than 0.1\%
+ \item check them in a MG scenario in different ranges of parameters: they should match at the same level at which they agree in LCDM on 
+all background quantities, all perturbation quantities, all spectra
+\end{itemize}
+
 \newpage
 \subsubsection{CAMB}
 %\href{http://camb.info/}{CAMB}
 (\url{http://camb.info/})\\
-{\it Language:} fortran90\\
-{\it Includes:}
+
+{\it \bf Language:} fortran90\\
+
+{\it \bf Includes:}
 \begin{itemize}
  \item standard neutrinos, sterile neutrinos
  \item CDM
  \item DE: $w_0\ w_a$
 \end{itemize}
-{\it Pros: }
+
+{\it \bf Pros: }
 \begin{itemize}
 %publicly available
  \item updated very often
@@ -59,7 +73,8 @@ This section includes an overview of publicly available Boltzmann codes. For eac
  \item python wrapper for CAMB to join to any MCMC
  \item documentation available and often updated: quick feedback by Anony Lewis and large community, via cosmocoffee
 \end{itemize}
-{\it Cons:}
+
+{\it \bf Cons:}
 \begin{itemize}
  \item structure of the code requires to modify different parts of the code for different models
  \item no general distribution function for neutrinos
@@ -67,11 +82,15 @@ This section includes an overview of publicly available Boltzmann codes. For eac
  \item maintainer (Antony Lewis) not currently in Euclid
 \end{itemize}
 
+\newpage
+\subsubsection{EFTCAMB}
+(\url{http://wwwhome.lorentz.leidenuniv.nl/~hu/codes/})\\
 
-\paragraph{EFTCAMB}(\url{http://wwwhome.lorentz.leidenuniv.nl/~hu/codes/})\\
-{\it Language:} fortran90\\
-{\it Includes:}\\
-{\it Pros:}
+{\it \bf Language:} fortran90\\
+
+{\it \bf Includes:}\\
+
+{\it \bf Pros:}
 \begin{itemize}
  \item based on CAMB
  \item very general parametrization for effective field theory (EFT) parametrisation of MG and DE models
@@ -81,27 +100,32 @@ This section includes an overview of publicly available Boltzmann codes. For eac
  \item Very clearly written, structured, documented. 
  \item It has a MCMC wrapper.
 \end{itemize}
-{\it Cons: }
+
+{\it \bf Cons: }
 \begin{itemize}
  \item need further testing
  \item needs some understand stability conditions
  \item MG starts from z = 100 (not tested earlier)
 \end{itemize}
 
+\newpage
+\subsubsection{MGCAMB}(\url{http://aliojjati.github.io/MGCAMB/})\\
 
-\paragraph{MGCAMB}(\url{http://aliojjati.github.io/MGCAMB/})\\
-{\it Language:} fortran90\\
-{\it Includes: }
+{\it \bf Language:} fortran90\\
+
+{\it \bf Includes: }
 \begin{itemize}
  \item changes the response of the scalar metric potentials (phi and psi) to the perturbations: this can be due to modifications of the Einstein equations 
  (modified gravity) or due to extra clustering components (dark energy)
 \end{itemize}
-{\it Pros: }
+
+{\it \bf Pros: }
 \begin{itemize}
  \item it works with some well tested parametrization; easy to compare with previous results 
  \item can test  very general deviations from LCDM visible in the scalar metric perturbations
 \end{itemize}
-{\it Cons: }
+
+{\it \bf Cons: }
 \begin{itemize}
  \item When used as a ‘EFT replacement’:
  \begin{itemize}
@@ -114,48 +138,34 @@ This section includes an overview of publicly available Boltzmann codes. For eac
 \end{itemize}
 Warning: the code was recently updated (late february). These comments do not refer to the latest version.\\
 
+\newpage
+\subsubsection{CLASS}(\url{http://class-code.net/})\\
 
-\paragraph{CLASS}(\url{http://class-code.net/})\\
+{\it \bf  Language:} C
 
-{\it Language:} C
-
-{\it Includes:}
+{\it \bf Includes:}
 \begin{itemize}
  \item various forms of neutrinos and dark matter
  \item DE with a given equation of state, quintessence with scalar potentials.
  \item DE extension is HiClass but not public (Bellini, Miguel Zuma)
  \item newtonian and synchronous gauge
 \end{itemize}
-{\it Pros: }
+
+{\it \bf Pros: }
 \begin{itemize}
  \item structure of code
  \item python wrapper
  \item two gauges (newtonian and synchronous: except the initial conditions which are only written in the synchronous gauge and gauge-transformed). 
  \item maintainer (Julien Lesgourgues) is active Euclid member
 \end{itemize}
-{\it Cons: }
+
+{\it \bf Cons: }
 \begin{itemize}
  \item community that uses/tested CLASS is smaller than CAMB
 \end{itemize}
 
 
-
-
-
-\subsubsection{Requirements to trust a code in MG}
-
-For every MG model, there should be at least 2 Boltzmann codes, agreeing. Agreement is defined as follows: 
-\begin{itemize}
- \item check them on LCDM, need to agree at less than 0.1\%
- \item check them in a MG scenario in different ranges of parameters: they should match at the same level at which they agree in LCDM on 
-all background quantities, all perturbation quantities, all spectra
-\end{itemize}
-
- 
-
-
-
-
+\newpage
 \subsection{Parameter estimation codes}
 
 \subsubsection{Requirements for parameter estimation codes}
