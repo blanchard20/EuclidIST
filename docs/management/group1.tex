@@ -167,6 +167,7 @@ Warning: the code was recently updated (late february). These comments do not re
 
 \newpage
 \subsection{Parameter estimation codes}
+This subsection includes an overview of publicly available codes to calculate the likelihood.
 
 \subsubsection{Requirements for parameter estimation codes}
 
@@ -176,7 +177,7 @@ Furthermore, separate modules for different physical quantities are needed for t
 flows (see e.g. Fig. \ref{WLtomo}) and to compare them between different codes.\\
 However too much modularity may affect code performances.\\
 
-A wishlist of module is:
+A wishlist of modules is:
 \begin{enumerate}
  \item module calling the Boltzmann/transfer function codes for primary science
  \item module calling the sampler
@@ -192,11 +193,13 @@ A wishlist of module is:
 In the following, the publicly available codes are listed, together with the requirements which are satisfied by each of them. The missed requirements are also listed and the complexity 
 of implementation is indicated as easy (E), medium (M) and difficult (D)
 
-\subsubsection{Overview of publicly available codes}
+\newpage
+\subsubsection{COSMOMC}
+(\url{http://cosmologist.info/cosmomc/})\\
 
-\paragraph{COSMOMC}(\url{http://cosmologist.info/cosmomc/})\\
-{\it Language:} fortran90\\
-{\it pros:}
+{\it \bf Language:} fortran90\\
+
+{\it \bf Pros:}
 \begin{itemize}
  \item updated constantly
  \item very well tested, very efficient for standard cosmology
@@ -209,26 +212,32 @@ of implementation is indicated as easy (E), medium (M) and difficult (D)
  \item Updated to all currently available data (WL, GC, clusters, CMB).
  \item Likelihood Sampler works really well
 \end{itemize}
-{\it Cons: }
+
+{\it \bf Cons: }
 \begin{itemize}
  \item if you increase the number of parameters, the sampler gets slower. Other samplers are publicly available and already interfaced with COSMOMC. However they are not included in the 
  standard version (interface needs to be modified when COSMOMC is updated)
  \item maintainer (Antony Lewis) not currently in Euclid
 \end{itemize}
-{\it Wish-list requirements: }
+
+{\it \bf Wish-list requirements: }
 \begin{itemize}
  \item included: 1, 2 (add samplers), 3, 6, 8, 9
  \item missing: 4 (E CAMB has background functions collected in module ModelParams in modules.f90 which can be called by COSMOMC), 5 (D), 6 (alternatives to halofit), 7 (E/M) 
 \end{itemize}
 
-\paragraph{MONTEPYTHON}(\url{https://github.com/baudren/montepython_public} or \url{http://baudren.github.io/montepython.html})\\
-{\it Language:} python\\
-{\it Includes:}
+\newpage
+\subsubsection{MONTEPYTHON}(\url{https://github.com/baudren/montepython_public} or \url{http://baudren.github.io/montepython.html})\\
+
+{\it \bf Language:} python\\
+
+{\it \bf Includes:}
 \begin{itemize}
  \item Euclid mock likelihood (weak lensing + galaxies) is publicly available
  \item CMB, SNIa, BAO, WiggleZ (CHFTLens and SDSS to be released); 
 \end{itemize}
-{\it Pros: }
+
+{\it \bf Pros: }
 \begin{itemize}
  \item modular environment
  \item can switch among different samplers
@@ -238,25 +247,31 @@ of implementation is indicated as easy (E), medium (M) and difficult (D)
  \item extra parameters need to be included only in the input file
  \item easy to add a new likelihood.
 \end{itemize}
-{\it Cons:} 
+
+{\it \bf Cons:} 
 \begin{itemize}
  \item community that uses/tested MP is smaller than COSMOMC
  \item less frequently updated 
 \end{itemize}
-{\it Wish-list requirements: }
+
+{\it \bf Wish-list requirements: }
 \begin{itemize}
  \item included: 1 (for generic Boltzmann code; currently points at Class wrapper; Camb wrapper in preparation), 2 (MH, Multinest, CosmoHammer, importance sampling, reprocessing chains, fisher matrices), 3, 4, 5, 6 (Halofit), 7, 8, 9 (can choose between MontePython or Getdist to produce plots or reprocess: chains are in the same format as cosmomc and can use 8,9 from COSMOMC) 
  \item missing: 6 (alternatives to Halofit E/M) 
 \end{itemize}
 
-\paragraph{COSMOSIS}(\url{https://bitbucket.org/joezuntz/cosmosis/wiki/Home})\\
-{\it Language:} ??\\
-{\it Includes: }
+\newpage
+\subsubsection{COSMOSIS}(\url{https://bitbucket.org/joezuntz/cosmosis/wiki/Home})\\
+
+{\it \bf Language:} ??\\
+
+{\it \bf Includes: }
 \begin{itemize}
  \item sampler code (http://arxiv.org/pdf/1409.3409v1.pdf)
  \item CFHTLens, Planck, some BAO, SNae JLA. 
 \end{itemize}
-{\it pros:} 
+
+{\it \bf Pros:} 
 \begin{itemize}
  \item can be wrapped to CAMB and CLASS
  \item it is modular (can introduce other samplers or Boltzmann codes) 
@@ -265,22 +280,23 @@ of implementation is indicated as easy (E), medium (M) and difficult (D)
  \item They will include SDSS. Easy to implement a new module for a new likelihood.
  \item Used by DES.
 \end{itemize}
-{\it cons:} 
+
+{\it \bf Cons:} 
 \begin{itemize}
  \item not very well tested
  \item small community uses it
  \item who is updating it?
 \end{itemize}
-{\it Wish-list requirements: }
+
+{\it \bf Wish-list requirements: }
 \begin{itemize}
  \item included: 1 (generic Boltzmann code: CAMB, CLASS), 2 (MH, MultiNest, EMCEE), 3 (...add…), 4 (?), 6 (Halofit, Halofit + T correction), 7
  \item Datablock the object passed down the pipeline. For a given set of parameters all module inputs are read from the datablock and all module outputs are written to it 
  \item missing: 4 (E but not implemented?), 5 (?), 6 (alternatives to Halofit; E/M), 8 (format of chains? can one use getdist? how advanced as compared to getdist?), 9 (how advanced with respect to COSMOMC ones?) 
 \end{itemize}
-\paragraph{NumCosmo}(\url{http://www.nongnu.org/numcosmo/})\\
 
-
-
+\newpage
+\subsubsection{NumCosmo}(\url{http://www.nongnu.org/numcosmo/})\\
 
 \paragraph{emcee}(\url{http://dan.iel.fm/emcee/current/})\\
 {\it Language:} python\\
