@@ -89,10 +89,122 @@ including such a sample some redshift biasing effects may cancel-out in this ana
 
 \tk{Contacting OUPHZ for current best estimates.}
 
+\subsection{Covariance matrix}
+
+The covariance matrix reads
+\begin{equation}
+C_{ij}(\ell)=P_{ij}(\ell)+N_{ij}(\ell),
+\end{equation}
+The noise spectrum $N_{ij}(\ell) $ contaminating the $C_{ij} (\ell)$ is given by the diagonal matrix
+\begin{equation}
+N_{ij}(\ell) = \delta_{jk}\gamma_{\mathrm{int}}^{2}{{{q}}_j}^{-1}
+\end{equation} 
+ where $\gamma_{\mathrm{int}}$ is the
+intrinsic galaxy shear  and 
+\begin{equation}
+q_{j} = 3600\left(\frac{180}{\pi}\right)^{2} n_{\theta} \int^\infty_0 n_j(z) dz \, .
+\end{equation}
+Here $n_{\theta}$ is the galaxy density per $\mathrm{arcmin}^{2}$ and $n_j(z)$ is the galaxy density for the j-th redshift bin, as defined in the previous section. 
+
+Since we consider multipoles up to $\ell_{\mathrm{max}}=5000$,
+we need to apply non-linear corrections to the matter power spectrum,
+for which we use the halofit (provided in the input spectra).
+
+Then the Fisher matrix is summed over all multiples:
+\begin{equation}
+F_{\alpha\beta}=f_{\mathrm{sky}}\sum\limits _{\ell,i,j,k,m}\frac{(2\ell+1)\Delta\ell}{2}\frac{\partial P_{ij}(\ell)}{\partial\theta_{\alpha}}C_{jk}^{-1}\frac{\partial P_{km}(\ell)}{\partial\theta_{\beta}}C_{mi}^{-1}\label{eq:fm-wl}.
+\end{equation}
+
 \subsection{Likelihood function}
 
+For an ideal full-sky experiment, the likelihood of the observed spectra given the theoretical spectra reads
+\begin{equation}
+\mathcal L = \mathcal N \Pi_{\ell, m} \left\{ \frac{1}{ (d_{\ell}^{\rm th} )^{1/2} } \exp \left[ - \frac 1 2 a_{\ell m}^{{\rm obs} \dagger} (\tilde C_l^{\rm th})^{-1} a_{\ell m}^{\rm obs}  \right]     \right\}~,
+\end{equation}
+where $\mathcal N$ is a normalization factor.   The likelihood simplifies to
+\begin{equation}
+\mathcal L = \mathcal N \Pi_{\ell, m} \left\{ \frac{1} { (d_{\ell}^{\rm th} )^{1/2} }  \exp \left[ - \frac 1 2 (2 \ell +1) \frac{d_\ell ^{\rm mix } } { d_\ell ^{\rm th}}      \right]     \right\}~,
+\end{equation}
+where 
+\begin{equation}
+d_\ell ^{\rm th} = {\rm det } \left[ C_{ij}^{\rm th} (\ell) \right]
+\end{equation}
+\begin{equation}
+d_\ell ^{\rm obs} = {\rm det } \left[ C_{ij}^{\rm obs} (\ell) \right]
+\end{equation}
+and $ d_\ell ^{\rm mix} $ is a quantity obtained by replacing one after each other the theoretical spectra $C_{ij}^{\rm th} (\ell) $ by the observed ones $C_{ij}^{\rm th} (\ell) $ (see~\cite{Audren:2012vy} for details and an exemple).  
 
-\subsection{Covariance matrix}
+By using a first-order approximation to take into account the limited sky coverage, the $\chi^2$ relative to the best-fit model is given by~\cite{Audren:2012vy}
+\begin{equation}
+\Delta \chi_{\rm eff} ^2 \equiv  -2 \ln \frac{\mathcal L}{\mathcal L_{\rm max}} \equiv \sum_\ell (2 \ell + 1) f_{\rm sky} \left( \frac{d_\ell ^{\rm mix}}{d_\ell ^{\rm th}}  + \ln \frac{d_\ell ^{\rm th}}{d_\ell ^{\rm obs}} - \mathcal N \right)
+\end{equation}
+which should be used in MCMC forecast codes. 
+
+
+\subsection{Weak lensing code comparison}
+
+\\
+
+\subsection*{WL comparison:  where to start} 
+
+In all cases the following specifications and options are fixed:
+\begin{enumerate}
+\item Area: 15,000 sq deg
+\item $f_{sky} = Area/(4 \pi (180/\pi)^2)$
+\item Median Redshift: $z_{mean} = 0.9$
+\item $\gamma_{\mathrm{int}}=0.22$
+\item $n_\theta =$ 30 galaxies per $\mathrm{arcmin}^{2}$
+\item Error on photometric redshift: $\sigma_z = 0.05 (1+z)$
+\item Method to correct for non-linearities: Halo model  
+\item Binning: 10 bins from z = 0 - 2.5. We assume equipopulated bins: the redshift bins chosen such that each contain
+the same amount of galaxies. \comment{need to add formula}
+\item k-range: $k_{min}=0.001$ h/Mpc, \revtext{$k_{max}=0.5$ h/Mpc}
+\item k-binning: use directly the one provided in the input
+\item $\ell$-range: $\ell_{min}=5$, $\ell_{max}$ \revtext{fixed as a function of z, using the table provided by Enea (uploaded in the wiki). No cut in z.}
+\item $\ell$-binning: 100 bins (with log spaced binning)
+\end{enumerate}
+
+\subsection*{WL Case 1:  minimal setting}
+
+\begin{enumerate}
+\item Linear power spectrum
+\item $\sigma_z = 0.05 (1+z)$
+\item $\gamma_{\rm int} = 0.22$
+\end{enumerate}
+
+\subsection*{WL Case 2:  ground based $n(z)$ }
+
+\begin{enumerate}
+\item Linear power spectrum
+\item Ground based $n(z)$ prescription
+\item $\sigma_z = 0.05 (1+z)$
+\item $ \gamma_{\rm int} = 0.22$
+\end{enumerate}
+
+
+\subsection*{WL Case 3:  simple non-linear corrections}
+
+\begin{enumerate}
+\item Non-linear power spectrum from HaloFit, with massive neutrinos corrections if needed.  Parameters:  Eqs. A06-A14  of http://arxiv.org/abs/1208.2701
+\item $\sigma_z = 0.05 (1+z) $ 
+\item $ \gamma_{\rm int} = 0.22$
+\item $n(z)$  either standard prescription or ground based  (we should decide)
+\end{enumerate}
+
+\subsection*{WL Case 4:  global uncorrelated theoretical error}
+
+Same as Case 4, but add a nuisance parameter in the covariance matrix accounting for a global uncorrelated theoretical error, following the procedure of Ref.~\cite{Audren:2012vy} (Appendix B4).   Marginalize over this parameter.
+
+In the case of massive neutrinos, add an extra neutrino-related error, as in Appendix B5 Ref.~\cite{Audren:2012vy}
+
+\subsection*{WL Case 5 and beyond:  extended cases (to be considered in a second phase?) }  
+
+\begin{enumerate}
+\item Other analytical formulae for non-linear corrections, possibly including baryonic feedback
+\item Method for intrinsic alignment  
+\item others
+\end{enumerate}
+(to be further discussed)
 
 
 \subsection{Real-space forecasts}
@@ -265,49 +377,172 @@ The shape of a spiral galaxy is determined by the inclination angle under which 
 
 
 % -------------------------------------------------------------------- %
-\subsection{Non-linear power spectrum}
-TBA
+\subsection{Non-linear power spectrum and baryonic corrections}
 
-\subsubsection{Baryonic corrections}
+Weak lensing measures the projected 3D density distribution probing therefore the matter power spectrum $P(k)$ and the gravitational theory determining it. While the perturbation theory efficiently works at computing $P(k)$ in the linear regime, corrections are needed to take into account deviations on scales where the condition $\delta \rho/\rho << 1$ does not hold anymore. Moreover, on small scales, baryons collapse to form the visible structures we observe. Both nonlinearities and baryon collapse make the power spectrum $P(k)$ to differ from the linear one $P_{lin}(k)$. Different methods, tailored on N\,-\,body simulations, have been developed to phenomenologically model these corrections with the Halofit approach \cite{HaloFit}, in its updated version \cite{Taka}, being the most used one .  
 
+Recently, Mead et al. \cite{Mead15,Mead16} developed a more accurate method based on a combination of the halo model approach \cite{Sel00,PS00,CS02} and tuning to power spectra from the COSMIC EMU simulations \cite{Heit10,Heit14}. We summarize below the main formulae referring the reader to the original papers for more details. Rather than $P(k)$ itself, it is more convenient to estimate the equivalent quantity
 
-\subsection{Fisher matrix}
+\begin{displaymath}
+\Delta^2(k) = 4 \pi V \left ( \frac{k}{2 \pi} \right )^3 P(k)
+\end{displaymath}
+representing the fractional contribution to the variance per logarithmic interval in $k$ with $V$ the periodic volume. Following the standard halo model approach, we write $\Delta^2(k)$ as the sum of the one halo and two halo terms. The first reads
 
-Then the Fisher matrix is summed over all multiples:
 \begin{equation}
-F_{\alpha\beta}=f_{\mathrm{sky}}\sum\limits _{\ell,i,j,k,m}\frac{(2\ell+1)\Delta\ell}{2}\frac{\partial P_{ij}(\ell)}{\partial\theta_{\alpha}}C_{jk}^{-1}\frac{\partial P_{km}(\ell)}{\partial\theta_{\beta}}C_{mi}^{-1}\label{eq:fm-wl}
+\Delta_{1H}^2(k) = 4 \pi \left ( \frac{k}{2 \pi} \right )^{3} \frac{1}{\bar{\rho}^2} \int_{0}^{\infty}{M^2 W^2(\nu^\eta k, M) n(M, z) dM} 
+\label{eq: delta1h}
 \end{equation}
- with the covariance matrix 
-\begin{equation}
-C_{jk}=P_{jk}+\delta_{jk}\gamma_{\mathrm{int}}^{2}{{{q}}_j}^{-1},
-\end{equation}
- where $\gamma_{\mathrm{int}}$ is the
-intrinsic galaxy shear  and 
-\begin{equation}
-q_{j} = 3600\left(\frac{180}{\pi}\right)^{2} n_{\theta} \int^\infty_0 n_j(z) dz \, .
-\end{equation}
-Here $n_{\theta}$ is the galaxy density per $\mathrm{arcmin}^{2}$ and $n_j(z)$ is the galaxy density for the j-th redshift bin, as defined in eq.(\ref{n_binned}).
+where $\bar{\rho}$ is the mean matter density. Let us detail the different quantities entering Eq.(\ref{eq: delta1h}). First, we have the normalized Fourier transform of the halo density profile given by
 
-Since we consider multipoles up to $\ell_{\mathrm{max}}=5000$,
-we need to apply non-linear corrections to the matter power spectrum,
-for which we use the halofit (provided in the input spectra).
+\begin{equation}
+W(k, M) = \frac{1}{M} \int_{0}^{R_v}{\frac{\sin{(kr)}}{kr} 4 \pi r^2 \rho_{h}(r, M) dr}
+\label{eq: fthalo}
+\end{equation}
+where the mass $M$ and the virial radius $R_v$ are related as
 
-\paragraph{Specifications for the weak lensing:}
-\begin{enumerate}
-\item Area: 15,000 sq deg
-\item $f_{sky} = Area/(4 \pi (180/\pi)^2)$
-\item Median Redshift: $z_{mean} = 0.9$
-\item $\gamma_{\mathrm{int}}=0.22$
-\item $n_\theta =$ 30 galaxies per $\mathrm{arcmin}^{2}$
-\item Error on photometric redshift: $\sigma_z$ = 0.05 (1+z)
-\item Linear Power Spectrum: CAMB (provided in the input, you shouldn't use it)
-\item Method to correct for non-linearities: Halo model  (however the input files are now linear; it does not matter for now as we are not looking for the correct Fisher, just comparing. For this comparison we are using linear spectra).
-\item Binning: 10 bins from z = 0 - 2.5. We assume equipopulated bins: the redshift bins chosen such that each contain
-the same amount of galaxies. \comment{need to add formula}
-\item k-range: $k_{min}=0.001$ h/Mpc, \revtext{$k_{max}=0.5$ h/Mpc}
-\item k-binning: use directly the one provided in the input
-\item $\ell$-range: $\ell_{min}=5$, $\ell_{max}$ \revtext{fixed as a function of z, using the table provided by Enea (uploaded in the wiki). No cut in z.}
-\item $\ell$-binning: 100 bins (with log spaced binning)
-\end{enumerate}
+\begin{equation}
+R_v = \left [ \frac{3M}{4 \pi \Delta_v(z) \bar{\rho}} \right ]^{1/3}
+\label{eq: rvm}
+\end{equation}
+with $\Delta_v(z) = 418 [\Omega_M(z)]^{-0.352}$. In order to compute $W(k, M)$, one needs to choose a model for the halo density profile. On the scales of interest, the NFW profile \cite{NFW96,NFW97} is the common choice with 
+
+\begin{equation}
+\rho_h(r) = \frac{\rho_M}{(r/R_s) ( 1+ r/R_s)^2}
+\label{eq: nfw}
+\end{equation}
+with $\rho_M$ a normalization constant set so that the mass within $R_v$ is the the virial mass $M$ and the scale radius $R_s$ given by $R_s = R_v/c_v$. The concentration $c_v$ is related to the halo mass as
+
+\begin{equation}
+c_v = A_v \frac{1 + z_f(M)}{1 + z}  \left [ \frac{g(z \rightarrow \infty)}{g_{\Lambda}(z \rightarrow \infty)} \right ]^{1.5}
+\label{eq: mcrelation}
+\end{equation}
+with $A_v$ a scaling constant and $g(z)$ the linear growth factor. Eq.(\ref{eq: mcrelation}) generalizes the Bullock et al. (2001) relation introducing a correction term to account for deviations from the $\Lambda$CDM model as proposed in \cite{Dol04}. The formation redshift $z_f$ is a function of the virial mass $M$ and is estimated solving
+
+\begin{equation}
+\frac{g[z_f(M)]}{g(z)} \sigma(f_v M, z) = \delta_c
+\label{eq: zfsolve}
+\end{equation}
+where $f_v$ is a constant and $\sigma(M, z)$ is the variance of the linear density field smoothed over a top hat filter with aperture $R = (3M/4\pi \bar{\rho})^{1/3}$, namely
+
+\begin{equation}
+\sigma^2(M, z) = \int_{0}^{\infty}{\Delta_{lin}^2(k) {\cal{T}}^2(kR) d\ln{k}}
+\label{eq: defsigma}
+\end{equation}
+with ${\cal{T}}(x) = 3(\sin{x} - x \cos{x})/x^3$. Note that $\sigma(M, z) = g(z) \sigma(M, z = 0)$ because of the linear regime. In Eq.(\ref{eq: zfsolve}), $\delta_c$ is the critical overdensity for spherical collapse. This is usually fixed to the canonical value $\delta_c = 1.686$, but it has been found that a better agreement with simulations can be obtained taking \cite{NS97}
+
+\begin{equation}
+\delta_c(z) = [1.59 + 0.0314 \ln{\sigma_8(z)}]  \times [1 + 0.0123 \ln{\Omega_M(z)}]
+\label{eq: deltac}
+\end{equation}
+with $\sigma_8(z) = \sigma_8 g(z)$ and $\sigma_8$ the present day variance on scale $R = 8 h^{-1} \ {\rm Mpc}$.  
+
+The last ingredient needed to compute the one halo term in Eq.(\ref{eq: delta1h}) is the halo mass function, i.e., the number of halo with mass in the range $(M, M + dM)$ in the unit voume. Following \cite{ST99}, it is 
+
+\begin{equation}
+n(\nu) = A_{MF} \left [ 1 + \frac{1}{(a_{MF} \nu^2)^p} \right ] \exp{(-a_{MF} \nu^2/2)}
+\label{eq: stmf}
+\end{equation}
+with $A_{MF} = 0.2162$, $a_{MF} = 0.707$, $p = 0.3$ and $\nu = \delta_c(z)/\sigma(M, z)$. Note that $\nu$ also enters Eq.(\ref{eq: delta1h}) through the normalized Fourier transfrom term $W^2(k, M)$ which is evaluated not in $k$, but in $k^{\prime} = \nu^\eta k$ with $\eta = 0.603 - 0.3 \sigma_8(z)$.  
+
+On the large scales, haloes are no more Poisson distributed and displacements between haloes must be accounted for introducing the two halo term $\Delta_{2H}(k)$. For matter perturbations, this can be straightforwardly evaluated since it is simply
+
+\begin{equation}
+\Delta_{2H}^2(k) = \Delta_{lin}^2(k) 
+\label{eq: delta2h}
+\end{equation}
+so that one only needs the linear power spectrum. The total power spectrum should now be estimated as the sum of the two terms, but Mead et al. \cite{Mead15} have found that a much better agreement with simulations is obtained setting
+
+\begin{equation}
+\Delta^2(k) = \left [ (\Delta_{1H}^{\prime 2})^\alpha + (\Delta_{2H}^{\prime 2})^\alpha \right ]^{1/\alpha}
+\label{eq: enddelta}
+\end{equation}
+where the primed spectra are given by
+
+\begin{equation}
+\Delta_{1H}^{\prime 2}(k) = \left \{ 1 - \exp{[(-k/k_{\star})^2]} \right \} \Delta_{1H}^{2}(k) \ , 
+\label{eq: delta1hprime}
+\end{equation}
+
+\begin{equation}
+\Delta_{2H}^{\prime 2}(k) = \left [ 1 - f_{2H} \tanh^2{(k \sigma_v/\sqrt{f_{2H}})} \right ] \Delta_{2H}^2(k) \ ,
+\label{eq: delta2hprime}
+\end{equation}
+while $(\alpha, k_{\star}, f_{2H})$ are fitted to the simulations to get \cite{Mead16}
+
+\begin{equation}
+\alpha(z) = 3.24 \times 1.85^{n_{eff}(z)} \ ,
+\label{eq: alpha}
+\end{equation}
+
+\begin{equation}
+k_{\star}(z) = 0.584/\sigma_v(z) \ , 
+\label{eq: kstar}
+\end{equation}
+
+\begin{equation}
+f_{2H}(z) = 0.0095 \ \sigma_{100}^{1.37}(z) \ .
+\label{eq: f2h}
+\end{equation} 
+Here, we have defined the following auxiliary functions
+
+\begin{equation}
+n_{eff}(z) = - 3 - \left . \frac{d\ln{\sigma^2(R, z)}}{d\ln{R}}\right |_{\sigma = 1} \ , 
+\label{eq: neff}
+\end{equation}
+
+\begin{equation}
+\sigma_v^2(R, z) = \frac{1}{3} \int_{0}^{\infty}{\frac{\Delta_{lin}^2(k, z)}{k^2} {\cal{T}}^2(kR) d\ln{k}}
+\label{eq: sigmav}
+\end{equation}
+
+\begin{equation}
+\sigma_{100}(z) = \sigma_v(R = 100 h^{-1} \ {\rm Mpc}, z) \ . 
+\label{eq: sigma100}
+\end{equation}
+It is worth noting that a code to calclulate the power spectra implementing all the above formulae is available\footnote{{\tt https://github.com/alexander-mead/hmcode}}. Originally conceived to fit the $\Lambda$CDM power spectrum taking care of nonlinearities and baryonic effects. However, it has been shown to work fine also for quintessence models with a CPL\,-\,like equation of state. Moreover, it can be easily extedend to models with massive neutrinos and modified gravity provided some fitting functions are accordingly changed (see \cite{Mead16} for the corresponding formulae).
+
+
+
+%\subsubsection{Baryonic corrections}
+
+
+%\subsection{Fisher matrix}
+%
+%Then the Fisher matrix is summed over all multiples:
+%\begin{equation}
+%F_{\alpha\beta}=f_{\mathrm{sky}}\sum\limits _{\ell,i,j,k,m}\frac{(2\ell+1)\Delta\ell}{2}\frac{\partial P_{ij}(\ell)}{\partial\theta_{\alpha}}C_{jk}^{-1}\frac{\partial P_{km}(\ell)}{\partial\theta_{\beta}}C_{mi}^{-1}\label{eq:fm-wl}
+%\end{equation}
+% with the covariance matrix 
+%\begin{equation}
+%C_{jk}=P_{jk}+\delta_{jk}\gamma_{\mathrm{int}}^{2}{{{q}}_j}^{-1},
+%\end{equation}
+% where $\gamma_{\mathrm{int}}$ is the
+%intrinsic galaxy shear  and 
+%\begin{equation}
+%q_{j} = 3600\left(\frac{180}{\pi}\right)^{2} n_{\theta} \int^\infty_0 n_j(z) dz \, .
+%\end{equation}
+%Here $n_{\theta}$ is the galaxy density per $\mathrm{arcmin}^{2}$ and $n_j(z)$ is the galaxy density for the j-th redshift bin, as defined in eq.(\ref{n_binned}).
+
+%Since we consider multipoles up to $\ell_{\mathrm{max}}=5000$,
+%we need to apply non-linear corrections to the matter power spectrum,
+%for which we use the halofit (provided in the input spectra).
+
+%\paragraph{Specifications for the weak lensing:}
+%\begin{enumerate}
+%\item Area: 15,000 sq deg
+%\item $f_{sky} = Area/(4 \pi (180/\pi)^2)$
+%\item Median Redshift: $z_{mean} = 0.9$
+%\item $\gamma_{\mathrm{int}}=0.22$
+%\item $n_\theta =$ 30 galaxies per $\mathrm{arcmin}^{2}$
+%\item Error on photometric redshift: $\sigma_z$ = 0.05 (1+z)
+%\item Linear Power Spectrum: CAMB (provided in the input, you shouldn't use it)
+%\item Method to correct for non-linearities: Halo model  (however the input files are now linear; it does not matter for now as we are not looking for the correct Fisher, just comparing. For this comparison we are using linear spectra).
+%\item Binning: 10 bins from z = 0 - 2.5. We assume equipopulated bins: the redshift bins chosen such that each contain
+%the same amount of galaxies. \comment{need to add formula}
+%\item k-range: $k_{min}=0.001$ h/Mpc, \revtext{$k_{max}=0.5$ h/Mpc}
+%\item k-binning: use directly the one provided in the input
+%\item $\ell$-range: $\ell_{min}=5$, $\ell_{max}$ \revtext{fixed as a function of z, using the table provided by Enea (uploaded in the wiki). No cut in z.}
+%\item $\ell$-binning: 100 bins (with log spaced binning)
+%\end{enumerate}
 
 
