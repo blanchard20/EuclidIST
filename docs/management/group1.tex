@@ -21,7 +21,7 @@
 \end{itemize}
 \subsubsection*{Participants}
 \begin{itemize}
- \item Matteo Costanzi,  Yabebal Fantaye, Ken Ganga, Martin Kunz, Massimiliano Lattanzi, Julien Lesgourgues, Baojiu Li, Matteo Martinelli, Federico Marulli, Valeria Pettorino, Anna M. Porredon, Marco Raveri, Ziad Sakr, Valentina Salvatelli, Barbara Sartoris, Bjšrn Malte Schaefer, Luca Amendola, Thejs Brinckmann, Mariana Penna-Lima \comment{in Euclid? verify with Ken Ganga}.
+ \item Matteo Costanzi,  Yabebal Fantaye, Ken Ganga, Martin Kunz, Massimiliano Lattanzi, Julien Lesgourgues, Baojiu Li, Matteo Martinelli, Federico Marulli, Valeria Pettorino, Anna M. Porredon, Marco Raveri, Ziad Sakr, Valentina Salvatelli, Barbara Sartoris, Bj\"orn Malte Schaefer, Luca Amendola, Thejs Brinckmann, Mariana Penna-Lima \comment{in Euclid? verify with Ken Ganga}.
 \end{itemize}
 
 \subsubsection*{Aim}
@@ -181,6 +181,7 @@ The wish list of modules is:
  \item module that gets the standard output from Boltzmann codes and produces list of suitable output
  \item postprocessing of the samples
  \item plotting modules 
+ \item \textcolor{red}{to be discussed: module for cross correlation of probes}
 \end{enumerate}
 
 In the following, the publicly available codes are listed, together with the requirements which are satisfied by each of them. The missed requirements are also listed and the complexity 
@@ -216,7 +217,7 @@ of implementation is indicated as easy (E), medium (M) and difficult (D).
 {\it \bf Wish-list requirements: }
 \begin{itemize}
  \item included: 1, 2 (add samplers), 3, 6, 8, 9
- \item missing: 4 (E CAMB has background functions collected in module ModelParams in modules.f90 which can be called by COSMOMC), 5 (D), 6 (alternatives to halofit), 7 (E/M) 
+ \item missing: 4 (E CAMB has background functions collected in module ModelParams in modules.f90 which can be called by COSMOMC), 5 (D), 6 (alternatives to halofit), 7 (E/M)
 \end{itemize}
 
 \newpage
@@ -291,7 +292,8 @@ of implementation is indicated as easy (E), medium (M) and difficult (D).
 \begin{itemize}
  \item included: 1 (generic Boltzmann code: CAMB, CLASS), 2 (MH, MultiNest, EMCEE), 3 (...addâ€¦), 4 (?), 6 (Halofit, Halofit + T correction), 7
  \item Datablock the object passed down the pipeline. For a given set of parameters all module inputs are read from the datablock and all module outputs are written to it 
- \item missing: 4 (E but not implemented?), 5 (?), 6 (alternatives to Halofit; E/M), 8 (format of chains? can one use getdist? how advanced as compared to getdist?), 9 (how advanced with respect to COSMOMC ones?) 
+ \item missing: 4 (E but not implemented?), 5 (?), 6 (alternatives to Halofit; E/M), 8 (format of chains? can one use getdist? how advanced as compared to getdist?), 9 
+ (how advanced with respect to COSMOMC ones?) 
 \end{itemize}
 
 \newpage
@@ -396,7 +398,8 @@ in addition, our recommendation is to use MGCAMB only for tests (and clearly spe
 
 \subsubsection{Parameter estimation}
 MontePython at present is the one that includes the highest number of requirements in the wish list. JL \& team within Euclid guarantee fast 
-update for wrappers to Boltzmann code version updates and to new data which become available. 
+update for wrappers to Boltzmann code version updates and to new data which become available. \\
+\textcolor{red}{To be discussed: how the different codes perform on cross correlation of probes.}
 
 \subsubsection{Analysis and visualization}
 Getdist and plotting tools provided by cosmomc.
@@ -423,7 +426,8 @@ galaxy mock catalogue
 Needed:
 \begin{itemize}
  \item simulations from non-standard cosmological models: e.g. f(R), DE 
- \item mock catalogue for WL (to be asked to the WL splinter-2
+ \item simulations with neutrinos
+ \item mock catalogue for WL (to be asked to the WL splinter-2)
 \end{itemize}
 
 
