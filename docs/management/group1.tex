@@ -396,8 +396,8 @@ No specific choice, but recommendation is that we need at least 2 codes that mat
 in addition, our recommendation is to use MGCAMB only for tests (and clearly specify limitations of the code and assumptions in it).
 
 
-\subsubsection{Parameter estimation}
-MontePython at present is the one that includes the highest number of requirements in the wish list. JL \& team within Euclid guarantee fast 
+\subsubsection{Parameter estimation and likelihood code map}
+A summary of how the likelihood codes compare to the wish list is visualised in Fig.\ref{ISTcodemap}. MontePython is at present the code that includes the highest number of requirements in the wish list. JL \& team within Euclid guarantee fast 
 update for wrappers to Boltzmann code version updates and to new data which become available. \\
 \textcolor{red}{To be discussed: how the different codes perform on cross correlation of probes.}
 
@@ -443,7 +443,11 @@ Needed:
  \item Simulations: list of simulations available
 \end{itemize}
 
-
+\begin{figure}
+    \includegraphics[angle=0,clip=,width=\columnwidth]{IST_codemap.pdf}
+ \caption{Likelihood Code Map. Fields correspond to the modules in the wish list. Rows correspond to the numerical codes available and discussed in the text. Easy/Medium?Difficult indicate the estimated level of difficulty to implement the missing modules.}
+ \label{ISTcodemap}
+\end{figure}
 
 
 
