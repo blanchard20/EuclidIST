@@ -4,44 +4,47 @@
 
 \subsection{Lensing projections}
 
-\mk{Generalized equations for non-flat Universe.}
-
-The simplest form of the convergence power spectrum with (correlated) sources in redshift bins centered around $z_i$ and $z_j$ is
+Starting from the Born approximation of the convergence, the exact equation for the convergence power spectrum 
+with (correlated) sources in redshift bins $i$ and $j$ for a flat universe is
+\begin{equation}
+  P_{ij}(\ell) = \frac{9}{4} \Omega_{\rm m}^2 \left(\frac{H_0}{c}\right)^4
+                \int_{0}^{\chi_{\rm lim}} \mathrm{d}\chi W_i(\chi)
+                \int_{0}^{\chi^\prime_{\rm lim}} \mathrm{d}\chi^\prime W_i(\chi^\prime)
+                \int_0^\infty {\rm d} k \, k^2 \, P_{\rm m}(k, \chi, \chi^\prime) \,
+                {\rm j}_\ell(k \chi) \, {\rm j}_\ell(k \chi^\prime),
+  \label{eq:pstomog_bessel}
+\end{equation}
+%
+where ${\rm j}_\ell$ is the spherical Bessel function of order $\ell$,
+$W_{i}(\chi)$ is the window function or \emph{lensing efficiency}.
+and $\chi$ the comoving distance.
+In the Limber approximation, this equation simplifies to
 %
 \begin{equation}
-P_{ij}(\ell) = \frac{9}{4} \Omega_{\rm m}^2 \left(\frac{H_0}{c}\right)^3 \int_{0}^{z_{\rm lim}}\mathrm{d}z\frac{(1+z)^2}{E(z)} W_{i}(z)W_{j}(z)
-    P_{\rm m}\left(\frac{\ell}{ f_K[r(z)], z}\right),
+  P_{ij}(\ell) = \frac{9}{4} \Omega_{\rm m}^2 \left(\frac{H_0}{c}\right)^4 \int_{0}^{\chi_{\rm lim}}\frac{\mathrm{d}\chi}{\chi^2}
+                 W_{i}(\chi) W_{j}(\chi) P_{\rm m}\left(k = \frac{\ell + 1 / 2}{ f_K(\chi)}, \chi\right),
   \label{eq:pstomog}
 \end{equation}
 %
-where $W_{i}(z)$ is the window function, $r(z)$ is the comoving distance, and $f_K$ the comoving angular
-diameter distance as a function of curvature $K$. The function $E$ is related to the Hubble parameter as
-%
-\begin{equation}
-  E(z) = \frac{H(z)}{H_0}.
-  \label{eq:E}
-\end{equation}
+This latter equation is the case of general curvature $K$, with $f_K$ the comoving angular
+diameter distance.
+Note that often the relation between 3D and 2D modes $k = \ell/f_K(\chi)$ is used,
+which leads however to less accurate results.
 %
 See Sect.~\ref{sec:WL_systematics} for a discussion on the various assumptions and approximations under which this 
 equation is derived.
-The function $r$ is the comoving distance, which is related to the angular diameter distrance $D_{\rm A}$ as
+The lensing efficiency is given as 
 %
 \begin{equation}
-  r(z) = D_{\rm A}(z) (1+z)
+ W_i(\chi) = \int^{\chi_{\rm lim}}_\chi {\rm d} \chi^\prime \, n_i(\chi^\prime) \frac{f_K(\chi^\prime - \chi)}{f_K(\chi^\prime)}.
 \end{equation}
 %
- 
-\begin{equation}
- W_i(z) = \int^{z_{\rm lim}}_z {\rm d}\tilde{z} \, \frac{f_K[r(z) - r(\tilde z)]}{f_K[r(\tilde{z})]} n_i(\tilde{z})
-\end{equation}
-where $r(z)$ is the coming distance. The redshift distribution for bin $i$ is denoted with $n_i$, and it is normalized to
+The redshift distribution for bin $i$ is denoted with $n_i$, and it is normalized to
 the number of galaxies belonging to that bin,
 %
 \begin{equation}
-  \int_0^{z_{\rm lim}} {\rm d} z \, n_i(z) = 1.
+  \int_0^{\chi_{\rm lim}} {\rm d} \chi \, n_i(\chi) = \int_0^{z_{\rm lim}} {\rm d} z \, n_i(z) = 1.
 \end{equation}
-%
-\mk{Modified, $n$ should depend on $\bar z$, not on $r$}
 
 \subsection{Redshift distribution}
 
@@ -49,10 +52,10 @@ The window function depends on $n_{i}(z)$, the galaxy distribution
 in the $i$-th redshift bin: this is convolved with a Gaussian to account for photometric
 redshift errors $\sigma_{z}$~(value specified below), i.e.~
 \begin{equation}
-n_{i}(z)=A \int\limits _{i\text{-th bin}}n({\tilde z})\exp\left(\frac{-(\tilde{z}-z)^{2}}{2 \sigma_{z}^{2}}\right)\mathrm{d}\tilde{z}
+n_{i}(z)=A \int\limits _{i\text{-th bin}}n({z^\prime})\exp\left(\frac{-(z\prime-z)^{2}}{2 \sigma_{z}^{2}}\right)\mathrm{d}{z^\prime}
 \label{n_binned}
 \end{equation}
-where the integral is done over $\tilde{z}$ for the single i-th bin. 
+where the integral is done over $z^\prime$ for the single i-th bin. 
 $A = \frac{1}{\sqrt{2\pi} \sigma_z}$ a normalization factor.
 
 \subsubsection{n(z)}
@@ -143,7 +146,6 @@ which should be used in MCMC forecast codes.
 
 \subsection{Weak lensing code comparison}
 
-\\
 
 \subsection*{WL comparison:  where to start} 
 
@@ -262,11 +264,12 @@ $\xi_+$ and $\xi_-$ have a covariance with very large off-diagonal elements.
 The calculation of the cosmic variance term even in the Gaussian case is
 time-consuming due to the product of two Bessel function with different
 arguments $\ell \theta_i$, $\ell \theta_j$ for the off-diagonal element
-$C_{ij}$ with $i \ne j$. Code exists (Benjamin Joachimi) that has been used
+$C_{ij}$ with $i \ne j$. A code exists (Benjamin Joachimi) that has been used
 within Euclid. Even with parallelization on ${\cal O}(50)$ CPUs, 
 for $N_\theta = 50$ and $N_z = 12$ it takes a up to two weeks to compute
 the $N_\theta^2 [N_z (N_z + 1)] / 2 \times 4$ covariance elements for $\xi_+$ and $\xi_-$
-including the mixed terms ($+-, -+)$.
+including the mixed terms ($+-, -+)$. The corresponding expressions for this covariance
+can be found in \cite{2008A&A...477...43J}.
 
 
 
@@ -329,13 +332,27 @@ Second order effects in weak lensing fall into a couple of categories, according
 
 \subsubsection{description of fluctuations}
 
-Several approximations are usually made, and should be examined, to describe density flucutations, their correlations, and their projections.
-The Limber approximation \cite{1953ApJ...117..134L,1992ApJ...388..272K} only accounts for modes that lie in the plane of sky, and neglects
-correlations of modes between different comoving distances $\chi \ne \chi^2$. Further, the small-angle and flat-sky approximation
-expands trigometric functions of the angles on the sky to first order, and replaces spherical harmonic transforms with Fourier transforms.
+Several approximations are usually made, and should be examined, to describe
+density flucutations, their correlations, and their projections. The Limber
+approximation (eq.~\ref{eq:pstomog}, see
+\cite{1953ApJ...117..134L,1992ApJ...388..272K}) assumes that the power spectrum
+is slowly varying compared to the spherical Bessel functions in
+(eq.~\ref{eq:pstomog_bessel}). In this approximation, correlations of modes
+between different comoving distances are neglected. (This is also explicitely
+assumed when deriving the deflection angle by linearly summing up
+contributions from isolated thin lenses along the line of sight
+\cite{1994CQGra..11.2345S}. This is a very good approximation of the exact convergence
+power spectrum for small angles up to 10 degrees, or $\ell > 20$.
 
 \subsubsection{geodesic effects}
-The implict lens equation is solved by a perturbative expansion, where the weak lensing deflection is collected by integration along a straight line replacing the actual light path. At higher order, there are corrections due to better approximations of the actual light path (Born-corrections). Similarly, the change in shape of a light bundle is computed relative to a light bundle with circular cross section, and corrected at higher order by gravitational distortion of an already deformed bundle (lens-lens coupling).
+
+The implict lens equation is solved by a perturbative expansion, where the weak
+lensing deflection is collected by integration along a straight line replacing
+the actual light path. At higher order, there are corrections due to better
+approximations of the actual light path (Born-corrections). Similarly, the
+change in shape of a light bundle is computed relative to a light bundle with
+circular cross section, and corrected at higher order by gravitational
+distortion of an already deformed bundle (lens-lens coupling).
 
 
 \subsubsection{clustering effects}
