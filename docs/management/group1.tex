@@ -13,43 +13,51 @@
 
 %\begin{document}
 
-\section{Splinter Group 1: codes}
+\section{Splinter Group 1: numerical codes}
 
-\subsubsection*{List of participants}
+\subsubsection*{Coordinators}
 \begin{itemize}
- \item Valeria Pettorino
- \item Matteo Martinelli
+ \item Valeria Pettorino, Matteo Martinelli
+\end{itemize}
+\subsubsection*{Participants}
+\begin{itemize}
+ \item Matteo Costanzi,  Yabebal Fantaye, Ken Ganga, Martin Kunz, Massimiliano Lattanzi, Julien Lesgourgues, Baojiu Li, Matteo Martinelli, Federico Marulli, Valeria Pettorino, Anna M. Porredon, Marco Raveri, Ziad Sakr, Valentina Salvatelli, Barbara Sartoris, Bj\"orn Malte Schaefer, Luca Amendola, Thejs Brinckmann, Mariana Penna-Lima \comment{in Euclid? verify with Ken Ganga}.
 \end{itemize}
 
 \subsubsection*{Aim}
-Make a recommendation on existing codes for Atomistic Forecasting approach (likelihood).\\
+Make a recommendation on existing codes for Atomistic Forecasting approach.\\
 Expected output:
 \begin{itemize}
  \item A technical note explaining pros and cons of the various potential public codes for this purpose 
- \item How do they meet our requirements
+ \item How do they meet our requirements:
  \begin{itemize}
-  \item On the division/requirements setting at fine-grained level 
-  \item On individual probe work and on combinations
+  \item on the division/requirements setting at fine-grained level 
+  \item on individual probe work and on combinations
  \end{itemize}
  \item Make a consensus of codes, and make a short presentation showing initial pros and cons.
 \end{itemize}
 
+\newpage
 \subsection{Boltzmann codes}
-
-\subsubsection{Overview of publicly available codes}
-
+This section includes an overview of publicly available Boltzmann codes. For each code we present a schema in the same format, including pros and cons.
 
 
-\paragraph{CAMB}
+
+\newpage
+\subsubsection{CAMB}
+%\href{http://camb.info/}{CAMB}
 (\url{http://camb.info/})\\
-{\it Language:} fortran90\\
-{\it Includes:}\\
+
+{\it \bf Language:} fortran90\\
+
+{\it \bf Includes:}
 \begin{itemize}
  \item standard neutrinos, sterile neutrinos
  \item CDM
  \item DE: $w_0\ w_a$
 \end{itemize}
-{\it Pros: }
+
+{\it \bf Pros: }
 \begin{itemize}
 %publicly available
  \item updated very often
@@ -58,7 +66,8 @@ Expected output:
  \item python wrapper for CAMB to join to any MCMC
  \item documentation available and often updated: quick feedback by Anony Lewis and large community, via cosmocoffee
 \end{itemize}
-{\it Cons:}
+
+{\it \bf Cons:}
 \begin{itemize}
  \item structure of the code requires to modify different parts of the code for different models
  \item no general distribution function for neutrinos
@@ -66,11 +75,15 @@ Expected output:
  \item maintainer (Antony Lewis) not currently in Euclid
 \end{itemize}
 
+\newpage
+\subsubsection{EFTCAMB}
+(\url{http://wwwhome.lorentz.leidenuniv.nl/~hu/codes/})\\
 
-\paragraph{EFTCAMB}(\url{http://wwwhome.lorentz.leidenuniv.nl/~hu/codes/})\\
-{\it Language:} fortran90\\
-{\it Includes:}\\
-{\it Pros:}
+{\it \bf Language:} fortran90\\
+
+{\it \bf Includes:}\\
+
+{\it \bf Pros:}
 \begin{itemize}
  \item based on CAMB
  \item very general parametrization for effective field theory (EFT) parametrisation of MG and DE models
@@ -80,27 +93,32 @@ Expected output:
  \item Very clearly written, structured, documented. 
  \item It has a MCMC wrapper.
 \end{itemize}
-{\it Cons: }
+
+{\it \bf Cons: }
 \begin{itemize}
  \item need further testing
  \item needs some understand stability conditions
  \item MG starts from z = 100 (not tested earlier)
 \end{itemize}
 
+\newpage
+\subsubsection{MGCAMB}(\url{http://aliojjati.github.io/MGCAMB/})\\
 
-\paragraph{MGCAMB}(\url{http://aliojjati.github.io/MGCAMB/})\\
-{\it Language:} fortran90\\
-{\it Includes: }
+{\it \bf Language:} fortran90\\
+
+{\it \bf Includes: }
 \begin{itemize}
  \item changes the response of the scalar metric potentials (phi and psi) to the perturbations: this can be due to modifications of the Einstein equations 
  (modified gravity) or due to extra clustering components (dark energy)
 \end{itemize}
-{\it Pros: }
+
+{\it \bf Pros: }
 \begin{itemize}
  \item it works with some well tested parametrization; easy to compare with previous results 
  \item can test  very general deviations from LCDM visible in the scalar metric perturbations
 \end{itemize}
-{\it Cons: }
+
+{\it \bf Cons: }
 \begin{itemize}
  \item When used as a ‘EFT replacement’:
  \begin{itemize}
@@ -113,51 +131,38 @@ Expected output:
 \end{itemize}
 Warning: the code was recently updated (late february). These comments do not refer to the latest version.\\
 
+\newpage
+\subsubsection{CLASS}(\url{http://class-code.net/})\\
 
-\paragraph{CLASS}(\url{http://class-code.net/})\\
+{\it \bf  Language:} C
 
-{\it Language:} C
-
-{\it Includes:}
+{\it \bf Includes:}
 \begin{itemize}
  \item various forms of neutrinos and dark matter
  \item DE with a given equation of state, quintessence with scalar potentials.
  \item DE extension is HiClass but not public (Bellini, Miguel Zuma)
  \item newtonian and synchronous gauge
 \end{itemize}
-{\it Pros: }
+
+{\it \bf Pros: }
 \begin{itemize}
  \item structure of code
  \item python wrapper
  \item two gauges (newtonian and synchronous: except the initial conditions which are only written in the synchronous gauge and gauge-transformed). 
  \item maintainer (Julien Lesgourgues) is active Euclid member
 \end{itemize}
-{\it Cons: }
+
+{\it \bf Cons: }
 \begin{itemize}
  \item community that uses/tested CLASS is smaller than CAMB
 \end{itemize}
 
 
-
-
-
-\subsubsection{Requirements to trust a code in MG}
-
-For every MG model, there should be at least 2 Boltzmann codes, agreeing. Agreement is defined as follows: 
-\begin{itemize}
- \item check them on LCDM, need to agree at less than 0.1\%
- \item check them in a MG scenario in different ranges of parameters: they should match at the same level at which they agree in LCDM on 
-all background quantities, all perturbation quantities, all spectra
-\end{itemize}
-
- 
-
-
-
-
+\newpage
 \subsection{Parameter estimation codes}
+This subsection includes an overview of publicly available codes to calculate the likelihood.
 
-\subsubsection{Requirements for parameter estimation codes}
+\subsubsection{Wish list definition}
 
 The basic requirement for codes which obtain cosmological predictions from Boltzmann codes and perform parameter estimation is ``modularity''.\\
 A modular code is easy to modify in case some changes and updates need to be included, e.g. additional likelihoods, extra parameters, correction to observables (systematics).\\
@@ -165,7 +170,7 @@ Furthermore, separate modules for different physical quantities are needed for t
 flows (see e.g. Fig. \ref{WLtomo}) and to compare them between different codes.\\
 However too much modularity may affect code performances.\\
 
-A wishlist of module is:
+The wish list of modules is:
 \begin{enumerate}
  \item module calling the Boltzmann/transfer function codes for primary science
  \item module calling the sampler
@@ -176,16 +181,19 @@ A wishlist of module is:
  \item module that gets the standard output from Boltzmann codes and produces list of suitable output
  \item postprocessing of the samples
  \item plotting modules 
+ \item \textcolor{red}{to be discussed: module for cross correlation of probes}
 \end{enumerate}
 
 In the following, the publicly available codes are listed, together with the requirements which are satisfied by each of them. The missed requirements are also listed and the complexity 
-of implementation is indicated as easy (E), medium (M) and difficult (D)
+of implementation is indicated as easy (E), medium (M) and difficult (D).
 
-\subsubsection{Overview of publicly available codes}
+\newpage
+\subsubsection{COSMOMC}
+(\url{http://cosmologist.info/cosmomc/})\\
 
-\paragraph{COSMOMC}(\url{http://cosmologist.info/cosmomc/})\\
-{\it Language:} fortran90\\
-{\it pros:}
+{\it \bf Language:} fortran90\\
+
+{\it \bf Pros:}
 \begin{itemize}
  \item updated constantly
  \item very well tested, very efficient for standard cosmology
@@ -198,26 +206,32 @@ of implementation is indicated as easy (E), medium (M) and difficult (D)
  \item Updated to all currently available data (WL, GC, clusters, CMB).
  \item Likelihood Sampler works really well
 \end{itemize}
-{\it Cons: }
+
+{\it \bf Cons: }
 \begin{itemize}
  \item if you increase the number of parameters, the sampler gets slower. Other samplers are publicly available and already interfaced with COSMOMC. However they are not included in the 
  standard version (interface needs to be modified when COSMOMC is updated)
  \item maintainer (Antony Lewis) not currently in Euclid
 \end{itemize}
-{\it Wish-list requirements: }
+
+{\it \bf Wish-list requirements: }
 \begin{itemize}
  \item included: 1, 2 (add samplers), 3, 6, 8, 9
- \item missing: 4 (E CAMB has background functions collected in module ModelParams in modules.f90 which can be called by COSMOMC), 5 (D), 6 (alternatives to halofit), 7 (E/M) 
+ \item missing: 4 (E CAMB has background functions collected in module ModelParams in modules.f90 which can be called by COSMOMC), 5 (D), 6 (alternatives to halofit), 7 (E/M)
 \end{itemize}
 
-\paragraph{MONTEPYTHON}(\url{https://github.com/baudren/montepython_public} or \url{http://baudren.github.io/montepython.html})\\
-{\it Language:} python\\
-{\it Includes:}
+\newpage
+\subsubsection{MONTEPYTHON}(\url{https://github.com/baudren/montepython_public} or \url{http://baudren.github.io/montepython.html})\\
+
+{\it \bf Language:} python\\
+
+{\it \bf Includes:}
 \begin{itemize}
  \item Euclid mock likelihood (weak lensing + galaxies) is publicly available
  \item CMB, SNIa, BAO, WiggleZ (CHFTLens and SDSS to be released); 
 \end{itemize}
-{\it Pros: }
+
+{\it \bf Pros: }
 \begin{itemize}
  \item modular environment
  \item can switch among different samplers
@@ -227,57 +241,121 @@ of implementation is indicated as easy (E), medium (M) and difficult (D)
  \item extra parameters need to be included only in the input file
  \item easy to add a new likelihood.
 \end{itemize}
-{\it Cons:} 
+
+{\it \bf Cons:} 
 \begin{itemize}
  \item community that uses/tested MP is smaller than COSMOMC
  \item less frequently updated 
 \end{itemize}
-{\it Wish-list requirements: }
+
+{\it \bf Wish-list requirements: }
 \begin{itemize}
  \item included: 1 (for generic Boltzmann code; currently points at Class wrapper; Camb wrapper in preparation), 2 (MH, Multinest, CosmoHammer, importance sampling, reprocessing chains, fisher matrices), 3, 4, 5, 6 (Halofit), 7, 8, 9 (can choose between MontePython or Getdist to produce plots or reprocess: chains are in the same format as cosmomc and can use 8,9 from COSMOMC) 
  \item missing: 6 (alternatives to Halofit E/M) 
 \end{itemize}
 
-\paragraph{COSMOSIS}(\url{https://bitbucket.org/joezuntz/cosmosis/wiki/Home})\\
-{\it Language:} ??\\
-{\it Includes: }
+\newpage
+\subsubsection{COSMOSIS}
+(\url{https://bitbucket.org/joezuntz/cosmosis/wiki/Home})\\
+
+{\it \bf Language:} Written in C++ and python. Modules can be written in C, C++, Fortran, or Python.\\
+
+{\it \bf Includes: }
 \begin{itemize}
- \item sampler code (http://arxiv.org/pdf/1409.3409v1.pdf)
- \item CFHTLens, Planck, some BAO, SNae JLA. 
+\item the models discussed here: \url{https://bitbucket.org/joezuntz/cosmosis/wiki/default_modules}
+ \item Different samplers: including emcee (see schema discussed in this document), fisher matrices sampler and Multinest (that computes the Bayesian evidence and the posterior pdf's.) http://arxiv.org/pdf/1409.3409v1.pdf
+ \item Likelihoods are listed here: \url{https://bitbucket.org/joezuntz/cosmosis/wiki/default_modules} in the likelihood section.
+ \item CAMB, CLASS
 \end{itemize}
-{\it pros:} 
+
+{\it \bf Pros:} 
 \begin{itemize}
  \item can be wrapped to CAMB and CLASS
- \item it is modular (can introduce other samplers or Boltzmann codes) 
+ \item it is modular (can introduce other samplers or Boltzmann codes or likelihoods) 
  \item can add modules in different languages
  \item new parameters are defined only in the input parameter file
  \item They will include SDSS. Easy to implement a new module for a new likelihood.
  \item Used by DES.
+ \item Issues are usually rapidly answered in the issues tab of the bitbucket repository.
+ \item Postprocess tool that automatically makes python plots of the sampler outputs (some demos: \url{https://bitbucket.org/joezuntz/cosmosis/wiki/Home})
 \end{itemize}
-{\it cons:} 
+
+{\it \bf Cons:} 
 \begin{itemize}
  \item not very well tested
  \item small community uses it
- \item who is updating it?
+ \item Not clear how often it is updated (Responsible is: Joe Zuntz et al) \comment{Is he in Euclid?}
+ \item Quality of demos visualisation seems lower than available for getdist python plotting.
 \end{itemize}
-{\it Wish-list requirements: }
+
+{\it \bf Wish-list requirements: }
 \begin{itemize}
  \item included: 1 (generic Boltzmann code: CAMB, CLASS), 2 (MH, MultiNest, EMCEE), 3 (...add…), 4 (?), 6 (Halofit, Halofit + T correction), 7
  \item Datablock the object passed down the pipeline. For a given set of parameters all module inputs are read from the datablock and all module outputs are written to it 
- \item missing: 4 (E but not implemented?), 5 (?), 6 (alternatives to Halofit; E/M), 8 (format of chains? can one use getdist? how advanced as compared to getdist?), 9 (how advanced with respect to COSMOMC ones?) 
+ \item missing: 4 (E but not implemented?), 5 (?), 6 (alternatives to Halofit; E/M), 8 (format of chains? can one use getdist? how advanced as compared to getdist?), 9 
+ (how advanced with respect to COSMOMC ones?) 
 \end{itemize}
-\paragraph{NumCosmo}(\url{http://www.nongnu.org/numcosmo/})\\
 
+\newpage
+\subsubsection{NumCosmo}
 
+(\url{http://www.nongnu.org/numcosmo/})\\
+(\url{https://github.com/NumCosmo/NumCosmo}) \\
 
+{\it \bf Language:} C (main), Python, Perl, Java, Java Script, Vala, Lua, Ruby (for a complete list see \url{https://wiki.gnome.org/Projects/GObjectIntrospection/Users})
+\\
 
-\paragraph{emcee}(\url{http://dan.iel.fm/emcee/current/})\\
-{\it Language:} python\\
-{\it Includes:}
+{\it \bf Includes:}
+\begin{itemize}
+ \item some BAO, some H(z) , SNe Ia JLA,  Planck, some cluster data
+\item resample codes (from a probability density function and  bootstrap)
+\item sampler codes
+\end{itemize}
+
+{\it \bf Pros:} 
+\begin{itemize}
+ \item modular environment
+ \item	can switch among different samplers
+ \item MCMC object is modular and one can implement just a new transition kernel
+\item 	can easily be interfaced with different Boltzmann codes
+\item 	the code is parallelized through multithread and easily extended to MPI
+\item 	all parameter information is defined in the NcmModel. It is inherited by NcmMSet, NcmFit, NcmFitMCMC etc, avoiding repetition
+\item 	easy to add a new likelihood
+\item 	it call be called from any bind language or from a general purpose executable (in C) called darkenergy
+\item 	frequently updated
+\item 	portable to Linux, Mac OS and Window
+\item 	it uses autotools as its building system allowing NumCosmo to be easily compiled in several architectures
+\item 	a list of pre-compiled packages can be found at https://build.opensuse.org/package/show/home:vitenti/numcosmo
+\item 	the QA is assured by a set of tests using ''Unit testing''
+
+ \end{itemize}
+
+{\it \bf Cons:} 
+\begin{itemize}
+ \item 	community that uses/tested NumCosmo is much smaller than COSMOMC
+ \item 	external dependencies (NLopt, Sundials, cfitsio, etc)
+ \item 	users can call NumCosmo from any bind language, but the developers have to learn GObject and GObject Introspection. We plan to provide a cookbook to make it easier.
+ \item 	no graphical interface
+ \end{itemize}
+
+{\it \bf Wish-list requirements: }
+\begin{itemize}
+ \item included: 1 (CLASS wrapper, generic Boltzmann code in progress); 2 (statistical tools available: best-fit finders, Fisher Matrix,  Monte Carlo (resample from a probability density function and bootstrap), Profile Likelihood, Markov Chain Monte Carlo (Metropolis-Hastings, Ensemble sampler MCMC), Approximate Bayesian Computation); 3; 4; 5; 6 (halofit, halo model); 7; 8; 9.
+\end{itemize}
+
+\newpage
+\subsubsection{emcee} 
+
+(\url{http://dan.iel.fm/emcee/current/})\\
+
+{\it \bf Language:} python\\
+
+{\it \bf Includes:}
 \begin{itemize}
  \item 3 different samplers (unified calling interface) and plotting tools
 \end{itemize}
-{\it Pros:} 
+
+{\it \bf Pros:} 
 \begin{itemize}
  \item affine invariant sampling for fast sampling of degenerate likelihoods
  \item parallel tempered sampler for multimodal likelihoods
@@ -288,45 +366,58 @@ of implementation is indicated as easy (E), medium (M) and difficult (D)
  \item interface to lensing code exists (in C)
  \item interface to supernova code exists (in C or python)
  \end{itemize}
-{\it Cons:} 
+
+{\it \bf Cons:} 
 \begin{itemize}
  \item not specifically interfaced to a Boltzmann code
 \end{itemize}
-{\it Wish-list requirements: }
+
+{\it \bf Wish-list requirements: }
 \begin{itemize}
- \item inclusion of observables CMB, CMB-lensing, CMB cross-correlations (iSW) and galaxy clustering
- \item call to Boltzmann code (Bjoern: we’re working to add CMB-related probes)
+\item{included: 2,8,9}
+\item{provided: 1,7 (wrapper for CLASS (working on it now)), 2,3 (lensing, supernovae and CMB spectra), 4, 5, 6 (work in progress)}
+\item{missing: 3 (iSW-effect, BAO, galaxy density)}
 \end{itemize}
 
+\newpage
+\subsection{Recommendation on codes and coding languages to use}
 
-\subsection{Code recommendation}
-
-\paragraph{Coding Language}
+\subsubsection{Coding Language}
 The SGS use python and C++ only, and it would be good for us to follow them to have some coherence. Although there are pros and cons.\\
 It would be ideal to have a python infrastructure: wrappers in python to other codes written in different open sources free languages (instead of IDL, Mathematica)\\
 FR software to convert languages from one to another: help to write a python wrapper, for example SDC is using swig (http://www.swig.org/).
 Good experience with SWIG, it serves as a way of passing data between python and other languages (Bjoern: tried out python$\rightarrow$C with openMP-parallelisation)\\
 Make sure all libraries used/needed are available. 
 SDC already has a list of libraries that are allowed to be used, at \url{http://euclid.roe.ac.uk/projects/codeen-users/wiki/EDEN}.
-Python slow for high level performances, 
+Python slow for high level performances. 
 
-%\paragraph{Infrastructure}
+\subsubsection{Boltzmann code}
 
-\paragraph{Boltzmann code}
-
-No specific choice, but recommendation is that we need at least 2 codes that match for each model (match in the sense explained above); 
-in addition, our recommendation is to use MGCAMB only for tests (and clearly specify limitations of the code and assumptions in it)
+No specific choice, but recommendation is that we need at least 2 codes that match for each model (match in the sense explained in the methodology below); 
+in addition, our recommendation is to use MGCAMB only for tests (and clearly specify limitations of the code and assumptions in it).
 
 
-\paragraph{Parameter estimation}
-MontePython at present is the one that includes the highest number of requirements in the wish list. JL \& team within Euclid guarantee fast 
-update for wrappers to Boltzmann code version updates and to new data which become available. 
+\subsubsection{Parameter estimation and likelihood code map}
+A summary of how the likelihood codes compare to the wish list is visualised in Fig.\ref{ISTcodemap}. MontePython is at present the code that includes the highest number of requirements in the wish list. JL \& team within Euclid guarantee fast 
+update for wrappers to Boltzmann code version updates and to new data which become available. \\
+\textcolor{red}{To be discussed: how the different codes perform on cross correlation of probes.}
 
-\paragraph{Analysis and visualization}
-Getdist and plotting tools provided by cosmomc
+\subsubsection{Analysis and visualization}
+Getdist and plotting tools provided by cosmomc.
 
-\paragraph{Code testing}
-Self-consistent check of the likelihood codes:  use a simulation to produce a set of data and check if we can recover the initial cosmological model.\\
+\subsection{Methodology to test a code}
+
+\subsubsection{How to trust a Boltzmann code in Modified Gravity}
+
+For every MG model, there should be at least 2 Boltzmann codes, agreeing. Agreement is defined as follows: 
+\begin{itemize}
+ \item check them on LCDM, need to agree at less than 0.1\%
+ \item check them in a MG scenario in different ranges of parameters: they should match at the same level at which they agree in LCDM on 
+all background quantities, all perturbation quantities, all spectra
+\end{itemize}
+
+\subsubsection{How to trust a likelihood code}
+The code needs to pass a self-consistency check: use a simulation to produce a set of data and check if you can recover the initial cosmological model.\\
 Available simulations: \\
 galaxy mock catalogue
 \begin{enumerate}
@@ -336,13 +427,15 @@ galaxy mock catalogue
 Needed:
 \begin{itemize}
  \item simulations from non-standard cosmological models: e.g. f(R), DE 
- \item mock catalogue for WL (to be asked to the WL splinter-2
+ \item simulations with neutrinos
+ \item mock catalogue for WL (to be asked to the WL splinter-2)
 \end{itemize}
 
 
-\paragraph{Required output from other groups}
+\subsection{Required output from other groups}
 \begin{itemize}
- \item SDC: list of python libraries (\url{http://euclid.roe.ac.uk/projects/codeen-users/wiki/EDEN})
+ \item SDC: list of python libraries (\url{http://euclid.roe.ac.uk/projects/codeen-users/wiki/EDEN}) \comment{Does not seem to contain a list of python libraries}
+ \item From all other splinters: check that the wish-list satisfies their list of requirements. \comment{List specific output required by the codes that satisfies theory/observations?}
  \item TWG:
  \begin{itemize}
   \item parameter definition document
@@ -351,7 +444,11 @@ Needed:
  \item Simulations: list of simulations available
 \end{itemize}
 
-
+\begin{figure}
+    \includegraphics[angle=0,clip=,width=\columnwidth]{IST_codemap.pdf}
+ \caption{Likelihood Code Map. Fields correspond to the modules in the wish list. Rows correspond to the numerical codes available and discussed in the text. Easy/Medium?Difficult indicate the estimated level of difficulty to implement the missing modules.}
+ \label{ISTcodemap}
+\end{figure}
 
 
 
