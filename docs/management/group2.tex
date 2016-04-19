@@ -44,9 +44,11 @@ the number of galaxies belonging to that bin,
 %
 \begin{equation}
   \int_0^{\chi_{\rm lim}} {\rm d} \chi \, n_i(\chi) = \int_0^{z_{\rm lim}} {\rm d} z \, n_i(z) = 1.
+  \label{eq:nofz_norm}
 \end{equation}
 
 \subsection{Redshift distribution}
+\label{sec:WL_nofz}
 
 The window function depends on $n_{i}(z)$, the galaxy distribution
 in the $i$-th redshift bin: this is convolved with a Gaussian to account for photometric
@@ -94,20 +96,55 @@ including such a sample some redshift biasing effects may cancel-out in this ana
 
 \subsection{Covariance matrix}
 
-The covariance matrix reads
+To write down the covariance matrix, we first define the observed power spectrum \cite{1999ApJ...522L..21H} as
+%
 \begin{equation}
-C_{ij}(\ell)=P_{ij}(\ell)+N_{ij}(\ell),
+  P^{\rm obs}_{ij}(\ell) = P_{ij}(\ell) + N_{ij}(\ell),
+  \label{eq:pstomog_obs}
 \end{equation}
-The noise spectrum $N_{ij}(\ell) $ contaminating the $C_{ij} (\ell)$ is given by the diagonal matrix
+%
+where the tomographic power spectrum $P_{ij}$ is given in eq.~(\ref{eq:pstomog}).
+The shot noise spectrum $N_{ij}(\ell)$ contaminating $P_{ij}(\ell)$ is given by the diagonal matrix
+%
 \begin{equation}
-N_{ij}(\ell) = \delta_{jk}\gamma_{\mathrm{int}}^{2}{{{q}}_j}^{-1}
+N_{ij}(\ell) = \delta_{ij} \left\langle \gamma_{\mathrm{int}}^{2} \right\rangle {{{q}}_i}^{-1}
 \end{equation} 
- where $\gamma_{\mathrm{int}}$ is the
-intrinsic galaxy shear  and 
+%
+where $\left\langle \gamma_{\mathrm{int}}^2\right\rangle$ is the
+intrinsic galaxy shear dispersion per component and 
+%
 \begin{equation}
-q_{j} = 3600\left(\frac{180}{\pi}\right)^{2} n_{\theta} \int^\infty_0 n_j(z) dz \, .
+q_{j} = n_\theta = \frac{n_\theta}{{\rm arcmin}^2} 3600 \left(\frac {180}{\pi}\right)^{2}.
 \end{equation}
-Here $n_{\theta}$ is the galaxy density per $\mathrm{arcmin}^{2}$ and $n_j(z)$ is the galaxy density for the j-th redshift bin, as defined in the previous section. 
+%
+Here $n_{\theta}$ is the galaxy density and $n_j(z)$ is the galaxy density for the j-th redshift bin, as defined in eq.~\ref{sec:WL_nofz}).
+Note that $n_j$ is normalized for every $j$ (eq.~\ref{eq:nofz_norm}).
+
+The Gaussian component of the covariance of the observed power spectrum for a shell width width $\Delta \ell$
+is then according to \cite{2004MNRAS.348..897T,2008A&A...477...43J}
+%
+\begin{equation}
+  C[P_{ij}(\ell), P_{mn}(\ell^\prime)] = \frac{2 \delta_{\ell\ell^\prime}}{(2\ell+1) \Delta \ell f_{\rm sky}}
+    \left[ P^{\rm obs}_{im}(\ell) P^{\rm obs}_{jn}(\ell) + P^{\rm obs}_{in}(\ell) P^{\rm obs}_{jm}(\ell) \right],
+\label{eq:pstomog_cov}
+\end{equation}
+%
+where $f_{\rm sky} = A / (4\pi)$ is the fraction of sky observed by the survey with area $A$.
+\mk{Prefactors seem to be different in Joachimi and Takada}.
+
+The non-Gaussian contribution consists of integrals over the convergence
+trispectrum. A corresponding expression can be found in
+\cite{1999ApJ...527....1S} and \cite{2004MNRAS.348..897T}. This does however
+not include couplings of small-scale modes with long wavelength modes that are
+larger than the observed survey volume. These super-survey modes were first
+introduced as beat coupling in \cite{2006MNRAS.371.1188H}, and later modeled in the
+halo model framework as halo sample variance (HSV; \cite{2009ApJ...701..945S}, \cite{2013MNRAS.429..344K}
+Contrary to the other terms of the covariance that scale inversely with
+the survey area fsky, the super-survey covariance decreases faster. Therefore
+it is important for small survey areas \cite{2009ApJ...701..945S}. A rigorous treatment
+of the non-Gaussian covariance including super-survey modes is presented in
+\cite{2013PhRvD..87l3504T}.
+
 
 Since we consider multipoles up to $\ell_{\mathrm{max}}=5000$,
 we need to apply non-linear corrections to the matter power spectrum,
@@ -117,6 +154,9 @@ Then the Fisher matrix is summed over all multiples:
 \begin{equation}
 F_{\alpha\beta}=f_{\mathrm{sky}}\sum\limits _{\ell,i,j,k,m}\frac{(2\ell+1)\Delta\ell}{2}\frac{\partial P_{ij}(\ell)}{\partial\theta_{\alpha}}C_{jk}^{-1}\frac{\partial P_{km}(\ell)}{\partial\theta_{\beta}}C_{mi}^{-1}\label{eq:fm-wl}.
 \end{equation}
+
+\mk{This term of the Fisher matrix is the one used in Hu 1999, using \ref{eq:pstomog} diretcly as covariance.
+Using \ref{eq:pstomog_cov} the other Fisher-matrix term is used in Takada\&Jain. Check whether both are consistent.}
 
 \subsection{Likelihood function}
 
