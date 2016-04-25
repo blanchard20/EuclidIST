@@ -77,27 +77,37 @@ This section includes an overview of publicly available Boltzmann codes. For eac
 
 \newpage
 \subsubsection{EFTCAMB}
-(\url{http://wwwhome.lorentz.leidenuniv.nl/~hu/codes/})\\
+(\url{http://wwwhome.lorentz.leidenuniv.nl/~hu/codes/}\\
+\url{https://github.com/EFTCAMB/EFTCAMB})\\
 
 {\it \bf Language:} fortran90\\
 
 {\it \bf Includes:}\\
+\textcolor{red}{
+\begin{itemize}
+\item parametrized ‘pure EFT’ approach to Horndeski (including the alpha option), GLPV, 
+      Horava-Lifshitz 
+\item exact (‘mapping’) implementation of: designer f(R), Hu-Sawicki f(R), low-energy Horava
+\item several backgrounds and massive neutrinos
+\end{itemize}
+}
 
 {\it \bf Pros:}
 \begin{itemize}
  \item based on CAMB
- \item very general parametrization for effective field theory (EFT) parametrisation of MG and DE models
+ \item very general parametrization of the effective field theory (EFT) parametrisation of MG and DE models
  \item tested against HiCLASS/MGCAMB/private codes for some models
- \item several parameterisations of the background expansion and also of the perturbations (now including the Horndeski functions)
+ \item several parameterisations of the background expansion and also of the perturbations (including Horndeski and beyond (e.g. GLPV))
  \item perturbation evolution computed self-consistently for EFT class of models
  \item Very clearly written, structured, documented. 
  \item It has a MCMC wrapper.
+ \item maintainers are active Euclid members
 \end{itemize}
 
 {\it \bf Cons: }
 \begin{itemize}
  \item need further testing
- \item needs some understand stability conditions
+ \item needs further development and understanding of the stability conditions
  \item MG starts from z = 100 (not tested earlier)
 \end{itemize}
 
@@ -108,17 +118,26 @@ This section includes an overview of publicly available Boltzmann codes. For eac
 
 {\it \bf Includes: }
 \begin{itemize}
- \item changes the response of the scalar metric potentials (phi and psi) to the perturbations: this can be due to modifications of the Einstein equations 
+ \item \textcolor{red}{very general parametrization of linear scalar perturbations in DE/MG based on two functions of time and scale}. The latter change the response of the scalar metric potentials (phi and psi) to the perturbations: this can be due to modifications of the Einstein equations 
  (modified gravity) or due to extra clustering components (dark energy)
+\textcolor{red}{
+\item LCDM and general w(z)
+\item massive neutrinos (with some glitches currently being fixed. I can elaborate more on this if needed)
+\item several backgrounds and massive neutrinos
+\item (mu, gamma) and (Q,R) general parametrisation; Linder’s gamma parametrisation of the growth rate; 
+\item can treat the following specific models in the quasi-static approximation: BZ parametrization of f(R), (beta, m) parametrisation of Generalized Brans-Dicke, Hu-Sawicki f(R), Generalized Brans-Dicke (including symmetron and dilaton models)
+}
 \end{itemize}
 
 {\it \bf Pros: }
 \begin{itemize}
  \item it works with some well tested parametrization; easy to compare with previous results 
  \item can test  very general deviations from LCDM visible in the scalar metric perturbations
+ \item  It has MCMC wrapper
 \end{itemize}
 
 {\it \bf Cons: }
+\textcolor{red}{
 \begin{itemize}
  \item When used as a ‘EFT replacement’:
  \begin{itemize}
@@ -130,7 +149,7 @@ This section includes an overview of publicly available Boltzmann codes. For eac
  \item Works with $\Lambda$CDM background
 \end{itemize}
 Warning: the code was recently updated (late february). These comments do not refer to the latest version.\\
-
+}
 \newpage
 \subsubsection{CLASS}(\url{http://class-code.net/})\\
 
@@ -192,6 +211,16 @@ of implementation is indicated as easy (E), medium (M) and difficult (D).
 (\url{http://cosmologist.info/cosmomc/})\\
 
 {\it \bf Language:} fortran90\\
+
+{\it \bf Includes:}\\
+\begin{itemize}
+\item SN: JLA, Union
+\item CMB+CMB Lensing: Planck, WMAP, BICEP2+Keck
+\item LSS: WiggleZ, SDSS LRG, CFHTLenS
+\item BAO+RSD: several (noticeably BOSS)
+\item HST H0 measurements
+\item SZ CLUSTER: Planck
+\end{itemize}
 
 {\it \bf Pros:}
 \begin{itemize}
