@@ -405,6 +405,15 @@ of implementation is indicated as easy (E), medium (M) and difficult (D).
 \end{itemize}
 
 \newpage
+
+\begin{figure}
+    \includegraphics[angle=0,clip=,width=\columnwidth]{IST_codemap.pdf}
+ \caption{Likelihood Code Map. Fields correspond to the modules in the wish list. Rows correspond to the numerical codes available and discussed in the text. Easy/Medium?Difficult indicate the estimated level of difficulty to implement the missing modules.}
+ \label{ISTcodemap}
+\end{figure}
+\newpage
+
+
 \subsection{Recommendation on codes and coding languages to use}
 
 \subsubsection{Coding Language}
@@ -457,24 +466,40 @@ Needed:
 \end{itemize}
 
 
-\subsection{Required output from other groups}
-\begin{itemize}
- \item SDC: list of python libraries (\url{http://euclid.roe.ac.uk/projects/codeen-users/wiki/EDEN}) \comment{Does not seem to contain a list of python libraries}
- \item From all other splinters: check that the wish-list satisfies their list of requirements. \comment{List specific output required by the codes that satisfies theory/observations?}
- \item TWG:
- \begin{itemize}
-  \item parameter definition document
-  \item list of Boltzmann codes available for MG
- \end{itemize}
- \item Simulations: list of simulations available
-\end{itemize}
+\subsection{Input from other groups}
+\subsubsection{SGS}
+We need to define the infrastructure of the code pipeline with SGS (\url{http://euclid.roe.ac.uk/projects/sgssu/wiki}), see infrastructure channel on SLACK.
+\comment{Contacted Marc Savage}
 
-\begin{figure}
-    \includegraphics[angle=0,clip=,width=\columnwidth]{IST_codemap.pdf}
- \caption{Likelihood Code Map. Fields correspond to the modules in the wish list. Rows correspond to the numerical codes available and discussed in the text. Easy/Medium?Difficult indicate the estimated level of difficulty to implement the missing modules.}
- \label{ISTcodemap}
-\end{figure}
-\newpage
+
+\subsubsection{Splinter-2}
+List of requirements that the ideal CosmoBox code should provide, as for weak lensing.
+
+\paragraph{Specific inputs}
+Tomographic redshift distribution, with errors, outlier distributions
+Optional: observational effects such as masks
+\paragraph{The signal}
+Non-linear matter power spectrum down to k ~ 50 h/Mpc (that is where the FoM saturates, Kitching $\&$ Taylor 2011; to model uncertainties in that highly non-linear regime we would then add parameters with certain priors).
+Baryonic effects on power spectrum (not clear yet how this should best be implemented) 
+Lensing projections: Standard WL power spectrum approximations, optional: second-order corrections
+Optional: real-space lensing correlations
+\paragraph{Errors}
+Gaussian covariance, optional: non-Gaussian covariance
+\paragraph{Systematics}
+Intrinsic alignment power spectra
+Nuisance parameters (e.g. shear biases)
+
+\paragraph{Specific outputs}
+Lensing tomographic power spectra, optional: split into different contributions (IA, with/without systematics) for testing
+
+
+\subsubsection{Splinter-3}
+
+\subsubsection{Splinter-4}
+
+\subsubsection{TWG}
+For each model in the parameter definition document (PDD), the TWG provides a table \ref{TWGcodemap} with the following information: Model, code, availability, Reference, Contact person.
+
 
 \subsection{TWG provided list of models and codes}
 \begin{figure}
@@ -487,6 +512,22 @@ Needed:
  \caption{TWG models and codes list}
  \label{TWGcodemap}
 \end{figure}
+
+
+
+\subsubsection{Simulation WG}
+The simulation Group provides a table 'model' : 'simulation' : 'reference', where 'simulation' is either 'Not available' or a list of simulations available for the model and 'reference' is the 'reference' contact for that set of simulations.
+
+Model    |     Simulation    |    Reference
+
+LCDM    |     Gadget         | Code: Springel 2005 MNRAS 364, Largest simulation: Millennium XXL, Angulo et al 2012 MNRAS 426
+
+LCDM   |      Ramses     |   Code: Teyssier 2002 A$\&$A 385, Largest Simulation: DEUS FUR, Rasera et al 2014 MNRAS 440
+
+LCDM   |     PKDGRAV    |    Code: Stadel J. PhD Thesis, Largest Simulation:  Euclid Flagship Run (still running)
+
+Code Comparison: Schneider et al. 2015, arXiv:1503.05920
+
 
 
 %\end{document}
