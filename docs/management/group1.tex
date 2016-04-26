@@ -21,7 +21,7 @@
 \end{itemize}
 \subsubsection*{Participants}
 \begin{itemize}
- \item Matteo Costanzi,  Yabebal Fantaye, Ken Ganga, Martin Kunz, Massimiliano Lattanzi, Julien Lesgourgues, Baojiu Li, Matteo Martinelli, Federico Marulli, Valeria Pettorino, Anna M. Porredon, Marco Raveri, Ziad Sakr, Valentina Salvatelli, Barbara Sartoris, Bj\"orn Malte Schaefer, Luca Amendola, Thejs Brinckmann, Mariana Penna-Lima \comment{in Euclid? verify with Ken Ganga}.
+ \item Matteo Costanzi,  Yabebal Fantaye, Ken Ganga, Martin Kunz, Massimiliano Lattanzi, Julien Lesgourgues, Baojiu Li, Matteo Martinelli, Federico Marulli, Valeria Pettorino, Anna M. Porredon, Marco Raveri, Ziad Sakr, Valentina Salvatelli, Barbara Sartoris, Bj\"orn Malte Schaefer, Luca Amendola, Thejs Brinckmann, Mariana Penna-Lima.
 \end{itemize}
 
 \subsubsection*{Aim}
@@ -83,14 +83,13 @@ This section includes an overview of publicly available Boltzmann codes. For eac
 {\it \bf Language:} fortran90\\
 
 {\it \bf Includes:}\\
-\textcolor{red}{
 \begin{itemize}
-\item parametrized ‘pure EFT’ approach to Horndeski (including the alpha option), GLPV, 
+\item parametrized pure EFT approach to Horndeski (including the $\alpha$ parameterization), GLPV (?), 
       Horava-Lifshitz 
-\item exact (‘mapping’) implementation of: designer f(R), Hu-Sawicki f(R), low-energy Horava
+\item exact (mapping) implementation of: designer f(R), Hu-Sawicki f(R), low-energy Horava
 \item several backgrounds and massive neutrinos
 \end{itemize}
-}
+
 
 {\it \bf Pros:}
 \begin{itemize}
@@ -118,15 +117,12 @@ This section includes an overview of publicly available Boltzmann codes. For eac
 
 {\it \bf Includes: }
 \begin{itemize}
- \item \textcolor{red}{very general parametrization of linear scalar perturbations in DE/MG based on two functions of time and scale}. The latter change the response of the scalar metric potentials (phi and psi) to the perturbations: this can be due to modifications of the Einstein equations 
- (modified gravity) or due to extra clustering components (dark energy)
-\textcolor{red}{
-\item LCDM and general w(z)
-\item massive neutrinos (with some glitches currently being fixed. I can elaborate more on this if needed)
-\item several backgrounds and massive neutrinos
-\item (mu, gamma) and (Q,R) general parametrisation; Linder’s gamma parametrisation of the growth rate; 
+ \item Parametrization of linear scalar perturbations in DE/MG based on two functions of time and scale ($\mu, \gamma$ (or Q,R).
+\item LCDM and \textcolor{red}{general w(z) (To be checked)}
+\item massive neutrino
+\item Linder gamma parametrisation of the growth rate
 \item can treat the following specific models in the quasi-static approximation: BZ parametrization of f(R), (beta, m) parametrisation of Generalized Brans-Dicke, Hu-Sawicki f(R), Generalized Brans-Dicke (including symmetron and dilaton models)
-}
+
 \end{itemize}
 
 {\it \bf Pros: }
@@ -137,7 +133,6 @@ This section includes an overview of publicly available Boltzmann codes. For eac
 \end{itemize}
 
 {\it \bf Cons: }
-\textcolor{red}{
 \begin{itemize}
  \item When used as a ‘EFT replacement’:
  \begin{itemize}
@@ -149,7 +144,7 @@ This section includes an overview of publicly available Boltzmann codes. For eac
  \item Works with $\Lambda$CDM background
 \end{itemize}
 Warning: the code was recently updated (late february). These comments do not refer to the latest version.\\
-}
+
 \newpage
 \subsubsection{CLASS}(\url{http://class-code.net/})\\
 
