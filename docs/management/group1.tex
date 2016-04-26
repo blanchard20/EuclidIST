@@ -195,7 +195,7 @@ The wish list of modules is:
  \item module that gets the standard output from Boltzmann codes and produces list of suitable output
  \item postprocessing of the samples
  \item plotting modules 
- \item \textcolor{red}{to be discussed: module for cross correlation of probes}
+ \item module for cross correlation of probes
 \end{enumerate}
 
 In the following, the publicly available codes are listed, together with the requirements which are satisfied by each of them. The missed requirements are also listed and the complexity 
@@ -308,7 +308,7 @@ of implementation is indicated as easy (E), medium (M) and difficult (D).
 \begin{itemize}
  \item not very well tested
  \item small community uses it
- \item Not clear how often it is updated (Responsible is: Joe Zuntz et al) \comment{Is he in Euclid?}
+ \item Not clear how often it is updated (Responsible is: Joe Zuntz et al, not in Euclid).
  \item Quality of demos visualisation seems lower than available for getdist python plotting.
 \end{itemize}
 
@@ -368,15 +368,15 @@ of implementation is indicated as easy (E), medium (M) and difficult (D).
 \end{itemize}
 
 \newpage
-\subsubsection{emcee} 
+\subsubsection{ITAbox} 
 
-(\url{http://dan.iel.fm/emcee/current/})\\
+
 
 {\it \bf Language:} python\\
 
 {\it \bf Includes:}
 \begin{itemize}
- \item 3 different samplers (unified calling interface) and plotting tools
+\item uses emcee as sampler (\url{http://dan.iel.fm/emcee/current/}); plotting tools
 \end{itemize}
 
 {\it \bf Pros:} 
@@ -398,9 +398,9 @@ of implementation is indicated as easy (E), medium (M) and difficult (D).
 
 {\it \bf Wish-list requirements: }
 \begin{itemize}
-\item{included: 2,8,9}
-\item{provided: 1,7 (wrapper for CLASS (working on it now)), 2,3 (lensing, supernovae and CMB spectra), 4, 5, 6 (work in progress)}
-\item{missing: 3 (iSW-effect, BAO, galaxy density)}
+\item{included: 2,8,9, 3 (lensing, supernovae and CMB spectra)}
+\item{provided: 4, 5}
+\item{missing: 1, 3 (iSW-effect, BAO, galaxy density), 6, 7}
 \end{itemize}
 
 \newpage
