@@ -518,13 +518,25 @@ For each model in the parameter definition document (PDD), the TWG provides a ta
 \subsubsection{Simulation WG}
 The simulation Group provides a table 'model' : 'simulation' : 'reference', where 'simulation' is either 'Not available' or a list of simulations available for the model and 'reference' is the 'reference' contact for that set of simulations.
 
-Model    |     Simulation    |    Reference
-
-LCDM    |     Gadget         | Code: Springel 2005 MNRAS 364, Largest simulation: Millennium XXL, Angulo et al 2012 MNRAS 426
-
-LCDM   |      Ramses     |   Code: Teyssier 2002 A$\&$A 385, Largest Simulation: DEUS FUR, Rasera et al 2014 MNRAS 440
-
-LCDM   |     PKDGRAV    |    Code: Stadel J. PhD Thesis, Largest Simulation:  Euclid Flagship Run (still running)
+\begin{table}[h!]
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+Model        & Code                     & Largest simulation\\
+\hline
+$\Lambda$CDM & Gadget                   & Millennium XXL \\
+             & Springel 2005 MNRAS 364  & Angulo et al 2012 MNRAS 426\\
+\hline
+$\Lambda$CDM & Ramses                   & DEUS FUR \\
+             & Teyssier 2002 A$\&$A 385 & Rasera et al 2014 MNRAS 440\\
+\hline
+$\Lambda$CDM & PKDGRAV                  & Euclid Flagship Run \\
+             & Stadel J. PhD Thesis     & still running\\
+\hline
+\end{tabular}
+\caption{List of available N-body simulations.}
+\end{center}
+\end{table}
 
 Code Comparison: Schneider et al. 2015, arXiv:1503.05920
 
