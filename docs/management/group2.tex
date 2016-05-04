@@ -582,7 +582,18 @@ n_{eff}(z) = - 3 - \left . \frac{d\ln{\sigma^2(R, z)}}{d\ln{R}}\right |_{\sigma 
 \sigma_{100}(z) = \sigma_v(R = 100 h^{-1} \ {\rm Mpc}, z) \ . 
 \label{eq: sigma100}
 \end{equation}
-It is worth noting that a code to calclulate the power spectra implementing all the above formulae is available\footnote{{\tt https://github.com/alexander-mead/hmcode}}. Originally conceived to fit the $\Lambda$CDM power spectrum taking care of nonlinearities and baryonic effects. However, it has been shown to work fine also for quintessence models with a CPL\,-\,like equation of state. Moreover, it can be easily extedend to models with massive neutrinos and modified gravity provided some fitting functions are accordingly changed (see \cite{Mead16} for the corresponding formulae).
+
+It is worth noting that a code to calclulate the power spectra implementing all
+the above formulae is available\footnote{{\tt
+https://github.com/alexander-mead/hmcode}}. Originally conceived to fit the
+$\Lambda$CDM power spectrum taking care of nonlinearities and baryonic effects.
+However, it has been shown to work fine also for quintessence models with a
+CPL\,-\,like equation of state. Moreover, it can be easily extedend to models
+with massive neutrinos and modified gravity provided some fitting functions are
+accordingly changed (see \cite{Mead16} for the corresponding formulae).
+
+Neutrino corrections have been published in \cite{Bird_Viel_Haehnelt_2012}, which have been implemented in \texttt{camb}.
+A simple formula to approximate these corrections is shown in \cite{2015JCAP...07..043C}.
 
 
 
