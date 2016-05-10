@@ -3,6 +3,7 @@
 \section{Splinter Group 2: Weak Lensing Holistic Forecast Definitions}
 
 \subsection{Lensing projections}
+\label{sec:WL_proj}
 
 Starting from the Born approximation of the convergence, the exact equation for the convergence power spectrum 
 with (correlated) sources in redshift bins $i$ and $j$ for a flat universe is
@@ -55,15 +56,16 @@ in the $i$-th redshift bin: this is convolved with a Gaussian to account for pho
 redshift errors $\sigma_{z}$~(value specified below), i.e.~
 \begin{equation}
 n_{i}(z)=A \int\limits _{i\text{-th bin}}n({z^\prime})\exp\left(\frac{-(z\prime-z)^{2}}{2 \sigma_{z}^{2}}\right)\mathrm{d}{z^\prime}
-\label{n_binned}
+\label{eq:n_binned}
 \end{equation}
 where the integral is done over $z^\prime$ for the single i-th bin. 
 $A = \frac{1}{\sqrt{2\pi} \sigma_z}$ a normalization factor.
 
 \subsubsection{n(z)}
-In eq. (\ref{n_binned}), we use the number density
+In eq. (\ref{eq:n_binned}), we use the number density
 \begin{equation}
 n(z) = a_1\exp\left[-\frac{(z-0.7)^2}{b_1^2}\right]+c_1\exp\left[-\frac{(z-1.2)^2}{d_1^2}\right]
+\label{eq:n_of_z_base}
 \end{equation}
 where $(a_1, b_1, c_1, d_1)=(1.50, 0.32, 0.20, 0.46)$. This distribution is taken from van Waerbeke et al. (2013) and 
 is the number density as a function of redshift for the CFHTLS survey. This is the most applicable $n(z)$ for Euclid as 
@@ -78,6 +80,7 @@ These three features can be captured in a double-Gaussian distribution where the
 \begin{equation}
 p(z|z_p)=\frac{1-f_{\rm out}}{\sqrt{2\pi}\sigma_z(z_p)}\exp\left[-(z-c_{\rm cal}z_p+z_{\rm bias})^2/2\sigma_z^2(z_p)\right]+
 \frac{f_{\rm out}}{\sqrt{2\pi}\sigma^O_z(z_p)}\exp\left[-(z-c^O_{\rm cal}z_p+z^O_{\rm bias})^2/2[\sigma^O_z(z_p)]^2\right], 
+\label{eq:n_of_z_calib}
 \end{equation} 
 Here we have assumed that the photo-z distribution is calibrated, but imperfectly, so that the median spectroscopic redshift distribution 
 is biased and inclined so that it lies along a line $z_s =c_{\rm cal}z_p +z_{\rm bias}$, 
@@ -95,6 +98,7 @@ including such a sample some redshift biasing effects may cancel-out in this ana
 \tk{Contacting OUPHZ for current best estimates.}
 
 \subsection{Covariance matrix}
+\label{sec:WL_cov}
 
 To write down the covariance matrix, we first define the observed power spectrum \cite{1999ApJ...522L..21H} as
 %
@@ -212,24 +216,102 @@ which should be used in MCMC forecast codes.
 
 \subsection*{WL comparison:  where to start} 
 
-In all cases the following specifications and options are fixed:
+The Euclid baseline survey has the following specifications.
+%
 \begin{enumerate}
-\item Area: 15,000 sq deg
-\item $f_{sky} = Area/(4 \pi (180/\pi)^2)$
-\item Median Redshift: $z_{mean} = 0.9$
-\item $\gamma_{\mathrm{int}}=0.22$
-\item $n_\theta =$ 30 galaxies per $\mathrm{arcmin}^{2}$
+\item Area: $A = 15,000$ sq deg
+\item Corresponding sky fraction $f_{sky} = A/(4 \pi (180/\pi)^2)$
+\item Redshift distribution eq.~\ref{eq:n_of_z_base}
+\item Median Redshift: $z_{\rm m} = 0.9$
+\item Intrinsic ellipticity dispersion per component: $\gamma_{\mathrm{int}}=0.22$
+\item Galaxy density $n_\theta = 30 \mathrm{arcmin}^{2}$
 \item Error on photometric redshift: $\sigma_z = 0.05 (1+z)$
-\item Method to correct for non-linearities: Halo model  
-\item Binning: 10 bins from z = 0 - 2.5. We assume equipopulated bins: the redshift bins chosen such that each contain
-the same amount of galaxies. \comment{need to add formula}
+\item Fracion of catastrophic outliers: $f_{\rm out} = 0.1$
+\item Redshift binning: 10 bins from z = 0 - 2.5 such that bins contain equal numbers of galaxies
+\end{enumerate}
+
+Further choices are
+
+\begin{enumerate}
+\item Non-linearities: \cite{Mead15}
 \item k-range: $k_{min}=0.001$ h/Mpc, \revtext{$k_{max}=0.5$ h/Mpc}
-\item k-binning: use directly the one provided in the input
 \item $\ell$-range: $\ell_{min}=5$, $\ell_{max}$ \revtext{fixed as a function of z, using the table provided by Enea (uploaded in the wiki). No cut in z.}
 \item $\ell$-binning: 100 bins (with log spaced binning)
 \end{enumerate}
 
-\subsection*{WL Case 1:  minimal setting}
+The following tables defines baselines of increasing complexity for the various WL inputs.
+
+\begin{table}
+
+Redshift distribution $n(z)$ (see Sect.~\ref{sec:WL_nofz}).
+
+\begin{tabular}{ll} \hline\hline
+1 & perfectly known \\
+2 & Including dispersion $\sigma_z$, eq.~(\ref{eq:n_binned}) \\
+3 & With catastrophic outliers $f_{\rm out}$, calibration $c_{\rm cal}$ and biases $z_{\rm bias}$, eq.~(\ref{eq:n_of_z_calib}) \\
+\hline\hline
+\end{tabular}
+
+\bigskip
+\bigskip
+
+Matter power spectrum (see Sect.\ref{sec:WL_NL_power}).
+
+\begin{tabular}{ll} \hline\hline
+1 & linear, CDM, GR \\
+2 & Including non-linear power. \\
+3 & Including baryonic corrections \\
+4 & Including WDM (neutrinos) \\
+5 & non-GR models \\
+\hline\hline
+\end{tabular}
+
+\cite{Mead15,Mead16} is one of the most recent and accurate choices for (2), and seems to comply to a large part
+with options (3)-(5) as well.
+
+\bigskip
+\bigskip
+
+Intrinsic alignment (see Sect.~\ref{sec:WL_IA}).
+
+\begin{tabular}{ll} \hline\hline
+1  & no IA \\
+2a & linear IA model \'a la \cite{2004PhRvD..70f3526H,2007NJPh....9..444B,2011A&A...527A..26J} \\
+2b & linear+quadratic alignment models, e.g.~\cite{2013MNRAS.435..194C} \\
+\hline\hline
+\end{tabular}
+
+\bigskip
+\bigskip
+
+Covariance matrix (see Sect.~\ref{sec:WL_cov}).
+
+\begin{tabular}{ll} \hline\hline
+1 & Gaussian cosmic variance  (analytical) \\
+2 & Including non-Gaussian trispectrum terms \\
+3 & Including non-Gaussian super-survey terms \\
+\hline\hline
+\end{tabular}
+
+\bigskip
+\bigskip
+
+Lensing projections (see Sect.~\ref{sec:WL_prok})
+
+\begin{tabular}{ll} \hline\hline
+1 & Born, Limber, no clustering, shear \\
+2 & reduced shear, beyond Limber and Born \\
+3 & Including source clustering \\
+3 & Relativistic effects, peculiar motions, other exotic higher-order effects \\
+\hline\hline
+\end{tabular}
+
+\bigskip
+\bigskip
+
+\end{table}
+
+\subsection*{WL Case 1: minimal setting}
 
 \begin{enumerate}
 \item Linear power spectrum
@@ -354,7 +436,7 @@ we can divide systematics sources in three classes.
 lensing-related effects which are usually taken for granted and neglected in the standard
 analysis. These are listed in Sect.~\ref{sec:lensing_systematics}, with the exception
 of intrinsic aligment (IA). As one of the dominant contaminations of the lensing signal,
-IA is discussed in the separated Section \ref{sec:IA}.
+IA is discussed in the separated Section \ref{sec:WL_IA}.
 
 \item{{\it Instrumental systematics.} Textbook example is CTI correction which
 introduces an artificial distortion pattern which impacts the ellipticity of
@@ -446,7 +528,7 @@ and \cite{2010PhRvD..81h3002B}.
 
 % -------------------------------------------------------------------- %
 \subsection{Systematics: Intrinsic alignments}
-\label{sec:IA}
+\label{sec:WL_IA}
 
 Weak lensing commonly operates under the assumption that ellipticities are intrinsically uncorrelated, and that weak lensing is the only effect that generates ellipticity correlations due to correlated tidal shear fields between light bundles. Galaxies can have intrinsically correlated shape due to their formation history or due to their interaction with the cosmic large-scale structure. While the exact mechanisms are not yet fully understood, there are two types of interaction based on tidal fields which are thought to be relevant for the alignment of spiral and elliptical galaxies.
 
@@ -461,6 +543,7 @@ The shape of a spiral galaxy is determined by the inclination angle under which 
 
 % -------------------------------------------------------------------- %
 \subsection{Non-linear power spectrum and baryonic corrections}
+\label{sec:WL_NL_power}
 
 Weak lensing measures the projected 3D density distribution probing therefore the matter power spectrum $P(k)$ and the gravitational theory determining it. While the perturbation theory efficiently works at computing $P(k)$ in the linear regime, corrections are needed to take into account deviations on scales where the condition $\delta \rho/\rho << 1$ does not hold anymore. Moreover, on small scales, baryons collapse to form the visible structures we observe. Both nonlinearities and baryon collapse make the power spectrum $P(k)$ to differ from the linear one $P_{lin}(k)$. Different methods, tailored on N\,-\,body simulations, have been developed to phenomenologically model these corrections with the Halofit approach \cite{HaloFit}, in its updated version \cite{Taka,Bird_Viel_Haehnelt_2012}, being the most used one .  
 
@@ -615,7 +698,7 @@ A simple formula to approximate these corrections is shown in \cite{2015JCAP...0
 %\begin{equation}
 %q_{j} = 3600\left(\frac{180}{\pi}\right)^{2} n_{\theta} \int^\infty_0 n_j(z) dz \, .
 %\end{equation}
-%Here $n_{\theta}$ is the galaxy density per $\mathrm{arcmin}^{2}$ and $n_j(z)$ is the galaxy density for the j-th redshift bin, as defined in eq.(\ref{n_binned}).
+%Here $n_{\theta}$ is the galaxy density per $\mathrm{arcmin}^{2}$ and $n_j(z)$ is the galaxy density for the j-th redshift bin, as defined in eq.(\ref{eq:n_binned}).
 
 %Since we consider multipoles up to $\ell_{\mathrm{max}}=5000$,
 %we need to apply non-linear corrections to the matter power spectrum,
