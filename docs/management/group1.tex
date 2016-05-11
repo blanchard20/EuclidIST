@@ -476,20 +476,35 @@ We need to define the infrastructure of the code pipeline with SGS (\url{http://
 List of requirements that the ideal CosmoBox code should provide, as for weak lensing.
 
 \paragraph{Specific inputs}
+
 Tomographic redshift distribution, with errors, outlier distributions.
 Optional: observational effects such as masks
+
 \paragraph{The signal}
-Non-linear matter power spectrum down to k$\sim$50 h/Mpc (that is where the FoM saturates, Kitching $\&$ Taylor 2011; to model uncertainties in that highly non-linear regime we would then add parameters with certain priors).
-Baryonic effects on power spectrum (not clear yet how this should best be implemented) 
-Lensing projections: Standard WL power spectrum approximations, optional: second-order corrections
-Optional: real-space lensing correlations
+
+Non-linear matter power spectrum down to k$\sim$50 h/Mpc (that is where the FoM
+saturates, Kitching $\&$ Taylor 2011; to model uncertainties in that highly
+non-linear regime we would then add parameters with certain priors).
+
+Baryonic effects on power spectrum (not clear yet how this should best be
+implemented)
+
+Lensing projections: Standard WL power spectrum approximations, optional:
+second-order corrections Optional: real-space lensing correlations
+
+Galaxy clustering power spectrum for (photometric) redshift bins.
+
 \paragraph{Errors}
+
 Gaussian covariance, optional: non-Gaussian covariance
 \paragraph{Systematics}
+
 Intrinsic alignment power spectra
+
 Nuisance parameters (e.g. shear biases)
 
 \paragraph{Specific outputs}
+
 Lensing tomographic power spectra, optional: split into different contributions (IA, with/without systematics) for testing
 
 
