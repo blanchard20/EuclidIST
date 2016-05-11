@@ -124,6 +124,8 @@ q_{j} = n_\theta = \frac{n_\theta}{{\rm arcmin}^2} 3600 \left(\frac {180}{\pi}\r
 Here $n_{\theta}$ is the galaxy density and $n_j(z)$ is the galaxy density for the j-th redshift bin, as defined in eq.~\ref{sec:WL_nofz}).
 Note that $n_j$ is normalized for every $j$ (eq.~\ref{eq:nofz_norm}).
 
+\subsubsection{Gaussian part}
+
 The Gaussian component of the covariance of the observed power spectrum for a shell width width $\Delta \ell$
 is then according to \cite{2004MNRAS.348..897T,2008A&A...477...43J}
 %
@@ -136,35 +138,77 @@ is then according to \cite{2004MNRAS.348..897T,2008A&A...477...43J}
 where $f_{\rm sky} = A / (4\pi)$ is the fraction of sky observed by the survey with area $A$.
 \mk{Prefactors seem to be different in Joachimi and Takada}.
 
+\subsubsection{Non-Gaussian part}
+
+\paragraph{Small-scale modes}
+
 The non-Gaussian contribution consists of integrals over the convergence
 trispectrum. A corresponding expression can be found in
-\cite{1999ApJ...527....1S} and \cite{2004MNRAS.348..897T}. The trispectrum has
-been approximated by various authors using the halo model.
-\cite{2009MNRAS.395.2065T} only take into consideration the one-halo term and
-the perturbation-theory term. The former is the dominant contribution in the
-highly non-linear regime on sub-halo scales. The latter appxorimates the
-contribution from different halos (2-, 3-, 4-halo terms) on intermediate
-scales. On large scales the non-Gaussian errors are sub-dominant compared to
-the Gaussian errors. All four halo terms were computed in
-\cite{2001ApJ...554...56C}, and compared to $N$-body simulations.
+\cite{1999ApJ...527....1S} and \cite{2004MNRAS.348..897T}.
 
-\cite{WH00} compared the Gaussian contribution to $N$-body simulation results.
-Fitting formulae for the non-Gaussian cosmic variance term have been provided
-by \cite{2010A&A...514A..79P} and \cite{2011ApJ...734...76S}.
+\cite{WH00} compared Gaussian and non-Gaussian contributions, the latter from $N$-body simulation results.
+
+\paragraph{Super-survey modes}
 
 The above mentioned expressions for the non-Gaussian covariance as integrals
 over the trispectrum do not include couplings of small-scale modes with long
 wavelength modes that are larger than the observed survey volume. These
 super-survey modes were first introduced as beat coupling in
 \cite{2006MNRAS.371.1188H}, and also discussed in \cite{2009MNRAS.395.2065T}.
-They were later modeled in the halo model framework as halo sample variance
-(HSV; \cite{2009ApJ...701..945S}, \cite{2013MNRAS.429..344K} Contrary to the
-other terms of the covariance that scale inversely with the survey area fsky,
-this super-survey covariance (SSC) decreases faster. Therefore it is important for
-small survey areas \cite{2009ApJ...701..945S}. A rigorous treatment of the
-non-Gaussian covariance including the SSC is presented in
-\cite{2013PhRvD..87l3504T}. SSC in numerical simulations were studied in detail 
+
+Contrary to the other terms of the covariance that scale inversely with the
+survey area $f_{\rm sky}$, the super-survey covariance (SSC) decreases faster.
+Therefore it is important for small survey areas \cite{2009ApJ...701..945S}. A
+rigorous treatment of the non-Gaussian covariance including the SSC is
+presented in \cite{2013PhRvD..87l3504T}.
+
+\mk{TODO: summarize results from papers that quantify influence of non-Gaussian terms.}
+
+\subsubsection{Further issues}
+
+\paragraph{Cosmology-dependence}
+
+\cite{2009A&A...502..721E}.
+
+
+\subsubsection{Modelling methods}
+
+The Gaussian part can be computed exactly analytically. For the non-Gaussian contribution,
+modelling options are as follows.
+
+\begin{itemize}
+
+\item Halo model. The trispectrum has been approximated by various authors
+using the halo model. \cite{2009MNRAS.395.2065T} only take into consideration
+the one-halo term and the perturbation-theory term. The former is the dominant
+contribution in the highly non-linear regime on sub-halo scales. The latter
+appxorimates the contribution from different halos (2-, 3-, 4-halo terms) on
+intermediate scales. On large scales the non-Gaussian errors are sub-dominant
+compared to the Gaussian errors.
+
+All four halo terms for the trispectrum were computed in
+\cite{2001ApJ...554...56C}, and compared to $N$-body simulations.
+
+Super-survey modes were modeled in the halo model framework as ``halo sample
+variance'' (HSV; \cite{2009ApJ...701..945S}, \cite{2013MNRAS.429..344K}.
+
+
+\item Fitting formulae.
+
+Fitting formulae for the non-Gaussian cosmic variance of the power spectrum have been provided
+by \cite{2010A&A...514A..79P}. Corresponding expressions for the real-space correlation function
+are published in \cite{2011ApJ...734...76S}.
+
+\item $N$-body simulations.
+
+DEUS.
+
+The SSC in numerical simulations were studied in detail 
 in \cite{2014PhRvD..89h3519L}.
+
+
+
+\end{itemize}
 
 \cite{2013MNRAS.429..344K} only account for the 1-halo term and HSV for the
 covariance. \cite{2013arXiv1302.2401E} compute the full covariance in the halo
@@ -173,11 +217,10 @@ model accounting for all four halo terms and HSV.
 \mk{Todo: look for analytical approaches (renormalization approach)}
 
 
-Since we consider multipoles up to $\ell_{\mathrm{max}}=5000$,
-we need to apply non-linear corrections to the matter power spectrum,
-for which we use the halofit (provided in the input spectra).
+\subsection{Fisher matrix}
 
-Then the Fisher matrix is summed over all multiples:
+The Fisher matrix is summed over all multiples:
+%
 \begin{equation}
 F_{\alpha\beta}=f_{\mathrm{sky}}\sum\limits _{\ell,i,j,k,m}\frac{(2\ell+1)\Delta\ell}{2}\frac{\partial P_{ij}(\ell)}{\partial\theta_{\alpha}}C_{jk}^{-1}\frac{\partial P_{km}(\ell)}{\partial\theta_{\beta}}C_{mi}^{-1}\label{eq:fm-wl}.
 \end{equation}
