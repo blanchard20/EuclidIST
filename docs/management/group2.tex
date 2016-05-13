@@ -277,7 +277,9 @@ Further choices are
 
 \begin{enumerate}
 \item Non-linearities: \cite{Mead15}
-\item k-range: $k_{min}=0.001$ h/Mpc, \revtext{$k_{max}=0.5$ h/Mpc}
+\item k-range: $k_{min}=0.001 h/$Mpc, \revtext{$k_{max}=10 h/$Mpc}.
+    At small scales ($k>1$-$5h/$Mpc) the tolerance for code comparison can be larger than on small scales, since we will be dominated by
+    uncertain physics.
 \item $\ell$-range: $\ell_{min}=5$, $\ell_{max}$ \revtext{fixed as a function of z, using the table provided by Enea (uploaded in the wiki). No cut in z.}
 \item $\ell$-binning: 100 bins (with log spaced binning)
 \end{enumerate}
@@ -285,98 +287,90 @@ Further choices are
 The following tables defines baselines of increasing complexity for the various WL inputs.
 
 \begin{table}
+Matter power spectrum (see Sect.\ref{sec:WL_NL_power}).
+
+\begin{tabular}{ll} \hline\hline
+pk-1 & linear, CDM, GR \\
+pk-2 & Including non-linear power \\
+pk-3 & Including baryonic corrections \\
+pk-4 & Including WDM (massive neutrinos) \\
+pk-5 & non-GR models \\
+\hline\hline
+\end{tabular}
+\cite{Mead15,Mead16} is one of the most recent and accurate choices for (2), and seems to comply to a large part
+with options (3)-(5) as well.
+\bigskip \bigskip
+
 
 Redshift distribution $n(z)$ (see Sect.~\ref{sec:WL_nofz}).
 
 \begin{tabular}{ll} \hline\hline
-1 & perfectly known \\
-2 & Including dispersion $\sigma_z$, eq.~(\ref{eq:n_binned}) \\
-3 & With catastrophic outliers $f_{\rm out}$, calibration $c_{\rm cal}$ and biases $z_{\rm bias}$, eq.~(\ref{eq:n_of_z_calib}) \\
+nz-1 & perfectly known, no photo-$z$ errors \\
+nz-2 & Including dispersion $\sigma_z$, eq.~(\ref{eq:n_binned}) \\
+nz-3 & With catastrophic outliers $f_{\rm out}$, calibration $c_{\rm cal}$ and biases $z_{\rm bias}$, eq.~(\ref{eq:n_of_z_calib}) \\
 \hline\hline
 \end{tabular}
-
-\bigskip
-\bigskip
-
-Matter power spectrum (see Sect.\ref{sec:WL_NL_power}).
-
-\begin{tabular}{ll} \hline\hline
-1 & linear, CDM, GR \\
-2 & Including non-linear power. \\
-3 & Including baryonic corrections \\
-4 & Including WDM (neutrinos) \\
-5 & non-GR models \\
-\hline\hline
-\end{tabular}
-
-\cite{Mead15,Mead16} is one of the most recent and accurate choices for (2), and seems to comply to a large part
-with options (3)-(5) as well.
-
-\bigskip
-\bigskip
+\bigskip \bigskip
 
 Intrinsic alignment (see Sect.~\ref{sec:WL_IA}).
 
 \begin{tabular}{ll} \hline\hline
-1  & no IA \\
-2a & linear IA model \'a la \cite{2004PhRvD..70f3526H,2007NJPh....9..444B,2011A&A...527A..26J} \\
-2b & linear+quadratic alignment models, e.g.~\cite{2013MNRAS.435..194C} \\
+ia-1  & no IA \\
+ia-2a & linear IA model \`a la \cite{2004PhRvD..70f3526H,2007NJPh....9..444B,2011A&A...527A..26J} \\
+ia-2b & linear+quadratic alignment models, e.g.~\cite{2013MNRAS.435..194C} \\
 \hline\hline
 \end{tabular}
-
-\bigskip
-\bigskip
+\bigskip \bigskip
 
 Covariance matrix (see Sect.~\ref{sec:WL_cov}).
 
 \begin{tabular}{ll} \hline\hline
-1 & Gaussian cosmic variance  (analytical) \\
-2 & Including non-Gaussian trispectrum terms \\
-3 & Including non-Gaussian super-survey terms \\
+cm-1 & Gaussian cosmic variance  (analytical) \\
+cm-2 & Including non-Gaussian trispectrum terms \\
+cm-3 & Including non-Gaussian super-survey terms \\
 \hline\hline
 \end{tabular}
-
-\bigskip
-\bigskip
+\bigskip \bigskip
 
 Lensing projections (see Sect.~\ref{sec:WL_proj})
 
 \begin{tabular}{ll} \hline\hline
-1 & Born, Limber, no clustering, shear \\
-2 & reduced shear, beyond Limber and Born \\
-3 & Including source clustering \\
-3 & Relativistic effects, peculiar motions, other exotic higher-order effects \\
+lp-1 & Born, Limber, no clustering, shear \\
+lp-2 & reduced shear, beyond Limber and Born \\
+lp-3 & Including source clustering \\
+lp-3 & Relativistic effects, peculiar motions, other exotic higher-order effects \\
 \hline\hline
 \end{tabular}
-
-\bigskip
-\bigskip
+\bigskip \bigskip
 
 \end{table}
 
 \subsection*{WL Case 1: minimal setting}
 
 \begin{enumerate}
-\item Linear power spectrum
-\item $\sigma_z = 0.05 (1+z)$
-\item $\gamma_{\rm int} = 0.22$
+\item pk-1, linear power spectrum
+\item nz-1, no redshift errors
+\item ia-1, no intrinsic alignment
+\item cm-1, Gaussian covariance
+\item lp-1, Born, Limber, no clustering
 \end{enumerate}
 
-\subsection*{WL Case 2:  ground based $n(z)$ }
+\subsection*{WL Case 2: ground based $n(z)$ }
 
 \begin{enumerate}
-\item Linear power spectrum
-\item Ground based $n(z)$ prescription
-\item $\sigma_z = 0.05 (1+z)$
-\item $ \gamma_{\rm int} = 0.22$
+\item pk-1, linear power spectrum
+\item nz-2, $n(z)$ with dispersion
+\item ia-1, no IA
+\item cm-1, Gaussian covariance
+\item lp-1, Born, Limber, no clustering
 \end{enumerate}
 
-
-\subsection*{WL Case 3:  simple non-linear corrections}
+\subsection*{WL Case 3: simple non-linear corrections}
 
 \begin{enumerate}
-\item Non-linear power spectrum from HaloFit, with massive neutrinos corrections if needed.  Parameters:  Eqs. A06-A14  of http://arxiv.org/abs/1208.2701
-\item $\sigma_z = 0.05 (1+z) $ 
+\item pk-2, non-linear power spectrum
+\item nz-2, $n(z)$ with dispersion
+\item  
 \item $ \gamma_{\rm int} = 0.22$
 \item $n(z)$  either standard prescription or ground based  (we should decide)
 \end{enumerate}
@@ -715,11 +709,12 @@ https://github.com/alexander-mead/hmcode}}. Originally conceived to fit the
 $\Lambda$CDM power spectrum taking care of nonlinearities and baryonic effects.
 However, it has been shown to work fine also for quintessence models with a
 CPL\,-\,like equation of state. Moreover, it can be easily extedend to models
-with massive neutrinos and modified gravity provided some fitting functions are
+with modified gravity provided some fitting functions are
 accordingly changed (see \cite{Mead16} for the corresponding formulae).
 
 Neutrino corrections have been published in \cite{Bird_Viel_Haehnelt_2012}, which have been implemented in \texttt{camb}.
 A simple formula to approximate these corrections is shown in \cite{2015JCAP...07..043C}.
+Further models including neutrino fitting formulae are \cite{Mead16} and \cite{2012ApJ...761..152T} (Eqs.~(A6-A14)).
 
 
 
