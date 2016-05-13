@@ -257,7 +257,7 @@ which should be used in MCMC forecast codes.
 \subsection{Weak lensing code comparison}
 
 
-\subsection*{WL comparison:  where to start} 
+\subsection*{WL comparison: where to start} 
 
 The Euclid baseline survey has the following specifications.
 %
@@ -285,6 +285,9 @@ Further choices are
 \end{enumerate}
 
 The following tables defines baselines of increasing complexity for the various WL inputs.
+The items are listed in each table with increasing complexity, either from a coding point of view or physical complexity.
+The asterisk $^\ast$ denotes the minimum requirement item needed for a relatively realistic Fisher matrix forecast for Euclid.
+For items with higher complexity it is not clear (yer) whether they have a significant influence of the prediction results.
 
 \begin{table}
 Matter power spectrum (see Sect.\ref{sec:WL_NL_power}).
@@ -292,8 +295,8 @@ Matter power spectrum (see Sect.\ref{sec:WL_NL_power}).
 \begin{tabular}{ll} \hline\hline
 pk-1 & linear, CDM, GR \\
 pk-2 & Including non-linear power \\
-pk-3 & Including baryonic corrections \\
-pk-4 & Including WDM (massive neutrinos) \\
+pk-3$^\ast$ & Including baryonic corrections \\
+pk-4$^{(\ast)}$ & Including WDM (massive neutrinos) \\
 pk-5 & non-GR models \\
 \hline\hline
 \end{tabular}
@@ -307,7 +310,7 @@ Redshift distribution $n(z)$ (see Sect.~\ref{sec:WL_nofz}).
 \begin{tabular}{ll} \hline\hline
 nz-1 & perfectly known, no photo-$z$ errors \\
 nz-2 & Including dispersion $\sigma_z$, eq.~(\ref{eq:n_binned}) \\
-nz-3 & With catastrophic outliers $f_{\rm out}$, calibration $c_{\rm cal}$ and biases $z_{\rm bias}$, eq.~(\ref{eq:n_of_z_calib}) \\
+nz-3$^\ast$ & With catastrophic outliers $f_{\rm out}$, calibration $c_{\rm cal}$ and biases $z_{\rm bias}$, eq.~(\ref{eq:n_of_z_calib}) \\
 \hline\hline
 \end{tabular}
 \bigskip \bigskip
@@ -316,7 +319,7 @@ Intrinsic alignment (see Sect.~\ref{sec:WL_IA}).
 
 \begin{tabular}{ll} \hline\hline
 ia-1  & no IA \\
-ia-2a & linear IA model \`a la \cite{2004PhRvD..70f3526H,2007NJPh....9..444B,2011A&A...527A..26J} \\
+ia-2a$^\ast$ & linear IA model \`a la \cite{2004PhRvD..70f3526H,2007NJPh....9..444B,2011A&A...527A..26J} \\
 ia-2b & linear+quadratic alignment models, e.g.~\cite{2013MNRAS.435..194C} \\
 \hline\hline
 \end{tabular}
@@ -325,7 +328,7 @@ ia-2b & linear+quadratic alignment models, e.g.~\cite{2013MNRAS.435..194C} \\
 Covariance matrix (see Sect.~\ref{sec:WL_cov}).
 
 \begin{tabular}{ll} \hline\hline
-cm-1 & Gaussian cosmic variance  (analytical) \\
+cm-1$^\ast$ & Gaussian cosmic variance (analytical) \\
 cm-2 & Including non-Gaussian trispectrum terms \\
 cm-3 & Including non-Gaussian super-survey terms \\
 \hline\hline
@@ -335,17 +338,28 @@ cm-3 & Including non-Gaussian super-survey terms \\
 Lensing projections (see Sect.~\ref{sec:WL_proj})
 
 \begin{tabular}{ll} \hline\hline
-lp-1 & Born, Limber, no clustering, shear \\
-lp-2 & reduced shear, beyond Limber and Born \\
-lp-3 & Including source clustering \\
-lp-3 & Relativistic effects, peculiar motions, other exotic higher-order effects \\
+lp-1$^\ast$ & Born, Limber, no clustering, shear \\
+lp-2 & Including source clustering \\
+lp-3 & reduced shear, beyond Limber and Born \\
+lp-4 & Relativistic effects, peculiar motions, other exotic higher-order effects \\
 \hline\hline
 \end{tabular}
 \bigskip \bigskip
 
+Observable
+
+\begin{tabular}{ll} \hline\hline
+ob-1  & idealistic power spectrum \\
+ob-2a$^\ast$ & observed power spectrum (including window and mask effects) \\
+ob-2b$^\ast$ & correlation function \\
+\hline\hline
+\end{tabular}
+\bigskip \bigskip
+
+
 \end{table}
 
-\subsection*{WL Case 1: minimal setting}
+\subsection*{WL case 1: minimal setting}
 
 \begin{enumerate}
 \item pk-1, linear power spectrum
@@ -353,41 +367,45 @@ lp-3 & Relativistic effects, peculiar motions, other exotic higher-order effects
 \item ia-1, no intrinsic alignment
 \item cm-1, Gaussian covariance
 \item lp-1, Born, Limber, no clustering
+\item ob-1, idealistic power spectrum
 \end{enumerate}
 
-\subsection*{WL Case 2: ground based $n(z)$ }
-
-\begin{enumerate}
-\item pk-1, linear power spectrum
-\item nz-2, $n(z)$ with dispersion
-\item ia-1, no IA
-\item cm-1, Gaussian covariance
-\item lp-1, Born, Limber, no clustering
-\end{enumerate}
-
-\subsection*{WL Case 3: simple non-linear corrections}
+\subsection*{WL case 2: with non-linear corrections and photo-$z$ errors}
 
 \begin{enumerate}
 \item pk-2, non-linear power spectrum
 \item nz-2, $n(z)$ with dispersion
-\item  
-\item $ \gamma_{\rm int} = 0.22$
-\item $n(z)$  either standard prescription or ground based  (we should decide)
+\item ia-1, no IA
+\item cm-1, Gaussian covariance
+\item lp-1, Born, Limber, no clustering
+\item ob-1, idealistic power spectrum
 \end{enumerate}
 
-\subsection*{WL Case 4:  global uncorrelated theoretical error}
+\subsection*{WL case 3: including intrinsic alignment, realistic photo-$z$ errors}
 
-Same as Case 4, but add a nuisance parameter in the covariance matrix accounting for a global uncorrelated theoretical error, following the procedure of Ref.~\cite{Audren:2012vy} (Appendix B4).   Marginalize over this parameter.
+\begin{enumerate}
+\item pk-2, non-linear power spectrum
+\item nz-3, with catastrophic outliers, biases
+\item ia-2, linear IA model
+\item cm-1, Gaussian covariance
+\item lp-1, Born, Limber no clustering
+\item ob-1, idealistic power spectrum
+\end{enumerate}
 
-In the case of massive neutrinos, add an extra neutrino-related error, as in Appendix B5 Ref.~\cite{Audren:2012vy}
+\subsection*{WL Case 4: realistic observables, baryonic effects}
+
+\begin{enumerate}
+\item pk-3, baryonic corrections
+\item nz-3, with catastrophic outliers, biases
+\item ia-2, linear IA model
+\item cm-1, Gaussian covariance
+\item lp-1, Born, Limber no clustering
+\item ob-1, observaed power spectrum or correlation function
+\end{enumerate}
+
 
 \subsection*{WL Case 5 and beyond:  extended cases (to be considered in a second phase?) }  
 
-\begin{enumerate}
-\item Other analytical formulae for non-linear corrections, possibly including baryonic feedback
-\item Method for intrinsic alignment  
-\item others
-\end{enumerate}
 (to be further discussed)
 
 
@@ -502,9 +520,13 @@ The impact of systematics in the first class can be explicitely evaluated and th
 \end{displaymath}
 where ${\cal{C}}_{sys}$ and ${\cal{C}}_{lens}$ are the cosmic shear power spectra with systematics included and the theoretical one, ${\cal{M}}_{ij}$ a redshift dependent multiplicative correction and ${\cal{A}}(\ell, z_i, z_j)$ is a scale and redshift dependent additive correction.
 
-Forecasting codes should include the relevant astrophysical systematics as a first step. A parameterization for the multiplicative and additive bias terms should be worked out to be added as soon as second and third class systematics have been quantified in some way.
+Forecasting codes should include the relevant astrophysical systematics as a
+first step. A parameterization for the multiplicative and additive bias terms
+should be worked out to be added as soon as second and third class systematics
+have been quantified in some way.
 
 
+\cite{Audren:2012vy} (App.~B4) propose a global uncorrelated theoretical error to be included as nuisance parameter in the covariance matrix.
 
 
 % -------------------------------------------------------------------- %
