@@ -61,15 +61,18 @@ n_{i}(z)=A \int\limits _{i\text{-th bin}}n({z^\prime})\exp\left(\frac{-(z\prime-
 where the integral is done over $z^\prime$ for the single i-th bin. 
 $A = \frac{1}{\sqrt{2\pi} \sigma_z}$ a normalization factor.
 
-\subsubsection{n(z)}
+\subsubsection{$n(z)$}
+
 In eq. (\ref{eq:n_binned}), we use the number density
+%
 \begin{equation}
 n(z) = a_1\exp\left[-\frac{(z-0.7)^2}{b_1^2}\right]+c_1\exp\left[-\frac{(z-1.2)^2}{d_1^2}\right]
 \label{eq:n_of_z_base}
 \end{equation}
-where $(a_1, b_1, c_1, d_1)=(1.50, 0.32, 0.20, 0.46)$. This distribution is taken from van Waerbeke et al. (2013) and 
-is the number density as a function of redshift for the CFHTLS survey. This is the most applicable $n(z)$ for Euclid as 
-CFHTLS covers each of the ground based broad-band filters to the depth required for Euclid ground-based photometry. 
+%
+where $(a_1, b_1, c_1, d_1)=(1.50, 0.32, 0.20, 0.46)$. This distribution is taken from \cite{CFHTLenS-kappa-maps} and 
+is a fitting function for the number density as a function of redshift for the CFHTLenS survey. This is the most applicable $n(z)$ for Euclid as 
+CFHTLenS covers each of the ground based broad-band filters to the depth required for Euclid ground-based photometry. 
 
 \tk{Need to specify the exact binning in redshift for this functional form.}
 
